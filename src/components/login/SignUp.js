@@ -38,10 +38,10 @@ const SignUp = () => {
 
   const onClickSign = () => {
     const data = {
-      username: newUserId,
-      password: newUserPassword,
-      email: newUserName,
-      birth: newUserBirth,
+      user_id: newUserId,
+      user_password: newUserPassword,
+      user_name: newUserName,
+      user_birth: newUserBirth,
     };
 
     axios
@@ -114,7 +114,6 @@ const SignUp = () => {
             value={newUserName}
             onChange={handleNewUserNameChange}
             style={{ marginBottom: "5px" }}
-            autoFocus
           />
         </div>
         <div className="form-group">
@@ -140,7 +139,7 @@ const SignUp = () => {
         </button>
         <p
           style={{
-            marginTop: "80px",
+            marginTop: "65px",
             marginLeft: "10px",
             float: "right",
             color: "gray",
