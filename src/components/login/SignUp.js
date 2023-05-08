@@ -1,6 +1,6 @@
 import { IoIosArrowBack } from "react-icons/io";
 import { FaArrowCircleRight } from "react-icons/fa";
-import "../css/Login.css";
+import "../../styles/login/Login.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
