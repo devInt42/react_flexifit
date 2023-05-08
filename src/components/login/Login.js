@@ -7,26 +7,25 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userPassword, setUserPassword] = useState("");
 
-  //이름 handleUserId 바꾸기 handleUserPwd
-  const onChangeId = (e) => {
-    setId(e.target.value);
+  const handleIdChange = (e) => {
+    setUserId(e.target.value);
   };
 
-  const onChangePw = (e) => {
-    setPassword(e.target.value);
+  const handlePwChange = (e) => {
+    setUserPassword(e.target.value);
   };
 
   //버튼클릭시 reset
   const resetInputs = () => {
-    setId("");
-    setPassword("");
+    setUserId("");
+    setUserPassword("");
   };
 
   const onClickBtn = () => {
-    const data = { id, password };
+    const data = { userId, userPassword };
     axios
       .post("http://localhost:8080/login", data) //맞는지 모르겠어요 정수씨
       .then((res) => {
@@ -61,8 +60,8 @@ const Login = () => {
             type="text"
             placeholder="아이디를 입력해주세요"
             aria-label="default input example"
-            value={id}
-            onChange={onChangeId}
+            value={userId}
+            onChange={handleIdChange}
             style={{ marginBottom: "5px" }}
             autoFocus
           />
@@ -76,8 +75,8 @@ const Login = () => {
             placeholder="비밀번호를 입력해주세요."
             type="password"
             id="inputPassword"
-            value={password}
-            onChange={onChangePw}
+            value={userPassword}
+            onChange={handlePwChange}
           />
         </div>
         <button className="login-button" onClick={onClickBtn}>

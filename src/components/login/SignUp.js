@@ -4,18 +4,42 @@ import "../../styles/login/Login.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [newId, setNewId] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const [newUserId, setNewUserId] = useState("");
+  const [newUserPassword, setNewUserPassword] = useState("");
+  const [newUserEmail, setNewUserEmail] = useState("");
 
-  const onNewId = (e) => {
-    setNewId(e.target.value);
+  const handleNewUserIdChange = (e) => {
+    setNewUserId(e.target.value);
   };
 
-  const onNewPw = (e) => {
-    setNewPassword(e.target.value);
+  const handleNewUserPwdChange = (e) => {
+    setNewUserPassword(e.target.value);
+  };
+
+  const handleNewUserEmailChange = (e) => {
+    setNewUserEmail(e.target.value);
+  };
+
+  const onClickSign = () => {
+    const data = {
+      username: newUserId,
+      password: newUserPassword,
+      email: newUserEmail,
+    };
+
+    axios
+      .post("/signup", data)
+      .then((response) => {
+        alert("회원 가입에 성공하였습니다.");
+        navigate("/");
+      })
+      .catch((error) => {
+        alert("회원 가입에 실패하였습니다.");
+      });
   };
 
   return (
@@ -43,8 +67,8 @@ const SignUp = () => {
             type="text"
             placeholder="아이디를 입력해주세요"
             aria-label="default input example"
-            value={newId}
-            onChange={onNewId}
+            value={newUserId}
+            onChange={handleNewUserIdChange}
             style={{ marginBottom: "5px" }}
             autoFocus
           />
@@ -62,6 +86,8 @@ const SignUp = () => {
             className="form-control"
             id="exampleFormControlInput1"
             placeholder="name@example.com"
+            onChange={handleNewUserEmailChange}
+            value={newUserEmail}
           ></input>
         </div>
 
@@ -74,11 +100,11 @@ const SignUp = () => {
             placeholder="비밀번호를 입력해주세요."
             type="password"
             id="inputPassword"
-            value={newPassword}
-            onChange={onNewPw}
+            value={newUserPassword}
+            onChange={handleNewUserPwdChange}
           />
         </div>
-        <button className="login-button">
+        <button className="login-button" onClick={onClickSign}>
           회원가입{" "}
           <FaArrowCircleRight className="arrow-circle-right" size={"25px"} />
         </button>
