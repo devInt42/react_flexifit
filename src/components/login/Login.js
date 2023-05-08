@@ -58,7 +58,7 @@ const Login = () => {
           <input
             className="form-control"
             type="text"
-            placeholder="아이디를 입력해주세요"
+            placeholder="example@naver.com"
             aria-label="default input example"
             value={userId}
             onChange={handleIdChange}

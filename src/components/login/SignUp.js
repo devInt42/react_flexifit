@@ -5,12 +5,17 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useRef } from "react";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [newUserId, setNewUserId] = useState("");
   const [newUserPassword, setNewUserPassword] = useState("");
-  const [newUserEmail, setNewUserEmail] = useState("");
+  const [newUserName, setNewUserName] = useState("");
+  const [newUserBirth, setNewUserBirth] = useState(new Date());
+  const datepickerRef = useRef(null);
 
   const handleNewUserIdChange = (e) => {
     setNewUserId(e.target.value);
@@ -20,15 +25,23 @@ const SignUp = () => {
     setNewUserPassword(e.target.value);
   };
 
-  const handleNewUserEmailChange = (e) => {
-    setNewUserEmail(e.target.value);
+  const handleNewUserNameChange = (e) => {
+    setNewUserName(e.target.value);
+  };
+
+  //버튼클릭시 reset
+  const resetInputs = () => {
+    setNewUserId("");
+    setNewUserPassword("");
+    setNewUserName("");
   };
 
   const onClickSign = () => {
     const data = {
       username: newUserId,
       password: newUserPassword,
-      email: newUserEmail,
+      email: newUserName,
+      birth: newUserBirth,
     };
 
     axios
@@ -39,6 +52,7 @@ const SignUp = () => {
       })
       .catch((error) => {
         alert("회원 가입에 실패하였습니다.");
+        resetInputs();
       });
   };
 
@@ -65,30 +79,13 @@ const SignUp = () => {
           <input
             className="form-control"
             type="text"
-            placeholder="아이디를 입력해주세요"
-            aria-label="default input example"
+            placeholder="example@naver.com"
+            // aria-label="default input example"
             value={newUserId}
             onChange={handleNewUserIdChange}
             style={{ marginBottom: "5px" }}
             autoFocus
           />
-        </div>
-        <div className="mb-3">
-          <label
-            htmlFor="exampleFormControlInput1"
-            className="form-label"
-            style={{ paddingTop: "5px", padding: "5px" }}
-          >
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="name@example.com"
-            onChange={handleNewUserEmailChange}
-            value={newUserEmail}
-          ></input>
         </div>
 
         <div className="form-group">
@@ -102,6 +99,39 @@ const SignUp = () => {
             id="inputPassword"
             value={newUserPassword}
             onChange={handleNewUserPwdChange}
+            style={{ marginBottom: "5px" }}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="inputName" style={{ paddingLeft: "5px" }}>
+            이름
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="이름을 입력해주세요"
+            // aria-label="default input example"/
+            value={newUserName}
+            onChange={handleNewUserNameChange}
+            style={{ marginBottom: "5px" }}
+            autoFocus
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="inputBirth" style={{ paddingLeft: "5px" }}>
+            생년월일
+          </label>
+          <br />
+          <DatePicker
+            className="form-control"
+            selected={newUserBirth}
+            dateFormat="yyyy년 MM월 dd일"
+            onChange={(date) => setNewUserBirth(date)}
+            showYearDropdown
+            scrollableYearDropdown
+            yearDropdownItemNumber={30}
+            maxDate={new Date()}
+            ref={datepickerRef}
           />
         </div>
         <button className="login-button" onClick={onClickSign}>
