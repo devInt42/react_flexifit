@@ -34,6 +34,7 @@ const SignUp = () => {
     setNewUserId("");
     setNewUserPassword("");
     setNewUserName("");
+    setNewUserBirth(new Date());
   };
 
   const onClickSign = () => {
