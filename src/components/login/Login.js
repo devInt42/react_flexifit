@@ -27,7 +27,7 @@ const Login = () => {
   const onClickBtn = () => {
     const data = { userId, userPassword };
     axios
-      .post("http://localhost:8080/login", data) //맞는지 모르겠어요 정수씨
+      .post("http://localhost:8080/check", data) //맞는지 모르겠어요 정수씨
       .then((res) => {
         console.log(res);
         navigate("/MainPage"); //success시 메인으로 이동
