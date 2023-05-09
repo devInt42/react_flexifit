@@ -24,19 +24,25 @@ const Login = () => {
     setUserPassword("");
   };
 
-  const onClickBtn = () => {
-    const data = { userId, userPassword };
-    axios
-      .post("http://localhost:8080/check", data) //맞는지 모르겠어요 정수씨
-      .then((res) => {
-        console.log(res);
-        navigate("/MainPage"); //success시 메인으로 이동
-      })
-      .catch((err) => {
+  const onClickBtn = async () => {
+    const param = { data: { userId: userId, userPassword: userPassword } };
+    try {
+      const res = await axios.post("http://localhost:8080/login/check", param);
+      if (res.data.success) {
+        navigate("/MainPage");
+      } else {
+        alert("로그인에 실패하였습니다.");
+        resetInputs();
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+      } else {
         console.error(err);
         alert("로그인에 실패하였습니다.");
         resetInputs();
-      });
+      }
+    }
   };
 
   return (
