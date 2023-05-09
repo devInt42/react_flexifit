@@ -37,24 +37,29 @@ const SignUp = () => {
     setNewUserBirth(new Date());
   };
 
-  const onClickSign = () => {
+  const onClickSign = async () => {
     const data = {
       user_id: newUserId,
       user_password: newUserPassword,
       user_name: newUserName,
       user_birth: newUserBirth,
     };
+    const param = { data: data };
 
-    axios
-      .post("/signup", data)
-      .then((response) => {
+    try {
+      const res = await axios.post("http://localhost:8080/signup", param);
+      if (res.status === 200) {
         alert("회원 가입에 성공하였습니다.");
         navigate("/");
-      })
-      .catch((error) => {
+      } else {
         alert("회원 가입에 실패하였습니다.");
         resetInputs();
-      });
+      }
+    } catch (err) {
+      console.error(err);
+      alert("회원 가입에 실패하였습니다.");
+      resetInputs();
+    }
   };
 
   return (
