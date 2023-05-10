@@ -52,14 +52,14 @@ const SignUp = () => {
     try {
       const res = await axios.post("http://localhost:8080/login/signup", param);
 
-      // 입력값 검증
-      if (!newUserId || !newUserPassword || !newUserName || !newUserBirth) {
-        alert("정보를 모두 입력해주세요.");
-        return;
-      }
       if (res.data === 0) {
         alert("중복된 아이디 입니다.");
       } else {
+        // 입력값 검증
+        if (!newUserId || !newUserPassword || !newUserName || !newUserBirth) {
+          alert("정보를 모두 입력해주세요.");
+          return;
+        }
         alert("회원가입이 완료되었습니다.");
         navigate("/");
       }
