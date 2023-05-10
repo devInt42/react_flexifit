@@ -41,7 +41,6 @@ const SignUp = () => {
   const onClickSign = async () => {
     const date = new Date(newUserBirth);
     const dataString = date.toISOString().split("T")[0]; //date형식변환
-    // console.log(dataString);
     const param = {
       data: {
         userId: newUserId,
@@ -52,10 +51,17 @@ const SignUp = () => {
     };
     try {
       const res = await axios.post("http://localhost:8080/login/signup", param);
+      if (res.data === 0) {
+        alert("중복된 아이디 입니다.");
+      }
     } catch (err) {
       console.error(err);
-      alert("회원 가입에 실패하였습니다.");
-      resetInputs();
+      if (err.response.status === 500) {
+        alert("회원 가입에 실패하였습니다.");
+        resetInputs();
+      } else {
+        alert("알 수 없는 오류가 발생했습니다.");
+      }
     }
   };
 
