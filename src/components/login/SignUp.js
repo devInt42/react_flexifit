@@ -15,6 +15,7 @@ const SignUp = () => {
   const [newUserPassword, setNewUserPassword] = useState("");
   const [newUserName, setNewUserName] = useState("");
   const [newUserBirth, setNewUserBirth] = useState(new Date());
+
   const datepickerRef = useRef(null);
 
   const handleNewUserIdChange = (e) => {
@@ -38,23 +39,19 @@ const SignUp = () => {
   };
 
   const onClickSign = async () => {
-    const data = {
-      user_id: newUserId,
-      user_password: newUserPassword,
-      user_name: newUserName,
-      user_birth: newUserBirth,
+    const date = new Date(newUserBirth);
+    const dataString = date.toISOString().split("T")[0]; //date형식변환
+    // console.log(dataString);
+    const param = {
+      data: {
+        userId: newUserId,
+        userPassword: newUserPassword,
+        userName: newUserName,
+        userBirth: dataString,
+      },
     };
-    const param = { data: data };
-
     try {
-      const res = await axios.post("http://localhost:8080/signup", param);
-      if (res.status === 200) {
-        alert("회원 가입에 성공하였습니다.");
-        navigate("/");
-      } else {
-        alert("회원 가입에 실패하였습니다.");
-        resetInputs();
-      }
+      const res = await axios.post("http://localhost:8080/login/signup", param);
     } catch (err) {
       console.error(err);
       alert("회원 가입에 실패하였습니다.");
