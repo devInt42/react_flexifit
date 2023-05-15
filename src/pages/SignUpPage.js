@@ -1,15 +1,15 @@
-import Login from "../components/login/Login";
+import SignUp from "../components/login/SignUp";
 import Header from "../components/header/header";
 import "../styles/pages/Header.css";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   return (
     <div>
       <div className="header-container">
         <Header />
       </div>
-      <Login />
+      <SignUp />
     </div>
   );
 };
-export default LoginPage;
+export default SignUpPage;

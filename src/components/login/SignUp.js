@@ -8,6 +8,8 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRef } from "react";
+// import "../../styles/pages/Header.css";
+// import Header from "../header/header";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -76,6 +78,9 @@ const SignUp = () => {
 
   return (
     <div>
+      {/* <div className="header-container">
+        <Header />
+      </div> */}
       <div className="container">
         <IoIosArrowBack
           size={25}
@@ -164,7 +169,7 @@ const SignUp = () => {
             fontSize: "13px",
           }}
         >
-          <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
+          <Link to="/login" style={{ textDecoration: "none", color: "gray" }}>
             로그인
           </Link>
         </p>

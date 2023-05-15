@@ -29,7 +29,7 @@ const Login = () => {
     try {
       const res = await axios.post("http://localhost:8080/login/check", param);
       if (res.data.success) {
-        navigate("/MainPage");
+        navigate("/");
       } else {
         alert("로그인에 실패하였습니다.");
         resetInputs();
