@@ -1,0 +1,19 @@
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-top {
+  margin-top: 10px;
+}
+
+.header-container {
+  width: 85%;
+  margin: 0 auto;
+}
+.hr-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid black;
+}
