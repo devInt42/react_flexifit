@@ -22,7 +22,7 @@ const NavigationLink = ({ to, children }) => {
 };
 
 const Header = ({ handleCategorySelect }) => {
-  const [selectCategory, setSelectCategory] = useState("티셔츠");
+  const [selectCategory, setSelectCategory] = useState("shirts");
 
   const handleSelectCategory = (category) => {
     setSelectCategory(category);
@@ -59,7 +59,7 @@ const Header = ({ handleCategorySelect }) => {
         </h1>
         <span
           style={{ paddingRight: "50px", fontSize: "17PX" }}
-          onClick={() => handleSelectCategory("티셔츠")}
+          onClick={() => handleSelectCategory("shirts")}
         >
           티셔츠
         </span>
@@ -71,19 +71,19 @@ const Header = ({ handleCategorySelect }) => {
         </span>
         <span
           style={{ paddingRight: "50px", fontSize: "17PX" }}
-          onClick={() => handleSelectCategory("아우터")}
+          onClick={() => handleSelectCategory("outer")}
         >
           아우터{" "}
         </span>
         <span
           style={{ paddingRight: "50px", fontSize: "17PX" }}
-          onClick={() => handleSelectCategory("바지")}
+          onClick={() => handleSelectCategory("pants")}
         >
           바지{" "}
         </span>
         <span
           style={{ paddingRight: "0px", fontSize: "17PX" }}
-          onClick={() => handleSelectCategory("전체상품")}
+          onClick={() => handleSelectCategory("all")}
         >
           전체상품{" "}
         </span>
