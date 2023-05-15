@@ -4,10 +4,8 @@ import axios from "axios";
 const ListPage = ({ category }) => {
   useEffect(() => {
     getData();
-    console.log(category);
   }, [category]);
 
-  //받아오는 부분 여기
   const getData = async () => {
     const param = {
       data: { category: category },
@@ -17,9 +15,9 @@ const ListPage = ({ category }) => {
         `http://localhost:8080/clothes/${category}`,
         param
       );
-      console.log("Success");
     } catch (err) {
       console.log(err);
+      //   console.log(category);
     }
   };
 

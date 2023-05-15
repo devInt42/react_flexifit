@@ -26,7 +26,7 @@ const Header = ({ handleCategorySelect }) => {
 
   const handleSelectCategory = (category) => {
     setSelectCategory(category);
-    handleCategorySelect(category); // MainPage의 handleCategorySelect 호출
+    handleCategorySelect(selectCategory); // MainPage의 handleCategorySelect 호출
   };
 
   return (
