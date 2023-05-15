@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import SignUp from "./pages/SignUpPage";
 import Login from "./pages/LoginPage";
+import FAQ from "./pages/FAQPage";
+import QNA from "./pages/QNAPage";
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/faqPage" element={<FAQ />} />
+        <Route path="/qnaPage" element={<QNA />} />
       </Routes>
     </Router>
   );

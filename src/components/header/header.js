@@ -1,43 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../Fonts/Font.css";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineUser, AiOutlineShopping } from "react-icons/ai";
 import { CgHeart } from "react-icons/cg";
-import { AiOutlineShopping } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Header() {
+const NavigationLink = ({ to, children }) => {
+  return (
+    <Link
+      to={to}
+      style={{
+        paddingRight: "30px",
+        paddingTop: "10px",
+        textDecoration: "none",
+        color: "black",
+      }}
+    >
+      {children}
+    </Link>
+  );
+};
+
+const Header = ({ handleCategorySelect }) => {
+  const [selectCategory, setSelectCategory] = useState("티셔츠");
+
+  const handleSelectCategory = (category) => {
+    setSelectCategory(category);
+    handleCategorySelect(category); // MainPage의 handleCategorySelect 호출
+  };
+
   return (
     <div>
       <div className="header-right">
-        <Link
-          to="/signup"
-          style={{
-            paddingRight: "30px",
-            paddingTop: "10px",
-            fontWeight: "bold",
-            textDecoration: "none",
-            color: "black",
-          }}
-        >
-          회원가입
-        </Link>
-
-        <Link
-          to="/login"
-          style={{
-            paddingRight: "30px",
-            paddingTop: "10px",
-
-            textDecoration: "none",
-            color: "black",
-          }}
-        >
-          로그인
-        </Link>
-
-        <span style={{ paddingRight: "30px", paddingTop: "10px" }}>FAQ</span>
-        <span style={{ paddingTop: "10px" }}>QNA</span>
+        <NavigationLink to="/signup">회원가입</NavigationLink>
+        <NavigationLink to="/login">로그인</NavigationLink>
+        <NavigationLink to="/faqPage">FAQ</NavigationLink>
+        <NavigationLink to="/qnaPage">QNA</NavigationLink>
       </div>
       <div className="header-top">
         <h1
@@ -52,7 +50,6 @@ function Header() {
             style={{
               paddingRight: "30px",
               paddingTop: "10px",
-
               textDecoration: "none",
               color: "black",
             }}
@@ -60,13 +57,36 @@ function Header() {
             F L E X I F I T
           </Link>
         </h1>
-        <span style={{ paddingRight: "50px", fontSize: "17PX" }}>티셔츠</span>
-        <span style={{ paddingRight: "50px", fontSize: "17PX" }}>
+        <span
+          style={{ paddingRight: "50px", fontSize: "17PX" }}
+          onClick={() => handleSelectCategory("티셔츠")}
+        >
+          티셔츠
+        </span>
+        <span
+          style={{ paddingRight: "50px", fontSize: "17PX" }}
+          onClick={() => handleSelectCategory("맨투맨/후드/집업")}
+        >
           맨투맨/후드/집업
         </span>
-        <span style={{ paddingRight: "50px", fontSize: "17PX" }}>아우터 </span>
-        <span style={{ paddingRight: "50px", fontSize: "17PX" }}>바지 </span>
-        <span style={{ paddingRight: "0px", fontSize: "17PX" }}>전체상품 </span>
+        <span
+          style={{ paddingRight: "50px", fontSize: "17PX" }}
+          onClick={() => handleSelectCategory("아우터")}
+        >
+          아우터{" "}
+        </span>
+        <span
+          style={{ paddingRight: "50px", fontSize: "17PX" }}
+          onClick={() => handleSelectCategory("바지")}
+        >
+          바지{" "}
+        </span>
+        <span
+          style={{ paddingRight: "0px", fontSize: "17PX" }}
+          onClick={() => handleSelectCategory("전체상품")}
+        >
+          전체상품{" "}
+        </span>
         <span style={{ float: "right" }}>
           <span style={{ paddingRight: "25px" }}>
             <AiOutlineUser style={{ fontSize: "25px" }} />
@@ -82,6 +102,6 @@ function Header() {
       <hr className="hr-line" />
     </div>
   );
-}
+};
 
 export default Header;
