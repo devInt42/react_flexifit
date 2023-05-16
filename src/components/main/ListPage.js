@@ -15,9 +15,9 @@ const ListPage = ({ category }) => {
         `http://localhost:8080/clothes/${category}`,
         param
       );
+      console.log(res.data.resultData);
     } catch (err) {
       console.log(err);
-      //   console.log(category);
     }
   };
 

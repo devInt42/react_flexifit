@@ -1,0 +1,11 @@
+.mainNotice {
+  background-color: #f0f9ff;
+  font-size: 32px;
+  font-weight: bolder;
+  margin-top: 20px;
+  text-align: center;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

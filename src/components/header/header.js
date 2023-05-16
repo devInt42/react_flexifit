@@ -49,39 +49,54 @@ const Header = ({ handleCategorySelect }) => {
             to="/"
             style={{
               paddingRight: "30px",
-              paddingTop: "10px",
               textDecoration: "none",
               color: "black",
+              fontSize: "35px",
             }}
           >
             F L E X I F I T
           </Link>
         </h1>
         <span
-          style={{ paddingRight: "50px", fontSize: "17PX" }}
+          className={`header-category ${
+            selectCategory === "shirts" ? "selected" : ""
+          }`}
+          // style={{ paddingRight: "50px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("shirts")}
         >
           티셔츠
         </span>
         <span
-          style={{ paddingRight: "50px", fontSize: "17PX" }}
+          className={`header-category ${
+            selectCategory === "맨투맨/후드/집업" ? "selected" : ""
+          }`}
+          // style={{ paddingRight: "50px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("맨투맨/후드/집업")}
         >
           맨투맨/후드/집업
         </span>
         <span
-          style={{ paddingRight: "50px", fontSize: "17PX" }}
+          className={`header-category ${
+            selectCategory === "outer" ? "selected" : ""
+          }`}
+          // style={{ paddingRight: "50px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("outer")}
         >
           아우터{" "}
         </span>
         <span
-          style={{ paddingRight: "50px", fontSize: "17PX" }}
+          className={`header-category ${
+            selectCategory === "pants" ? "selected" : ""
+          }`}
+          // style={{ paddingRight: "50px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("pants")}
         >
           바지{" "}
         </span>
         <span
+          className={`header-category ${
+            selectCategory === "all" ? "selected" : ""
+          }`}
           style={{ paddingRight: "0px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("all")}
         >
@@ -99,7 +114,7 @@ const Header = ({ handleCategorySelect }) => {
       </div>
       <p />
 
-      <hr className="hr-line" />
+      {/* <hr className="hr-line" /> */}
     </div>
   );
 };
