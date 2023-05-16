@@ -1,11 +1,88 @@
 .mainNotice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #f0f9ff;
-  font-size: 32px;
+  font-size: 25px;
   font-weight: bolder;
   margin-top: 20px;
   text-align: center;
   height: 80px;
+}
+
+.mainNotice .icon {
+  margin-right: 10px;
+}
+
+.mainNotice img {
+  height: 45px;
+  width: auto;
+}
+
+.mainNotice span {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+
+.mainNotice span::before,
+.mainNotice span::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background-color: #000;
+  margin: 0 10px;
+}
+
+.mainNotice span::before {
+  margin-left: 0;
+}
+
+.mainNotice span::after {
+  margin-right: 0;
+}
+
+.customLogo {
+  font-size: 32px;
+  margin-top: 55px;
+  text-align: center;
+  font-weight: bolder;
+}
+.image-with-text {
+  position: relative;
+  display: inline-block;
+}
+
+.image-with-text .text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  padding: 10px;
+}
+
+.image-with-text .text-overlay h2 {
+  color: red;
+  font-size: 10px;
+  margin: 0;
+}
+
+.imageContainer {
+  background-color: black;
+  width: 48%;
+  height: 300px;
+  margin-top: 30px;
+  margin-right: 10px;
+  float: left;
+}
+
+.clearFloat {
+  clear: both;
+}
+
+.review {
+  font-size: 25px;
+  font-weight: bolder;
+  margin-top: 50px;
 }
