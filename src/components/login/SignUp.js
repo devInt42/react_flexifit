@@ -8,8 +8,6 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRef } from "react";
-// import "../../styles/pages/Header.css";
-// import Header from "../header/header";
 
 const SignUp = () => {
   const navigate = useNavigate();

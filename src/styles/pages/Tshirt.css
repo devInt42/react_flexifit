@@ -1,0 +1,45 @@
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.product-item {
+  width: 25%;
+  padding: 10px;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+}
+
+.product-size {
+  font-size: 10px;
+}
+
+.product-title {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.product-description {
+  font-size: 10px;
+}
+
+.product-price {
+  font-size: 10px;
+  color: red;
+  text-decoration: line-through;
+}
+
+.discounted-price {
+  font-size: 10px;
+  color: black;
+  font-weight: bold;
+}
+
+.header-container {
+  width: 80%;
+  margin: 0 auto;
+}

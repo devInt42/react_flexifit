@@ -18,20 +18,24 @@ function App() {
 
   return (
     <Router>
-      <div className="header-container">
-        <Header handleCategorySelect={handleCategorySelect} />
+      <div className="app-container">
+        <div className="header-container">
+          <Header handleCategorySelect={handleCategorySelect} />
+        </div>
+        <div className="content-container">
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/qna" element={<QNA />} />
+            <Route
+              path="/tshirt"
+              element={<TshirtPage selectCategory={selectCategory} />}
+            />
+          </Routes>
+        </div>
       </div>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/qna" element={<QNA />} />
-        <Route
-          path="/tshirt"
-          element={<TshirtPage selectCategory={selectCategory} />}
-        />
-      </Routes>
     </Router>
   );
 }

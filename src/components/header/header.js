@@ -139,10 +139,8 @@ const Header = ({ handleCategorySelect }) => {
           </span>
           <AiOutlineShopping style={{ fontSize: "25px" }} />
         </span>
+        <hr className="hr-line" />
       </div>
-      <p />
-
-      {/* <hr className="hr-line" /> */}
     </div>
   );
 };

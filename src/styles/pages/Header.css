@@ -7,13 +7,6 @@
   width: 80%;
   margin: 0 auto;
 }
-/* .hr-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  border-top: 1px solid black;
-  margin-top: 5px;
-} */
 
 .selected {
   border-bottom: 4px solid black;
@@ -27,4 +20,16 @@
 
 .header-top {
   padding-top: 30px;
+}
+
+.content-container {
+  /* padding-top: 80px; */
+  /* 다른 스타일링 */
+}
+
+.hr-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid black;
 }
