@@ -5,9 +5,6 @@ import "../styles/pages/Header.css";
 const SignUpPage = () => {
   return (
     <div>
-      <div className="header-container">
-        <Header />
-      </div>
       <SignUp />
     </div>
   );

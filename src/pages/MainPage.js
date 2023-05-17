@@ -1,7 +1,4 @@
-import Header from "../components/header/header";
 import "../styles/pages/Header.css";
-import ListPage from "../components/main/ListPage";
-import { useState } from "react";
 import Banner from "../components/banner/banner";
 import "../styles/pages/Main.css";
 import clothes from "../images/clothes.png";
@@ -9,19 +6,8 @@ import Review from "../components/main/Review";
 import Footer from "../components/footer/footer";
 
 const MainPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("shirts");
-
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-  };
-
   return (
     <div>
-      <div className="header-container">
-        <Header handleCategorySelect={handleCategorySelect} />
-      </div>
-      <p />
-      <ListPage category={selectedCategory} />
       <Banner />
       <div className="header-container">
         <div className="mainNotice">

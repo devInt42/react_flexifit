@@ -5,9 +5,6 @@ import "../styles/pages/Header.css";
 const LoginPage = () => {
   return (
     <div>
-      <div className="header-container">
-        <Header />
-      </div>
       <Login />
     </div>
   );

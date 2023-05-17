@@ -26,7 +26,7 @@ const Header = ({ handleCategorySelect }) => {
 
   const handleSelectCategory = (category) => {
     setSelectCategory(category);
-    handleCategorySelect(selectCategory); // MainPage의 handleCategorySelect 호출
+    handleCategorySelect(category); // MainPage의 handleCategorySelect 호출
   };
 
   return (
@@ -34,8 +34,8 @@ const Header = ({ handleCategorySelect }) => {
       <div className="header-right">
         <NavigationLink to="/signup">회원가입</NavigationLink>
         <NavigationLink to="/login">로그인</NavigationLink>
-        <NavigationLink to="/faqPage">FAQ</NavigationLink>
-        <NavigationLink to="/qnaPage">QNA</NavigationLink>
+        <NavigationLink to="/faq">FAQ</NavigationLink>
+        <NavigationLink to="/qna">QNA</NavigationLink>
       </div>
       <div className="header-top">
         <h1
@@ -61,37 +61,65 @@ const Header = ({ handleCategorySelect }) => {
           className={`header-category ${
             selectCategory === "shirts" ? "selected" : ""
           }`}
-          // style={{ paddingRight: "50px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("shirts")}
         >
-          티셔츠
+          <Link
+            to="/Tshirt"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
+            티셔츠
+          </Link>
         </span>
         <span
           className={`header-category ${
             selectCategory === "맨투맨/후드/집업" ? "selected" : ""
           }`}
-          // style={{ paddingRight: "50px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("맨투맨/후드/집업")}
         >
-          맨투맨/후드/집업
+          <Link
+            to="/hood"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
+            맨투맨/후드/집업
+          </Link>
         </span>
         <span
           className={`header-category ${
             selectCategory === "outer" ? "selected" : ""
           }`}
-          // style={{ paddingRight: "50px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("outer")}
         >
-          아우터{" "}
+          <Link
+            to="/outer"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
+            아우터
+          </Link>
         </span>
         <span
           className={`header-category ${
             selectCategory === "pants" ? "selected" : ""
           }`}
-          // style={{ paddingRight: "50px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("pants")}
         >
-          바지{" "}
+          <Link
+            to="/pants"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
+            바지
+          </Link>
         </span>
         <span
           className={`header-category ${

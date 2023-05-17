@@ -1,64 +1,39 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import SignUp from "./pages/SignUpPage";
 import Login from "./pages/LoginPage";
 import FAQ from "./pages/FAQPage";
 import QNA from "./pages/QNAPage";
+import TshirtPage from "./pages/TshirtPage";
+import Header from "./components/header/header";
+import "./styles/pages/Header.css";
+import { useState } from "react";
 
 function App() {
+  const [selectCategory, setSelectCategory] = useState("");
+
+  const handleCategorySelect = (category) => {
+    setSelectCategory(category);
+  };
+
   return (
     <Router>
+      <div className="header-container">
+        <Header handleCategorySelect={handleCategorySelect} />
+      </div>
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/faqPage" element={<FAQ />} />
-        <Route path="/qnaPage" element={<QNA />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/qna" element={<QNA />} />
+        <Route
+          path="/tshirt"
+          element={<TshirtPage selectCategory={selectCategory} />}
+        />
       </Routes>
     </Router>
   );
 }
 
 export default App;
-// import React, { useState } from "react";
-// import axios from "axios";
-
-// const App = () => {
-//   const [selectedColor, setSelectedColor] = useState(""); // 선택된 색상
-//   const [imageUrl, setImageUrl] = useState(""); // 이미지 URL
-
-//   const handleColorChange = (color) => {
-//     setSelectedColor(color);
-//     fetchTshirtImage(color);
-//   };
-
-//   const fetchTshirtImage = (color) => {
-//     // API 호출하여 이미지 URL 가져오기
-//     axios
-//       .get(`clothes/shirts/${color}`)
-//       .then((response) => {
-//         setImageUrl(response.data.imageUrl);
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
-
-//   return (
-//     <div>
-//       <div className="tshirt">
-//         <img src={imageUrl} alt="T-Shirt" />
-//       </div>
-//       <div className="buttons">
-//         <button onClick={() => handleColorChange("red")}>빨강</button>
-//         <button onClick={() => handleColorChange("orange")}>주황</button>
-//         <button onClick={() => handleColorChange("green")}>녹색</button>
-//         <button onClick={() => handleColorChange("blue")}>파랑</button>
-//         <button onClick={() => handleColorChange("purple")}>보라</button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default App;
