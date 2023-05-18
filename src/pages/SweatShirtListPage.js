@@ -2,14 +2,32 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/pages/Tshirt.css";
 
-const SweatShirtPage = ({ selectCategory }) => {
+const SweatShirtListPage = ({ selectCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
   const [data, setData] = useState([]);
+  const [count, setCount] = useState();
 
   useEffect(() => {
     getData();
   }, [selectedCategory]);
 
+  useEffect(() => {
+    getCount();
+  }, [count]);
+
+  //count
+  const getCount = async (category) => {
+    try {
+      const res = await axios.get("http://localhost:8080/clothes/count", {
+        params: { category: selectedCategory },
+      });
+      setCount(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //data
   const getData = async () => {
     if (selectedCategory) {
       const param = {
@@ -30,19 +48,19 @@ const SweatShirtPage = ({ selectCategory }) => {
   return (
     <div className="header-container">
       <p>
-        <h3 style={{ marginTop: "50px", color: "black", fontWeight: "bolder" }}>
-          맨투맨/후드/집업
+        <h3 className="title-text">
+          맨투맨/후드/집업 <span className="count-text">({count})</span>
         </h3>
       </p>
       <div className="product-container">
         {data.map((item) => {
           const imagePath = process.env.PUBLIC_URL + "/images/shirt1.png";
-          //   console.log(imagePath);
+          // console.log(imagePath);
 
           return (
             <div className="product-item" key={item.cloth_id}>
               <div className="product-image">
-                <img src={imagePath} alt="SweatShirt Image" />
+                <img src={imagePath} alt="swearshirt Image" />
               </div>
               <div className="product-details">
                 <div className="product-size">{item.cloth_size}</div>
@@ -67,4 +85,4 @@ const SweatShirtPage = ({ selectCategory }) => {
   );
 };
 
-export default SweatShirtPage;
+export default SweatShirtListPage;

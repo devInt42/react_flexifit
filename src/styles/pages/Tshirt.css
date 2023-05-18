@@ -18,6 +18,13 @@
   font-size: 10px;
 }
 
+.count-text {
+  margin-top: 50px;
+  color: gray;
+  font-size: 17px;
+  text-align: center;
+}
+
 .product-title {
   font-size: 12px;
   font-weight: bold;
@@ -42,4 +49,10 @@
 .header-container {
   width: 80%;
   margin: 0 auto;
+}
+
+.title-text {
+  margin-top: 50px;
+  color: black;
+  font-weight: bolder;
 }

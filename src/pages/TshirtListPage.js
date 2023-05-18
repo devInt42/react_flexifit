@@ -5,11 +5,29 @@ import "../styles/pages/Tshirt.css";
 const TshirtPage = ({ selectCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
   const [data, setData] = useState([]);
+  const [count, setCount] = useState();
 
   useEffect(() => {
     getData();
   }, [selectedCategory]);
 
+  useEffect(() => {
+    getCount();
+  }, [count]);
+
+  //count
+  const getCount = async (category) => {
+    try {
+      const res = await axios.get("http://localhost:8080/clothes/count", {
+        params: { category: selectedCategory },
+      });
+      setCount(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //data
   const getData = async () => {
     if (selectedCategory) {
       const param = {
@@ -30,8 +48,8 @@ const TshirtPage = ({ selectCategory }) => {
   return (
     <div className="header-container">
       <p>
-        <h3 style={{ marginTop: "50px", color: "black", fontWeight: "bolder" }}>
-          티셔츠
+        <h3 className="title-text">
+          티셔츠 <span className="count-text">({count})</span>
         </h3>
       </p>
       <div className="product-container">

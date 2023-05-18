@@ -5,12 +5,29 @@ import "../styles/pages/Tshirt.css";
 const PantsListPage = ({ selectCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
   const [data, setData] = useState([]);
+  const [count, setCount] = useState();
 
   useEffect(() => {
     getData();
   }, [selectedCategory]);
-  //   console.log(selectCategory);
 
+  useEffect(() => {
+    getCount();
+  }, [count]);
+
+  //count
+  const getCount = async (category) => {
+    try {
+      const res = await axios.get("http://localhost:8080/clothes/count", {
+        params: { category: selectedCategory },
+      });
+      setCount(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //data
   const getData = async () => {
     if (selectedCategory) {
       const param = {
@@ -31,19 +48,19 @@ const PantsListPage = ({ selectCategory }) => {
   return (
     <div className="header-container">
       <p>
-        <h3 style={{ marginTop: "50px", color: "black", fontWeight: "bolder" }}>
-          바지
+        <h3 className="title-text">
+          바지 <span className="count-text">({count})</span>
         </h3>
       </p>
       <div className="product-container">
         {data.map((item) => {
           const imagePath = process.env.PUBLIC_URL + "/images/shirt1.png";
-          console.log(imagePath);
+          // console.log(imagePath);
 
           return (
             <div className="product-item" key={item.cloth_id}>
               <div className="product-image">
-                <img src={imagePath} alt="Pants Image" />
+                <img src={imagePath} alt="pants Image" />
               </div>
               <div className="product-details">
                 <div className="product-size">{item.cloth_size}</div>
