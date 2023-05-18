@@ -3,7 +3,6 @@ import Banner from "../components/banner/banner";
 import "../styles/pages/Main.css";
 import clothes from "../images/clothes.png";
 import Review from "../components/main/Review";
-import Footer from "../components/footer/footer";
 
 const MainPage = () => {
   return (
@@ -24,7 +23,6 @@ const MainPage = () => {
         <div className="clearFloat"></div>
         <Review />
       </div>
-      <Footer />
     </div>
   );
 };

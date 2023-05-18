@@ -4,10 +4,15 @@ import SignUp from "./pages/SignUpPage";
 import Login from "./pages/LoginPage";
 import FAQ from "./pages/FAQPage";
 import QNA from "./pages/QNAPage";
-import TshirtPage from "./pages/TshirtPage";
+import Tshirt from "./pages/TshirtListPage";
+import AllList from "./pages/AllListsPage";
+import Outer from "./pages/OuterListPage";
+import Pants from "./pages/PantsListPage";
+import SweatShirt from "./pages/SweatShirtListPage";
 import Header from "./components/header/header";
 import "./styles/pages/Header.css";
 import { useState } from "react";
+import Footer from "./components/footer/footer.js";
 
 function App() {
   const [selectCategory, setSelectCategory] = useState("");
@@ -31,10 +36,28 @@ function App() {
             <Route path="/qna" element={<QNA />} />
             <Route
               path="/tshirt"
-              element={<TshirtPage selectCategory={selectCategory} />}
+              element={<Tshirt selectCategory={selectCategory} />}
+            />
+            <Route
+              path="/sweatshirt"
+              element={<SweatShirt selectCategory={selectCategory} />}
+            />
+            <Route
+              path="/outer"
+              element={<Outer />}
+              selectCategory={selectCategory}
+            />
+            <Route
+              path="/pants"
+              element={<Pants selectCategory={selectCategory} />}
+            />
+            <Route
+              path="/all"
+              element={<AllList selectCategory={selectCategory} />}
             />
           </Routes>
         </div>
+        <Footer />
       </div>
     </Router>
   );

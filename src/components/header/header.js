@@ -75,12 +75,12 @@ const Header = ({ handleCategorySelect }) => {
         </span>
         <span
           className={`header-category ${
-            selectCategory === "맨투맨/후드/집업" ? "selected" : ""
+            selectCategory === "Sweatshirt" ? "selected" : ""
           }`}
-          onClick={() => handleSelectCategory("맨투맨/후드/집업")}
+          onClick={() => handleSelectCategory("Sweatshirt")}
         >
           <Link
-            to="/hood"
+            to="/sweatshirt"
             style={{
               textDecoration: "none",
               color: "black",
@@ -128,7 +128,15 @@ const Header = ({ handleCategorySelect }) => {
           style={{ paddingRight: "0px", fontSize: "17PX" }}
           onClick={() => handleSelectCategory("all")}
         >
-          전체상품{" "}
+          <Link
+            to="/all"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
+            전체상품
+          </Link>
         </span>
         <span style={{ float: "right" }}>
           <span style={{ paddingRight: "25px" }}>

@@ -21,7 +21,6 @@ const TshirtPage = ({ selectCategory }) => {
           param
         );
         setData(res.data.resultData);
-        console.log(res.data.resultData);
       } catch (err) {
         console.log(err);
       }
@@ -31,19 +30,19 @@ const TshirtPage = ({ selectCategory }) => {
   return (
     <div className="header-container">
       <p>
-        <h3 style={{ marginTop: "50px", color: "black" }}>
-          {selectedCategory}
+        <h3 style={{ marginTop: "50px", color: "black", fontWeight: "bolder" }}>
+          티셔츠
         </h3>
       </p>
       <div className="product-container">
         {data.map((item) => {
-          const imagePath = item.cloth_defaultImage;
+          const imagePath = process.env.PUBLIC_URL + "/images/shirt1.png";
           console.log(imagePath);
 
           return (
             <div className="product-item" key={item.cloth_id}>
               <div className="product-image">
-                <img src={imagePath} alt="Product Image" />
+                <img src={imagePath} alt="T-Shirt Image" />
               </div>
               <div className="product-details">
                 <div className="product-size">{item.cloth_size}</div>
