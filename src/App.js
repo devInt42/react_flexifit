@@ -44,8 +44,7 @@ function App() {
             />
             <Route
               path="/outer"
-              element={<Outer />}
-              selectCategory={selectCategory}
+              element={<Outer selectCategory={selectCategory} />}
             />
             <Route
               path="/pants"
