@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/pages/Tshirt.css";
+import Option from "../components/options/SortingOptions";
 
 const TshirtPage = ({ selectCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
@@ -50,6 +51,9 @@ const TshirtPage = ({ selectCategory }) => {
       <p>
         <h3 className="title-text">
           티셔츠 <span className="count-text">({count})</span>
+          <span className="option">
+            <Option />
+          </span>
         </h3>
       </p>
       <div className="product-container">
