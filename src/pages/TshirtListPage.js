@@ -17,7 +17,7 @@ const TshirtPage = ({ selectCategory }) => {
       };
       try {
         const res = await axios.post(
-          `http://localhost:8080/clothes/${selectedCategory}`,
+          `http://localhost:8080/clothes/getProductInfo`,
           param
         );
         setData(res.data.resultData);
@@ -51,11 +51,11 @@ const TshirtPage = ({ selectCategory }) => {
                   {item.cloth_description}
                 </div>
                 <div className="product-price">
-                  <span className="original-price">₩{item.cloth_price}</span>
+                  <span className="original-price">₩{item.cloth_price}원</span>
                 </div>
                 {item.cloth_discount && (
                   <span className="discounted-price">
-                    ₩{item.cloth_discount}
+                    ₩{item.cloth_discount}원
                   </span>
                 )}
               </div>

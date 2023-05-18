@@ -17,7 +17,7 @@ const SweatShirtPage = ({ selectCategory }) => {
       };
       try {
         const res = await axios.post(
-          `http://localhost:8080/clothes/${selectedCategory}`,
+          `http://localhost:8080/clothes/getProductInfo`,
           param
         );
         setData(res.data.resultData);
@@ -42,7 +42,7 @@ const SweatShirtPage = ({ selectCategory }) => {
           return (
             <div className="product-item" key={item.cloth_id}>
               <div className="product-image">
-                <img src={imagePath} alt="T-Shirt Image" />
+                <img src={imagePath} alt="SweatShirt Image" />
               </div>
               <div className="product-details">
                 <div className="product-size">{item.cloth_size}</div>
@@ -51,11 +51,11 @@ const SweatShirtPage = ({ selectCategory }) => {
                   {item.cloth_description}
                 </div>
                 <div className="product-price">
-                  <span className="original-price">₩{item.cloth_price}</span>
+                  <span className="original-price">₩{item.cloth_price}원</span>
                 </div>
                 {item.cloth_discount && (
                   <span className="discounted-price">
-                    ₩{item.cloth_discount}
+                    ₩{item.cloth_discount}원
                   </span>
                 )}
               </div>
