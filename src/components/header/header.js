@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
 import "../../Fonts/Font.css";
 import { AiOutlineUser, AiOutlineShopping } from "react-icons/ai";
 import { CgHeart } from "react-icons/cg";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "../../store/action";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavigationLink = ({ to, children }) => {
   return (
@@ -23,19 +20,43 @@ const NavigationLink = ({ to, children }) => {
   );
 };
 
-const Header = () => {
-  const selectCategory = useSelector((state) => state.category);
-  const dispatch = useDispatch();
+const Header = ({ handleCategorySelect }) => {
+  const navigate = useNavigate();
+  const [selectCategory, setSelectCategory] = useState("shirts");
+  const isLoggedIn = sessionStorage.getItem("userId");
 
   const handleSelectCategory = (category) => {
-    dispatch(setCategory(category));
+    setSelectCategory(category);
+    handleCategorySelect(category); // MainPage의 handleCategorySelect 호출
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("userId");
+    navigate("/");
   };
 
   return (
     <div>
       <div className="header-right">
-        <NavigationLink to="/signup">회원가입</NavigationLink>
-        <NavigationLink to="/login">로그인</NavigationLink>
+        {isLoggedIn ? (
+          <Link
+            to="/"
+            onClick={handleLogout}
+            style={{
+              paddingRight: "30px",
+              paddingTop: "10px",
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
+            로그아웃
+          </Link>
+        ) : (
+          <>
+            <NavigationLink to="/signup">회원가입</NavigationLink>
+            <NavigationLink to="/login">로그인</NavigationLink>
+          </>
+        )}
         <NavigationLink to="/faq">FAQ</NavigationLink>
         <NavigationLink to="/qna">QNA</NavigationLink>
       </div>
