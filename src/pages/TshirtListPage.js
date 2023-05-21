@@ -5,14 +5,10 @@ import Option from "../components/options/SortingOptions";
 import { useSelector } from "react-redux";
 
 const TshirtPage = () => {
+  const data = useSelector((state) => state.data);
   const selectCategory = useSelector((state) => state.category);
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
-  const [data, setData] = useState([]);
   const [count, setCount] = useState();
-
-  useEffect(() => {
-    getData();
-  }, [selectedCategory]);
 
   useEffect(() => {
     getCount();
@@ -27,24 +23,6 @@ const TshirtPage = () => {
       setCount(res.data);
     } catch (err) {
       console.log(err);
-    }
-  };
-
-  //data
-  const getData = async () => {
-    if (selectedCategory) {
-      const param = {
-        data: { category: selectedCategory },
-      };
-      try {
-        const res = await axios.post(
-          `http://localhost:8080/clothes/getProductInfo`,
-          param
-        );
-        setData(res.data.resultData);
-      } catch (err) {
-        console.log(err);
-      }
     }
   };
 

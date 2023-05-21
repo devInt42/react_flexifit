@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategory, setData } from "../../store/action";
 
 const SortingOptions = () => {
-  const [option, setOption] = useState("");
+  const selectCategory = useSelector((state) => state.category);
+  const [selectedCategory, setSelectedCategory] = useState(selectCategory);
+  const [option, setOption] = useState("1");
+  const dispatch = useDispatch();
 
   const handleSortChange = (e) => {
     setOption(e.target.value);
@@ -14,14 +19,16 @@ const SortingOptions = () => {
 
   const getOption = async () => {
     if (option) {
+      const param = {
+        data: { option: option, category: selectedCategory },
+      };
       try {
-        const res = await axios.get(
-          `http://localhost:8080/clothes/option/${option}`,
-          {
-            params: { option: option },
-          }
+        const res = await axios.post(
+          `http://localhost:8080/clothes/sort`,
+          param
         );
-        console.log(res.data);
+        dispatch(setData(res.data.resultData));
+        // console.log(res.data.resultData);
       } catch (err) {
         console.log(err);
       }

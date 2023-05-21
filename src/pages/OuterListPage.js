@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import "../styles/pages/Tshirt.css";
+import Option from "../components/options/SortingOptions";
 
 const OuterListPage = () => {
+  const data = useSelector((state) => state.data);
   const selectCategory = useSelector((state) => state.category);
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
-  const [data, setData] = useState([]);
   const [count, setCount] = useState();
-
-  useEffect(() => {
-    getData();
-  }, [selectedCategory]);
 
   useEffect(() => {
     getCount();
@@ -29,29 +26,14 @@ const OuterListPage = () => {
     }
   };
 
-  //data
-  const getData = async () => {
-    if (selectedCategory) {
-      const param = {
-        data: { category: selectedCategory },
-      };
-      try {
-        const res = await axios.post(
-          `http://localhost:8080/clothes/getProductInfo`,
-          param
-        );
-        setData(res.data.resultData);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
-
   return (
     <div className="header-container">
       <p>
         <h3 className="title-text">
           아우터 <span className="count-text">({count})</span>
+          <span className="option">
+            <Option />
+          </span>
         </h3>
       </p>
       <div className="product-container">
