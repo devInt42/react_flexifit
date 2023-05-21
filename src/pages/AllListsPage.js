@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/pages/Tshirt.css";
+import { useSelector } from "react-redux";
 
-const AllListPage = ({ selectCategory }) => {
+const AllListPage = () => {
+  const selectCategory = useSelector((state) => state.category);
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
   const [data, setData] = useState([]);
   const [count, setCount] = useState();

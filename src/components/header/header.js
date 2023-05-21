@@ -4,6 +4,8 @@ import { AiOutlineUser, AiOutlineShopping } from "react-icons/ai";
 import { CgHeart } from "react-icons/cg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../../store/action";
 
 const NavigationLink = ({ to, children }) => {
   return (
@@ -21,12 +23,12 @@ const NavigationLink = ({ to, children }) => {
   );
 };
 
-const Header = ({ handleCategorySelect }) => {
-  const [selectCategory, setSelectCategory] = useState("shirts");
+const Header = () => {
+  const selectCategory = useSelector((state) => state.category);
+  const dispatch = useDispatch();
 
   const handleSelectCategory = (category) => {
-    setSelectCategory(category);
-    handleCategorySelect(category); // MainPage의 handleCategorySelect 호출
+    dispatch(setCategory(category));
   };
 
   return (

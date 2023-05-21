@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/pages/Tshirt.css";
 import Option from "../components/options/SortingOptions";
+import { useSelector } from "react-redux";
 
-const TshirtPage = ({ selectCategory }) => {
+const TshirtPage = () => {
+  const selectCategory = useSelector((state) => state.category);
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
   const [data, setData] = useState([]);
   const [count, setCount] = useState();
