@@ -3,6 +3,8 @@ import { AiOutlineUser, AiOutlineShopping } from "react-icons/ai";
 import { CgHeart } from "react-icons/cg";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategory } from "../../store/action";
 
 const NavigationLink = ({ to, children }) => {
   return (
@@ -20,14 +22,14 @@ const NavigationLink = ({ to, children }) => {
   );
 };
 
-const Header = ({ handleCategorySelect }) => {
+const Header = () => {
   const navigate = useNavigate();
-  const [selectCategory, setSelectCategory] = useState("shirts");
+  const selectCategory = useSelector((state) => state.category);
+  const dispatch = useDispatch();
   const isLoggedIn = sessionStorage.getItem("userId");
 
   const handleSelectCategory = (category) => {
-    setSelectCategory(category);
-    handleCategorySelect(category); // MainPage의 handleCategorySelect 호출
+    dispatch(setCategory(category));
   };
 
   const handleLogout = () => {
