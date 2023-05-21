@@ -14,7 +14,6 @@ const AllListPage = () => {
     getCount();
   }, [count]);
 
-  //count
   const getCount = async (category) => {
     try {
       const res = await axios.get("http://localhost:8080/clothes/count", {
