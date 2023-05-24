@@ -27,6 +27,7 @@ const Header = () => {
   const selectCategory = useSelector((state) => state.category);
   const dispatch = useDispatch();
   const isLoggedIn = sessionStorage.getItem("userId");
+  const [popoverVisible, setPopoverVisible] = useState(false);
 
   const handleSelectCategory = (category) => {
     dispatch(setCategory(category));
@@ -35,6 +36,16 @@ const Header = () => {
   const handleLogout = () => {
     sessionStorage.removeItem("userId");
     navigate("/");
+  };
+
+  //팝오버
+  const handlePopoverToggle = () => {
+    if (isLoggedIn) {
+      setPopoverVisible((prevVisible) => !prevVisible);
+    } else {
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/login");
+    }
   };
 
   return (
@@ -164,8 +175,41 @@ const Header = () => {
           </Link>
         </span>
         <span style={{ float: "right" }}>
-          <span style={{ paddingRight: "25px" }}>
-            <AiOutlineUser style={{ fontSize: "25px" }} />
+          <span style={{ paddingRight: "15px" }}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              data-bs-container="body"
+              onClick={handlePopoverToggle}
+              style={{
+                borderColor: "transparent",
+                backgroundColor: "transparent",
+              }}
+            >
+              <AiOutlineUser style={{ fontSize: "25px", color: "black" }} />
+            </button>
+
+            {popoverVisible && isLoggedIn && (
+              <div
+                className="popover"
+                style={{
+                  position: "absolute",
+                  color: "white",
+                }}
+              >
+                <span className="menu-item">
+                  <span className="menu-email">{isLoggedIn}</span>
+                  <br />
+                  <span className="gray-line">구매내역</span>
+                  <br />
+                  <span className="gray-line">나의 리뷰</span>
+                  <br />
+                  <span className="gray-line">개인정보</span>
+                  <br />
+                  <span className="menu-logout">로그아웃</span>
+                </span>
+              </div>
+            )}
           </span>
           <span style={{ paddingRight: "25px" }}>
             <CgHeart style={{ fontSize: "25px" }} />

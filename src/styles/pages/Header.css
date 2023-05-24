@@ -22,14 +22,29 @@
   padding-top: 30px;
 }
 
-.content-container {
-  /* padding-top: 80px; */
-  /* 다른 스타일링 */
-}
-
 .hr-line {
   position: absolute;
   left: 0;
   right: 0;
   border-top: 1px solid black;
+}
+
+.menu-item {
+  color: black;
+  padding-bottom: 10px;
+}
+
+.menu-email {
+  color: darkgray;
+  margin-bottom: 10px;
+}
+
+.gray-line {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  width: 150px;
+
+  margin-bottom: 5px;
 }
