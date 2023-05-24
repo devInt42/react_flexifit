@@ -1,0 +1,64 @@
+.header-container {
+  width: 80%;
+  margin-bottom: 80px;
+}
+
+.body-container {
+  width: 60%;
+  background-color: white;
+  margin: 0 auto;
+  display: flex;
+}
+
+.input-container {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 7px;
+  padding: 20px;
+  border: 2px solid lightpink;
+  margin-bottom: 15px;
+}
+
+.input-container label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: black;
+}
+
+.input-container input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid black; /* 검은색 border */
+  margin-bottom: 15px;
+}
+
+.input-container input[type="radio"] {
+  margin-right: 5px;
+}
+
+.input-container button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: lightpink;
+  color: white;
+  cursor: pointer;
+  float: left;
+  width: 240px;
+  margin-bottom: 13px;
+}
+
+.bottom-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: lightpink;
+  color: white;
+  float: none;
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
