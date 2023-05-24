@@ -4,14 +4,14 @@
 }
 
 .body-container {
-  width: 60%;
+  width: 50%;
   background-color: white;
   margin: 0 auto;
   display: flex;
 }
 
 .input-container {
-  width: 60%;
+  width: 50%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
