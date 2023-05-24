@@ -5,6 +5,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { format } from "date-fns";
 
 const MyPage = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -77,24 +78,27 @@ const MyPage = () => {
   };
 
   //유저 정보 업데이트
-  // const updateUserInfo = async () => {
-  //   const param = {
-  //     data: {
-  //       userEmail: userEmail,
-  //       userPassword: userPassword,
-  //       userBirth: userBirth,
-  //       userName: userName,
-  //       userSex: userSex,
-  //       userPhone: userPhone,
-  //     },
-  //   };
-  //   try {
-  //     const res = await axios.post(`http://localhost:8080/users/update`, param);
-  //     console.log(res.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const updateUserInfo = async () => {
+    const formattedDate = selectedDate
+      ? format(selectedDate, "yyyy-MM-dd")
+      : null;
+    const param = {
+      data: {
+        userEmail: userEmail,
+        userPassword: userPassword,
+        userBirth: formattedDate,
+        userName: userName,
+        userSex: userSex,
+        userPhone: userPhone,
+      },
+    };
+    try {
+      const res = await axios.post(`http://localhost:8080/users/update`, param);
+      alert("수정이 완료되었습니다.");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -182,10 +186,7 @@ const MyPage = () => {
         />
       </div>
 
-      <button
-        className="bottom-btn"
-        // onClick={updateUserInfo}
-      >
+      <button className="bottom-btn" onClick={updateUserInfo}>
         수정
       </button>
     </div>
