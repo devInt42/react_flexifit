@@ -13,6 +13,7 @@ import SweatShirt from "./pages/SweatShirtListPage";
 import Header from "./components/header/header";
 import "./styles/pages/Header.css";
 import Footer from "./components/footer/footer.js";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/outer" element={<Outer />} />
             <Route path="/pants" element={<Pants />} />
             <Route path="/all" element={<AllList />} />
+            <Route path="/login/MyPage" element={<MyPage />} />
           </Routes>
         </div>
         <Footer />

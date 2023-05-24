@@ -36,6 +36,7 @@ const Header = () => {
   const handleLogout = () => {
     sessionStorage.removeItem("userId");
     navigate("/");
+    alert("로그아웃 되었습니다.");
   };
 
   //팝오버
@@ -204,9 +205,18 @@ const Header = () => {
                   <br />
                   <span className="gray-line">나의 리뷰</span>
                   <br />
-                  <span className="gray-line">개인정보</span>
+                  <span className="gray-line">
+                    <Link
+                      to="/login/MyPage"
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      개인정보
+                    </Link>
+                  </span>
                   <br />
-                  <span className="menu-logout">로그아웃</span>
+                  <span className="menu-logout" onClick={handleLogout}>
+                    로그아웃
+                  </span>
                 </span>
               </div>
             )}
