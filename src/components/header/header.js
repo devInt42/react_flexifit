@@ -176,7 +176,11 @@ const Header = () => {
           </Link>
         </span>
         <span style={{ float: "right" }}>
-          <span style={{ paddingRight: "15px" }}>
+          <span
+            style={{ paddingRight: "15px" }}
+            onMouseEnter={handlePopoverToggle}
+            onMouseLeave={handlePopoverToggle}
+          >
             <button
               type="button"
               className="btn btn-secondary"
