@@ -1,55 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/pages/QNA.css";
-import UpdateForm from "../components/QNA/UpdateForm";
-import DeleteForm from "../components/QNA/DeleteForm";
 import WriteForm from "../components/QNA/WriteForm";
+import { useDispatch, useSelector } from "react-redux";
+import { getQnaData } from "../store/action";
 
 const QnaPage = () => {
-  const qnaList = [
-    {
-      id: 1,
-      title: "제목이다11111111111",
-      date: "2023-05-24",
-      author: "user1",
-    },
-    { id: 2, title: "질문 2", date: "2023-05-25", author: "user2" },
-    // ...더 많은 질문들
-  ];
+  const dispatch = useDispatch();
+  const qnaList = useSelector((state) => state.data);
+  const isLoading = useSelector((state) => state.isLoading);
+  const [selectedQnaId, setSelectedQnaId] = useState("");
 
-  const [selectedQna, setSelectedQna] = useState(null);
-
-  const handleQnaSelect = (qnaId) => {
-    setSelectedQna((prevSelectedQna) =>
-      prevSelectedQna === qnaId ? null : qnaId
-    );
+  const handleQnaClick = (qnaId) => {
+    setSelectedQnaId((prevId) => {
+      if (prevId === qnaId) {
+        return null;
+      } else {
+        return qnaId;
+      }
+    });
   };
+
+  console.log(selectedQnaId);
+
+  useEffect(() => {
+    dispatch(getQnaData());
+  }, [dispatch]);
 
   return (
     <div className="qna-page">
-      <h2 style={{ fontWeight: "bold", marginBottom: "20px" }}>Q&A</h2>
-      <ul className="qna-list">
-        {qnaList.map((qna) => (
-          <li key={qna.id} className="qna-item">
-            <div className="qna-item-content">
-              <input
-                style={{ float: "left", marginRight: "30px", marginTop: "5px" }}
-                type="checkbox"
-                checked={selectedQna === qna.id}
-                onChange={() => handleQnaSelect(qna.id)}
-              />
-              <div>
-                <h3 className="qna-item-title">{qna.title}</h3>
-
-                <span className="qna-item-date">작성일: {qna.date}</span>
-                <span className="qna-item-author">작성자: {qna.author}</span>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <WriteForm />
-      <UpdateForm qnaId={selectedQna} />
-      <DeleteForm qnaId={selectedQna} />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <span className="qnaLogo">Q&A</span>
+          <ul className="qna-list">
+            {qnaList.map((qna) => (
+              <li key={qna.qna_id} className="qna-item">
+                <div className="qna-item-content">
+                  <input
+                    style={{
+                      float: "left",
+                      marginRight: "30px",
+                      marginTop: "8px",
+                    }}
+                    type="checkbox"
+                    checked={selectedQnaId === qna.qna_id}
+                    onChange={() => handleQnaClick(qna.qna_id)}
+                  />
+                  <div>
+                    <span className="qna-item-title">{qna.qna_title}</span>
+                    <span className="qna-item-date">
+                      작성일: {qna.qna_date}{" "}
+                    </span>
+                    <span className="qna-item-author">
+                      작성자: {qna.user_name}
+                    </span>
+                  </div>
+                </div>
+              </li>
+            ))}{" "}
+            <WriteForm />
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
