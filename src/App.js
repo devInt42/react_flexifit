@@ -28,15 +28,15 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/login/MyPage" element={<MyPage />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/qna" element={<QNA />} />
+            <Route path="/qna/write" element={<WriteForm />} />
             <Route path="/tshirt" element={<Tshirt />} />
             <Route path="/sweatshirt" element={<SweatShirt />} />
             <Route path="/outer" element={<Outer />} />
             <Route path="/pants" element={<Pants />} />
             <Route path="/all" element={<AllList />} />
-            <Route path="/login/MyPage" element={<MyPage />} />
-            <Route path="/qna/write" element={<WriteForm />} />
           </Routes>
         </div>
         <Footer />

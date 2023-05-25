@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { setCategory, setData } from "../../store/action";
+import { setData } from "../../store/action";
 
 const SortingOptions = () => {
   const selectCategory = useSelector((state) => state.category);
@@ -28,7 +28,6 @@ const SortingOptions = () => {
           param
         );
         dispatch(setData(res.data.resultData));
-        // console.log(res.data.resultData);
       } catch (err) {
         console.log(err);
       }
