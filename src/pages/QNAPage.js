@@ -20,8 +20,6 @@ const QnaPage = () => {
     });
   };
 
-  console.log(selectedQnaId);
-
   useEffect(() => {
     dispatch(getQnaData());
   }, [dispatch]);
