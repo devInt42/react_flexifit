@@ -43,7 +43,6 @@
   float: right;
 }
 
-/* 버튼 스타일 */
 .button {
   display: inline-block;
   background-color: #ff99cc;
@@ -61,13 +60,15 @@
   background-color: #ff66a3;
 }
 
-/* 글쓰기 버튼 스타일 */
 .write-button {
   background-color: #ff99cc;
   color: #ffffff;
   float: right;
+  text-decoration: none;
 }
 
 .write-button:hover {
   background-color: #ff66a3;
+  text-decoration: none;
+  color: white;
 }

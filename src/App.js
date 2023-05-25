@@ -14,6 +14,7 @@ import Header from "./components/header/header";
 import "./styles/pages/Header.css";
 import Footer from "./components/footer/footer.js";
 import MyPage from "./pages/MyPage";
+import WriteForm from "./components/QNA/WriteForm";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/pants" element={<Pants />} />
             <Route path="/all" element={<AllList />} />
             <Route path="/login/MyPage" element={<MyPage />} />
+            <Route path="/qna/write" element={<WriteForm />} />
           </Routes>
         </div>
         <Footer />

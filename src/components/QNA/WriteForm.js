@@ -1,5 +1,5 @@
 const WriteForm = () => {
-  return <button className="button write-button">글쓰기</button>;
+  return <div>write form</div>;
 };
 
 export default WriteForm;

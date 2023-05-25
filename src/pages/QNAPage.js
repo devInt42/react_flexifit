@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../styles/pages/QNA.css";
-import WriteForm from "../components/QNA/WriteForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getQnaData } from "../store/action";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const QnaPage = () => {
   const dispatch = useDispatch();
@@ -122,7 +122,9 @@ const QnaPage = () => {
           <div></div>
         </div>
       )}
-      <WriteForm />
+      <Link to="/qna/write" className="button write-button">
+        글쓰기
+      </Link>
     </div>
   );
 };
