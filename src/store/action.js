@@ -11,13 +11,13 @@ export const setData = (data) => ({
 });
 
 //qna allList
-export const getQnaData = () => {
+export const getQnaData = (page, itemsPerPage) => {
   return (dispatch) => {
     axios
       .get("http://localhost:8080/qna/list", {
         params: {
-          page: 1, // 첫 페이지만 요청
-          itemsPerPage: 10, // 페이지당 항목 수
+          page: page, // 첫 페이지만 요청
+          itemsPerPage: itemsPerPage, // 페이지당 항목 수
         },
       })
       .then((response) => {
