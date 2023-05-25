@@ -3,8 +3,7 @@ import "../styles/pages/QNA.css";
 import WriteForm from "../components/QNA/WriteForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getQnaData } from "../store/action";
-//  const totalPages = useSelector((state) => state.totalPages);
-const totalPages = 5;
+import axios from "axios";
 
 const QnaPage = () => {
   const dispatch = useDispatch();
@@ -13,8 +12,21 @@ const QnaPage = () => {
   const [selectedQnaId, setSelectedQnaId] = useState("");
   const [page, setPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [totalCount, setTotalCount] = useState();
+
+  useEffect(() => {
+    getTotalCount();
+  }, [totalCount]);
 
   //QNA count
+  const getTotalCount = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/qna/count");
+      setTotalCount(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleQnaClick = (qnaId) => {
     setSelectedQnaId((prevId) => {
@@ -36,7 +48,7 @@ const QnaPage = () => {
 
   const renderPageButtons = () => {
     const buttons = [];
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= totalCount; i++) {
       buttons.push(
         <li key={i} className={`page-item ${page === i ? "active" : ""}`}>
           <a className="page-link" href="#" onClick={() => handlePageClick(i)}>
@@ -95,7 +107,7 @@ const QnaPage = () => {
               </li>
               {renderPageButtons()}
               <li
-                className={`page-item ${page === totalPages ? "disabled" : ""}`}
+                className={`page-item ${page === totalCount ? "disabled" : ""}`}
               >
                 <a
                   className="page-link"
