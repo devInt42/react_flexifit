@@ -14,7 +14,12 @@ export const setData = (data) => ({
 export const getQnaData = () => {
   return (dispatch) => {
     axios
-      .get("http://localhost:8080/qna/list")
+      .get("http://localhost:8080/qna/list", {
+        params: {
+          page: 1, // 첫 페이지만 요청
+          itemsPerPage: 10, // 페이지당 항목 수
+        },
+      })
       .then((response) => {
         dispatch(setData(response.data));
       })

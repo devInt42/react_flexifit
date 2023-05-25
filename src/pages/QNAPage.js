@@ -56,11 +56,11 @@ const QnaPage = () => {
                   </div>
                 </div>
               </li>
-            ))}{" "}
-            <WriteForm />
+            ))}
           </ul>
         </div>
       )}
+      <WriteForm />
     </div>
   );
 };
