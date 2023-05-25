@@ -57,7 +57,7 @@
 }
 
 .button:hover {
-  background-color: #ff66a3;
+  /* background-color: #ff66a3; */
 }
 
 /* writeForm */
@@ -77,6 +77,9 @@
 .qna-Writepage {
   width: 70%;
   margin: 0 auto;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  padding: 20px;
 }
 
 .WriteLogo {
@@ -91,4 +94,36 @@
   text-align: center !important;
   color: #999999;
   font-size: 15px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  color: #ffffff;
+  /* transition: background-color 0.3s ease; */
+}
+
+.cancel-button {
+  background-color: #999999;
+  margin-right: 10px;
+  float: right;
+}
+
+.submit-button {
+  background-color: #ff99cc;
+  float: right;
+}
+
+.list-button {
+  background-color: #999999;
+}
+
+.list-button:hover,
+.cancel-button:hover {
+  color: white;
 }
