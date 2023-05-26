@@ -13,7 +13,6 @@ const QnaPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalCount, setTotalCount] = useState();
   const navigate = useNavigate();
-  const [selectedQnaId, setSelectedQnaId] = useState(null);
 
   useEffect(() => {
     getTotalCount();
@@ -29,11 +28,10 @@ const QnaPage = () => {
   };
 
   const handleTitleClick = async (qnaId, qnaPassword) => {
-    await setSelectedQnaId(qnaId);
     if (qnaPassword === "") {
-      navigate("/qna/board");
+      navigate(`/qna/board?qnaId=${qnaId}`);
     } else {
-      navigate("/qna/private");
+      navigate(`/qna/private?qnaId=${qnaId}`);
     }
   };
 
@@ -117,7 +115,6 @@ const QnaPage = () => {
           </nav>
         </div>
       )}
-      {selectedQnaId && <SecretForm qnaId={selectedQnaId} />}
       <Link to="/qna/write" className="button write-button">
         글쓰기
       </Link>

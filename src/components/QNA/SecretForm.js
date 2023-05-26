@@ -1,16 +1,45 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
-const SecretForm = ({ qnaId }) => {
+const SecretForm = () => {
+  const [qnaId, setQnaId] = useState(null);
   const [qnaPassword, setQnaPassword] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  // console.log(qnaId);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const id = queryParams.get("qnaId");
+    setQnaId(id);
+  }, [location]);
 
   const handlePasswordChange = (e) => {
     setQnaPassword(e.target.value);
   };
-  console.log(qnaId);
-  const confirmPassword = (e) => {
-    // qna_id와 input pwd를 보내서 같다면 해당 게시물 페이지로 이동
-    // 일치하지 않으면 빠꾸
+
+  const confirmPassword = async () => {
+    const param = {
+      data: {
+        qnaId: qnaId,
+        qnaPassword: qnaPassword,
+      },
+    };
+    try {
+      const res = await axios.post("http://localhost:8080/qna/check", param);
+      if (res.data === 0) {
+        alert("비밀번호가 틀렸습니다.");
+        navigate("/qna");
+      } else if (res.data === 1) {
+        navigate(`/qna/board?qnaId=${qnaId}`);
+      }
+    } catch (err) {
+      console.error(err);
+      navigate("/qna");
+    }
   };
 
   return (
