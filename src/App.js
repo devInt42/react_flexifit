@@ -15,6 +15,7 @@ import "./styles/pages/Header.css";
 import Footer from "./components/footer/footer.js";
 import MyPage from "./pages/MyPage";
 import WriteForm from "./components/QNA/WriteForm";
+import SecretForm from "./components/QNA/SecretForm";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/qna" element={<QNA />} />
             <Route path="/qna/write" element={<WriteForm />} />
+            <Route path="/qna/private" element={<SecretForm />} />
             <Route path="/tshirt" element={<Tshirt />} />
             <Route path="/sweatshirt" element={<SweatShirt />} />
             <Route path="/outer" element={<Outer />} />

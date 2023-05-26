@@ -13,7 +13,6 @@ const WriteForm = () => {
   const userSeq = sessionStorage.getItem("userSeq");
   const navigate = useNavigate();
 
-  // 비밀번호 show
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -32,13 +31,11 @@ const WriteForm = () => {
 
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
-    // console.log(selectedFile);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //서버로 이미지 axios 전송
-    console.log("이미지전송");
+    console.log("이미지 전송");
   };
 
   const submitInfo = async () => {
@@ -61,7 +58,7 @@ const WriteForm = () => {
 
   return (
     <div className="qna-Writepage">
-      <p className="WriteLogo ">Q & A</p>
+      <p className="WriteLogo">Q & A</p>
       <p className="WriteMiniLogo">상품 Q&A입니다.</p>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -131,7 +128,7 @@ const WriteForm = () => {
             className="button submit-button"
             onClick={submitInfo}
           >
-            수정
+            등록
           </button>
         </div>
       </form>

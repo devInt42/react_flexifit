@@ -6,6 +6,13 @@
   margin: 0 auto;
 }
 
+.qna-private-page {
+  padding: 20px;
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
 /* Q&A 목록 스타일 */
 
 .qnaLogo {
@@ -34,6 +41,7 @@
   font-size: 18px;
   font-weight: bold;
   color: #333333;
+  margin-left: 5px;
 }
 
 .qna-item-date,
@@ -54,10 +62,6 @@
   font-size: 14px;
   font-weight: bold;
   margin-right: 10px;
-}
-
-.button:hover {
-  /* background-color: #ff66a3; */
 }
 
 /* writeForm */
@@ -126,4 +130,39 @@
 .list-button:hover,
 .cancel-button:hover {
   color: white;
+}
+
+/* qna private */
+.qna-line {
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.qna-submitBtn {
+  margin-top: 10px;
+  background-color: #ff99cc;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.qna-cancleBtn {
+  margin-top: 10px;
+  background-color: #ccc;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+  text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.qna-cancleBtn:hover {
+  color: #ffffff;
+  background-color: #ccc;
+  text-decoration: none; /* 호버 시 링크에 밑줄 제거 */
 }
