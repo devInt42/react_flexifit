@@ -26,15 +26,16 @@ const Header = () => {
   const navigate = useNavigate();
   const selectCategory = useSelector((state) => state.category);
   const dispatch = useDispatch();
-  const isLoggedIn = sessionStorage.getItem("userId");
+  const isLoggedIn = sessionStorage.getItem("userSeq");
   const [popoverVisible, setPopoverVisible] = useState(false);
+  const userId = sessionStorage.getItem("userId");
 
   const handleSelectCategory = (category) => {
     dispatch(setCategory(category));
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("userSeq");
     navigate("/");
     alert("로그아웃 되었습니다.");
   };
@@ -203,7 +204,7 @@ const Header = () => {
                 }}
               >
                 <span className="menu-item">
-                  <span className="menu-email">{isLoggedIn}</span>
+                  <span className="menu-email">{userId}</span>
                   <br />
                   <span className="gray-line">구매내역</span>
                   <br />

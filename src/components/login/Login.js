@@ -29,8 +29,10 @@ const Login = () => {
     try {
       const res = await axios.post("http://localhost:8080/login/check", param);
       if (res.data.success) {
-        // 로그인 성공 시 세션에 userId 저장
-        sessionStorage.setItem("userId", userId);
+        // 로그인 성공 시 세션에 userSeq 저장
+
+        sessionStorage.setItem("userSeq", res.data.user_seq);
+        sessionStorage.setItem("userId", res.data.user_id);
         navigate("/");
       } else {
         alert("로그인에 실패하였습니다.");
