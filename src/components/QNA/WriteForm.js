@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../../styles/pages/QNA.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const WriteForm = () => {
   const [title, setTitle] = useState("");
@@ -9,6 +10,8 @@ const WriteForm = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [userPassword, setUserPassword] = useState("");
+  const userSeq = sessionStorage.getItem("userSeq");
+  const navigate = useNavigate();
 
   // 비밀번호 show
   const handleTogglePasswordVisibility = () => {
@@ -35,6 +38,25 @@ const WriteForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //서버로 이미지 axios 전송
+    console.log("이미지전송");
+  };
+
+  const submitInfo = async () => {
+    const param = {
+      data: {
+        title: title,
+        content: content,
+        userPassword: userPassword,
+        userSeq: userSeq,
+      },
+    };
+    try {
+      const res = await axios.post("http://localhost:8080/qna/insert", param);
+      alert("등록되었습니다.");
+      navigate("/qna");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -104,7 +126,11 @@ const WriteForm = () => {
           <Link to="/qna" className="button cancel-button">
             취소
           </Link>
-          <button type="submit" className="button submit-button">
+          <button
+            type="submit"
+            className="button submit-button"
+            onClick={submitInfo}
+          >
             수정
           </button>
         </div>
