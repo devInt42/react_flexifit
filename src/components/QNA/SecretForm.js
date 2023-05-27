@@ -38,7 +38,6 @@ const SecretForm = () => {
       }
     } catch (err) {
       console.error(err);
-      navigate("/qna");
     }
   };
 

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getQnaData } from "../store/action";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import SecretForm from "../components/QNA/SecretForm";
 
 const QnaPage = () => {
   const dispatch = useDispatch();

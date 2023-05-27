@@ -1,5 +1,135 @@
+import React, { useState, useEffect } from "react";
+import "../../styles/pages/QNA.css";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
 const BoardForm = () => {
-  return <div>비번 ㄴ</div>;
+  const dispatch = useDispatch();
+  const qnaList = useSelector((state) => state.data);
+  const isLoading = useSelector((state) => state.isLoading);
+  const [qnaId, setQnaId] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedQna, setSelectedQna] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const id = queryParams.get("qnaId");
+    setQnaId(id);
+  }, [location]);
+
+  useEffect(() => {
+    if (qnaList.length > 0) {
+      const foundQna = qnaList.find((qna) => qna.qna_id == qnaId);
+      if (foundQna) {
+        setSelectedQna(foundQna);
+        setTitle(foundQna.qna_title);
+        setContent(foundQna.qna_content);
+      }
+    }
+  }, [qnaId]);
+
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleContent = (e) => {
+    setContent(e.target.value);
+  };
+
+  //QNA 정보 업데이트
+  const updateQna = async () => {
+    const param = {
+      data: {
+        title: title,
+        content: content,
+        qnaId: qnaId,
+      },
+    };
+    try {
+      navigate("/qna");
+      const res = await axios.post(`http://localhost:8080/qna/update`, param);
+      alert("수정이 완료되었습니다.");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //QNA 정보 삭제
+  const removeQna = async () => {
+    const param = {
+      data: {
+        qnaId: qnaId,
+      },
+    };
+    try {
+      navigate("/qna");
+      const res = await axios.post(`http://localhost:8080/qna/delete`, param);
+      alert("삭제가 완료되었습니다.");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <div className="qna-Writepage">
+      <p className="WriteLogo">Q & A</p>
+      <p className="WriteMiniLogo">상품 Q&A입니다.</p>
+      <form>
+        <div className="mb-3">
+          <label htmlFor="exampleFormControlInput1" className="form-label">
+            제목
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="exampleFormControlInput1"
+            value={title}
+            onChange={handleTitle}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="exampleFormControlTextarea1" className="form-label">
+            내용
+          </label>
+          <textarea
+            className="form-control"
+            id="exampleFormControlTextarea1"
+            rows="10"
+            value={content}
+            onChange={handleContent}
+          ></textarea>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="formFileSm" className="form-label">
+            첨부파일
+          </label>
+          <input
+            className="form-control form-control-sm"
+            id="formFileSm"
+            type="file"
+            value={selectedFile}
+          />
+        </div>
+
+        <div className="button-row">
+          <Link to="/qna" className="button list-button">
+            목록
+          </Link>
+          <span className="button cancel-button" onClick={removeQna}>
+            삭제
+          </span>
+          <button className="button submit-button" onClick={updateQna}>
+            수정
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default BoardForm;
