@@ -9,7 +9,8 @@ const WriteForm = () => {
   const [content, setContent] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [userPassword, setUserPassword] = useState("");
+  const [userPassword, setUserPassword] = useState(""); // 초기화
+
   const userSeq = sessionStorage.getItem("userSeq");
   const navigate = useNavigate();
 
@@ -49,8 +50,12 @@ const WriteForm = () => {
     };
     try {
       const res = await axios.post("http://localhost:8080/qna/insert", param);
-      alert("등록되었습니다.");
-      navigate("/qna");
+      if (res.data.resultMsg === "false") {
+        alert("제목과 내용은 필수값 입니다.");
+      } else {
+        alert("등록되었습니다.");
+        navigate("/qna");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -116,6 +121,7 @@ const WriteForm = () => {
             </span>
           </div>
         </div>
+
         <div className="button-row">
           <Link to="/qna" className="button list-button">
             목록
