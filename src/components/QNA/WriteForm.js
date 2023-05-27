@@ -34,9 +34,28 @@ const WriteForm = () => {
     setSelectedFile(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("이미지 전송");
+
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/qna/insert/file",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("파일 전송 성공");
+      } catch (err) {
+        console.log("파일 전송 실패");
+      }
+    }
   };
 
   const submitInfo = async () => {
