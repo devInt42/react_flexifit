@@ -77,6 +77,7 @@ const WriteForm = () => {
       );
       console.log(res.data);
       if (res.data.resultMsg === "false") {
+        //return 안받아서 작동안함. db에는 안들어감
         alert("제목과 내용은 필수값 입니다.");
       } else {
         alert("등록되었습니다.");
