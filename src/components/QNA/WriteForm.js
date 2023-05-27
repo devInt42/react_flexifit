@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/pages/QNA.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ const WriteForm = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [userPassword, setUserPassword] = useState(""); // 초기화
+  const [listCount, setListCount] = useState(""); //db 개수
 
   const userSeq = sessionStorage.getItem("userSeq");
   const navigate = useNavigate();
@@ -34,41 +35,47 @@ const WriteForm = () => {
     setSelectedFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-
-      try {
-        const res = await axios.post(
-          "http://localhost:8080/qna/insert/file",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        console.log("파일 전송 성공");
-      } catch (err) {
-        console.log("파일 전송 실패");
-      }
+  const getTotalCount = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/qna/countall");
+      setListCount(res.data);
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  const submitInfo = async () => {
-    const param = {
-      data: {
-        title: title,
-        content: content,
-        userPassword: userPassword,
-        userSeq: userSeq,
-      },
-    };
+  //write 게시판 qna_seq 설정
+  useEffect(() => {
+    getTotalCount();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    if (selectedFile) {
+      formData.append("file", selectedFile);
+    } else {
+      formData.append("file", null);
+    }
+
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("userPassword", userPassword);
+    formData.append("userSeq", userSeq);
+
     try {
-      const res = await axios.post("http://localhost:8080/qna/insert", param);
+      const res = await axios.post(
+        "http://localhost:8080/qna/insert",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(res.data);
       if (res.data.resultMsg === "false") {
         alert("제목과 내용은 필수값 입니다.");
       } else {
@@ -84,7 +91,7 @@ const WriteForm = () => {
     <div className="qna-Writepage">
       <p className="WriteLogo">Q & A</p>
       <p className="WriteMiniLogo">상품 Q&A입니다.</p>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="mb-3">
           <label htmlFor="exampleFormControlInput1" className="form-label">
             제목
@@ -151,7 +158,7 @@ const WriteForm = () => {
           <button
             type="submit"
             className="button submit-button"
-            onClick={submitInfo}
+            onClick={handleSubmit}
           >
             등록
           </button>
