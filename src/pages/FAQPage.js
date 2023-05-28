@@ -37,7 +37,6 @@ const FAQPage = () => {
   };
 
   //관리자일때
-
   const handleEdit = async () => {
     const param = {
       data: {
@@ -48,16 +47,25 @@ const FAQPage = () => {
     };
     try {
       const res = await axios.post(`http://localhost:8080/faq/update`, param);
-      alert("수정이 완료되었습니다.");
-      setSelectedTitle(faqTitle); // 수정된 제목으로 업데이트
-      setSelectedContent(faqContent);
+      dispatch(getFAQData());
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleDelete = () => {
-    //삭제
+  const handleDelete = async () => {
+    const param = {
+      data: {
+        selectedId: selectedId,
+      },
+    };
+    try {
+      const res = await axios.post(`http://localhost:8080/faq/delete`, param);
+      alert("삭제가 완료되었습니다.");
+      dispatch(getFAQData());
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
