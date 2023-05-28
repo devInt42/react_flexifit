@@ -1,0 +1,39 @@
+.faq-page {
+  background-color: #f7f7f7;
+  padding: 20px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.faqLogo {
+  text-align: center;
+  font-size: 38px;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.faqminiLogo {
+  font-size: 23px;
+}
+
+.faq-title {
+  font-size: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.faq-title.selected {
+  font-weight: bold;
+  color: #000000;
+}
+
+.faq-content {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
