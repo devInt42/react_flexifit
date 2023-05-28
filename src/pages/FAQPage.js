@@ -1,38 +1,25 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getFAQData } from "../store/action";
 
 const FAQPage = () => {
+  const dispatch = useDispatch();
   const faqList = useSelector((state) => state.faqData);
-  const [selectedTitle, setSelectedTitle] = useState("");
-  const [qnaContent, setQnaContent] = useState("");
 
-  const handleTitleClick = (title, content) => {
-    if (title === selectedTitle) {
-      setSelectedTitle("");
-      setQnaContent("");
-    } else {
-      setSelectedTitle(title);
-      setQnaContent(content);
-    }
-  };
+  useEffect(() => {
+    dispatch(getFAQData());
+  }, [dispatch]);
 
   return (
-    <div>
+    <div className="qna-page">
       {faqList.map((faq) => (
-        <div key={faq.faq_id}>
-          <div
-            className="faq-title"
-            style={{
-              fontWeight: selectedTitle === faq.faq_title ? "bold" : "normal",
-            }}
-            onClick={() => handleTitleClick(faq.faq_title, faq.faq_content)}
-          >
-            {faq.faq_title}
-            <span className="faq-author">작성자: {faq.user_name}</span>
+        <div key={faq.faq_id} className="qna-item">
+          <div className="qna-item-content">
+            <div>
+              <span className="qna-item-title">{faq.faq_title}</span>
+              <span className="qna-item-author">작성자:</span>
+            </div>
           </div>
-          {selectedTitle === faq.faq_title && (
-            <div className="faq-content">{qnaContent}</div>
-          )}
         </div>
       ))}
     </div>
