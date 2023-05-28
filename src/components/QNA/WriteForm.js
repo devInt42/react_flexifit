@@ -10,7 +10,6 @@ const WriteForm = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [userPassword, setUserPassword] = useState(""); // 초기화
-  const [listCount, setListCount] = useState(""); //db 개수
 
   const userSeq = sessionStorage.getItem("userSeq");
   const navigate = useNavigate();
@@ -34,20 +33,6 @@ const WriteForm = () => {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-
-  const getTotalCount = async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/qna/countall");
-      setListCount(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  //write 게시판 qna_seq 설정
-  useEffect(() => {
-    getTotalCount();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,7 +60,7 @@ const WriteForm = () => {
           },
         }
       );
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.resultMsg === "false") {
         //return 안받아서 작동안함. db에는 안들어감
         alert("제목과 내용은 필수값 입니다.");
@@ -130,6 +115,11 @@ const WriteForm = () => {
             onChange={handleFileChange}
           />
         </div>
+        {selectedFile && (
+          <div>
+            <img src={URL.createObjectURL(selectedFile)} alt="Selected File" />
+          </div>
+        )}
         <div className="mb-3">
           <label htmlFor="password">비밀번호</label>
           <div className="password-input">

@@ -21,6 +21,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         isLoading: action.payload,
       };
+    case "SET_FAQDATA":
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
     default:
       return state;
   }

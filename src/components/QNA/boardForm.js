@@ -29,6 +29,7 @@ const BoardForm = () => {
         setSelectedQna(foundQna);
         setTitle(foundQna.qna_title);
         setContent(foundQna.qna_content);
+        setSelectedFile(foundQna.qna_imageUrl);
       }
     }
   }, [qnaId]);
@@ -41,18 +42,37 @@ const BoardForm = () => {
     setContent(e.target.value);
   };
 
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
   //QNA 정보 업데이트
-  const updateQna = async () => {
-    const param = {
-      data: {
-        title: title,
-        content: content,
-        qnaId: qnaId,
-      },
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    if (selectedFile) {
+      formData.append("file", selectedFile);
+    } else {
+      formData.append("file", null);
+    }
+
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("qnaId", qnaId);
+
     try {
       navigate("/qna");
-      const res = await axios.post(`http://localhost:8080/qna/update`, param);
+      const res = await axios.post(
+        `http://localhost:8080/qna/update`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       alert("수정이 완료되었습니다.");
     } catch (err) {
       console.log(err);
@@ -112,10 +132,15 @@ const BoardForm = () => {
             className="form-control form-control-sm"
             id="formFileSm"
             type="file"
-            value={selectedFile}
+            onChange={handleFileChange}
           />
         </div>
-
+        {/* 경로 수정 */}
+        {selectedFile && (
+          <div>
+            <img src={selectedFile} alt="Selected File" />
+          </div>
+        )}
         <div className="button-row">
           <Link to="/qna" className="button list-button">
             목록
@@ -123,7 +148,11 @@ const BoardForm = () => {
           <span className="button cancel-button" onClick={removeQna}>
             삭제
           </span>
-          <button className="button submit-button" onClick={updateQna}>
+          <button
+            type="submit"
+            className="button submit-button"
+            onClick={handleSubmit}
+          >
             수정
           </button>
         </div>
