@@ -35,15 +35,10 @@ export const getQnaData = (page, itemsPerPage) => {
 };
 
 //faq allList
-export const getFAQData = (page, itemsPerPage) => {
+export const getFAQData = () => {
   return (dispatch) => {
     axios
-      .get("http://localhost:8080/faq/list", {
-        params: {
-          page: page, // 첫 페이지만 요청
-          itemsPerPage: itemsPerPage, // 페이지당 항목 수
-        },
-      })
+      .get("http://localhost:8080/faq/list")
       .then((response) => {
         dispatch(setFaqData(response.data));
       })

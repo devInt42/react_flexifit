@@ -24,7 +24,7 @@ const rootReducer = (state = initialState, action) => {
     case "SET_FAQDATA":
       return {
         ...state,
-        isLoading: action.payload,
+        faqData: action.payload,
       };
     default:
       return state;
