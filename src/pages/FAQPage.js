@@ -44,6 +44,7 @@ const FAQPage = () => {
                     handleTitleClick(faq.faq_title, faq.faq_content)
                   }
                 >
+                  <span className="plus-button">+</span>
                   {faq.faq_title}
                 </div>
                 {selectedTitle === faq.faq_title && (
