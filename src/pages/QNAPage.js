@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getQnaData } from "../store/action";
+import { getQnaData, getReplyData } from "../store/action";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 const QnaPage = () => {
   const dispatch = useDispatch();
   const qnaList = useSelector((state) => state.data);
+  const ReplyList = useSelector((state) => state.replyData);
   const isLoading = useSelector((state) => state.isLoading);
   const [page, setPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalCount, setTotalCount] = useState();
+
   const navigate = useNavigate();
   const userSeq = sessionStorage.getItem("userSeq");
 
@@ -28,7 +30,7 @@ const QnaPage = () => {
   };
 
   const handleTitleClick = async (qnaId, qnaPassword) => {
-    //관리자는 비밀글 여부x
+    // 관리자는 비밀글 여부x
     if (qnaPassword === "" || userSeq === "0") {
       navigate(`/qna/board?qnaId=${qnaId}`);
     } else {
@@ -38,7 +40,21 @@ const QnaPage = () => {
 
   useEffect(() => {
     dispatch(getQnaData(page, itemsPerPage));
+    dispatch(getReplyData()); // 답변 데이터 가져오기
   }, [dispatch, page]);
+
+  const renderReplyContent = (qnaId) => {
+    const reply = ReplyList.find((reply) => reply.qna_id === qnaId);
+    if (reply) {
+      const privateLink = `/qna/reply/private?qnaId=${qnaId}`; // 수정: 프라이빗 링크 생성
+      return (
+        <div className="qna-item-reply">
+          <Link to={privateLink}>비밀 글 입니다.</Link>
+        </div>
+      );
+    }
+    return null;
+  };
 
   const handlePageClick = (pageNumber) => {
     setPage(pageNumber);
@@ -86,6 +102,7 @@ const QnaPage = () => {
                     </span>
                   </div>
                 </div>
+                {renderReplyContent(qna.qna_id)}
               </li>
             ))}
           </ul>
