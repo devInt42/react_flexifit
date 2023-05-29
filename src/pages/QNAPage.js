@@ -46,7 +46,12 @@ const QnaPage = () => {
   const renderReplyContent = (qnaId) => {
     const reply = ReplyList.find((reply) => reply.qna_id === qnaId);
     if (reply) {
-      const privateLink = `/qna/reply/private?qnaId=${qnaId}`; // 수정: 프라이빗 링크 생성
+      let privateLink;
+      if (userSeq === "0") {
+        privateLink = `/qna/reply?qnaId=${qnaId}`;
+      } else {
+        privateLink = `/qna/reply/private?qnaId=${qnaId}`;
+      }
       return (
         <div className="qna-item-reply">
           <Link to={privateLink}>비밀 글 입니다.</Link>

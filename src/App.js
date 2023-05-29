@@ -18,6 +18,8 @@ import QNAWriteForm from "./components/QNA/WriteForm";
 import SecretForm from "./components/QNA/SecretForm";
 import BoardForm from "./components/QNA/BoardForm";
 import FAQWriteForm from "./components/FAQ/WriteForm";
+import ReplySecretForm from "./components/QNA/ReplySecretForm";
+import QNAReplyForm from "./components/QNA/ReplyForm";
 
 function App() {
   return (
@@ -36,7 +38,9 @@ function App() {
             <Route path="/faq/write" element={<FAQWriteForm />} />
             <Route path="/qna" element={<QNA />} />
             <Route path="/qna/write" element={<QNAWriteForm />} />
+            <Route path="/qna/reply" element={<QNAReplyForm />} />
             <Route path="/qna/private" element={<SecretForm />} />
+            <Route path="/qna/reply/private" element={<ReplySecretForm />} />
             <Route path="/qna/board" element={<BoardForm />} />
             <Route path="/tshirt" element={<Tshirt />} />
             <Route path="/sweatshirt" element={<SweatShirt />} />
