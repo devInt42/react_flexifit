@@ -37,13 +37,10 @@ const AllListPage = () => {
       </p>
       <div className="product-container">
         {data.map((item) => {
-          const imagePath = process.env.PUBLIC_URL + "/images/shirt1.png";
-          //   console.log(imagePath);
-
           return (
             <div className="product-item" key={item.cloth_id}>
               <div className="product-image">
-                <img src={imagePath} alt="Product Image" />
+                <img src={item.cloth_defaultImage} alt="all Image" />
               </div>
               <div className="product-details">
                 <div className="product-size">{item.cloth_size}</div>
