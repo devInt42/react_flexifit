@@ -1,6 +1,8 @@
 const initialState = {
   category: "",
   data: [],
+  faqData: [],
+  replyData: [],
   isLoading: false,
 };
 
@@ -25,6 +27,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         faqData: action.payload,
+      };
+    case "SET_REPLYDATA":
+      return {
+        ...state,
+        replyData: action.payload,
       };
     default:
       return state;

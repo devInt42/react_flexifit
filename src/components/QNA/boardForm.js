@@ -3,6 +3,7 @@ import "../../styles/pages/QNA.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { getReplyData } from "../../store/action";
 
 const BoardForm = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,13 @@ const BoardForm = () => {
   const navigate = useNavigate();
   const userSeq = sessionStorage.getItem("userSeq");
   const [showReplyForm, setShowReplyForm] = useState(false);
+  const ReplyList = useSelector((state) => state.replyData);
+
+  useEffect(() => {
+    dispatch(getReplyData());
+  }, [dispatch]);
+
+  console.log(ReplyList);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -60,7 +68,6 @@ const BoardForm = () => {
     } catch (err) {
       console.log(err);
     }
-    setReply("");
     setShowReplyForm(false);
   };
 

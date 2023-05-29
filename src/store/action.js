@@ -15,6 +15,11 @@ export const setFaqData = (data) => ({
   payload: data,
 });
 
+export const setReplyData = (data) => ({
+  type: "SET_REPLYDATA",
+  payload: data,
+});
+
 //qna allList
 export const getQnaData = (page, itemsPerPage) => {
   return (dispatch) => {
@@ -41,6 +46,20 @@ export const getFAQData = () => {
       .get("http://localhost:8080/faq/list")
       .then((response) => {
         dispatch(setFaqData(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+//reply allList
+export const getReplyData = () => {
+  return (dispatch) => {
+    axios
+      .get("http://localhost:8080/qna/replyList")
+      .then((response) => {
+        dispatch(setReplyData(response.data));
       })
       .catch((error) => {
         console.log(error);
