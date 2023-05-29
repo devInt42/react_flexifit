@@ -54,7 +54,6 @@ const SecretForm = () => {
             비밀번호를 입력하여 주세요.
           </span>
         </p>
-        <p>관리자는 확인버튼만 누르시면 됩니다.</p>
         <p style={{ color: "black", paddingRight: "10px", marginTop: "30px" }}>
           비밀번호{" "}
           <input

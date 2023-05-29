@@ -12,6 +12,7 @@ const QnaPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalCount, setTotalCount] = useState();
   const navigate = useNavigate();
+  const userSeq = sessionStorage.getItem("userSeq");
 
   useEffect(() => {
     getTotalCount();
@@ -27,7 +28,8 @@ const QnaPage = () => {
   };
 
   const handleTitleClick = async (qnaId, qnaPassword) => {
-    if (qnaPassword === "") {
+    //관리자는 비밀글 여부x
+    if (qnaPassword === "" || userSeq === "0") {
       navigate(`/qna/board?qnaId=${qnaId}`);
     } else {
       navigate(`/qna/private?qnaId=${qnaId}`);

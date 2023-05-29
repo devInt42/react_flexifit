@@ -17,6 +17,7 @@ const BoardForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const userSeq = sessionStorage.getItem("userSeq");
+  const [showReplyForm, setShowReplyForm] = useState(false);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -36,6 +37,34 @@ const BoardForm = () => {
     }
   }, [qnaId]);
 
+  //admin
+  const handleReply = (e) => {
+    setReply(e.target.value);
+  };
+
+  const handleReplySubmit = async () => {
+    const param = {
+      data: {
+        qnaId: qnaId,
+        reply: reply,
+      },
+    };
+    try {
+      const res = await axios.post(`http://localhost:8080/qna/reply`, param);
+      if (res.data.resultMsg == "false") {
+        alert("필수값을 입력해주세요.");
+      } else {
+        alert("등록이 완료되었습니다.");
+        navigate("/qna");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setReply("");
+    setShowReplyForm(false);
+  };
+
+  //user
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -98,7 +127,9 @@ const BoardForm = () => {
   };
 
   //관리자 QNA
-  const replyQna = () => {};
+  const replyQna = () => {
+    setShowReplyForm(true);
+  };
 
   return (
     <div className="qna-Writepage">
@@ -156,8 +187,33 @@ const BoardForm = () => {
             </span>
           )}
           {userSeq == "0" && (
-            <span className="button submit-button" onClick={replyQna}>
-              답글 달기
+            <span>
+              <span
+                className="button submit-button"
+                onClick={replyQna}
+                style={{ marginBottom: "15px" }}
+              >
+                답글 달기
+              </span>
+              {showReplyForm && (
+                <div className="reply-section">
+                  <textarea
+                    className="form-control"
+                    rows="3"
+                    placeholder="답글을 입력하세요."
+                    value={reply}
+                    onChange={handleReply}
+                  ></textarea>
+                  <button
+                    type="button"
+                    style={{ marginTop: "10px" }}
+                    className="button submit-button"
+                    onClick={handleReplySubmit}
+                  >
+                    저장
+                  </button>
+                </div>
+              )}
             </span>
           )}
           {userSeq !== "0" && (

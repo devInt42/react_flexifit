@@ -87,7 +87,7 @@ const FAQPage = () => {
           {userSeq === "0" && (
             <button
               type="button"
-              class="btn btn-outline-secondary"
+              className="btn btn-outline-secondary"
               style={{ float: "right" }}
               onClick={handleWriteForm}
             >
