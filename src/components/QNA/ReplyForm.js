@@ -53,9 +53,6 @@ const ReplyForm = () => {
           <Link to="/qna" className="button list-button">
             목록
           </Link>
-          <Link to="/qna" className="button cancel-button">
-            취소
-          </Link>
         </div>
       </form>
     </div>
