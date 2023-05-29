@@ -58,6 +58,7 @@ const BoardForm = () => {
     setReply(e.target.value);
   };
 
+  //insert
   const handleReplySubmit = async () => {
     const param = {
       data: {
@@ -71,6 +72,31 @@ const BoardForm = () => {
         alert("필수값을 입력해주세요.");
       } else {
         alert("등록이 완료되었습니다.");
+        navigate("/qna");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setShowReplyForm(false);
+  };
+
+  //update
+  const handleReplyUpdate = async () => {
+    const param = {
+      data: {
+        qnaId: qnaId,
+        reply: reply,
+      },
+    };
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/qna/reply/update`,
+        param
+      );
+      if (res.data.resultMsg == "false") {
+        alert("필수값을 입력해주세요.");
+      } else {
+        alert("수정이 완료되었습니다.");
         navigate("/qna");
       }
     } catch (err) {
@@ -224,7 +250,7 @@ const BoardForm = () => {
                       type="button"
                       style={{ marginTop: "10px" }}
                       className="button submit-button"
-                      onClick={handleReplySubmit}
+                      onClick={handleReplyUpdate}
                     >
                       수정
                     </button>
