@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import "../styles/pages/FAQ.css";
 import { getFAQData } from "../store/action";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FAQPage = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ const FAQPage = () => {
   const [selectedId, setSelectedId] = useState(""); //faqId
   const isLoading = useSelector((state) => state.isLoading);
   const userSeq = sessionStorage.getItem("userSeq");
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getFAQData());
@@ -68,6 +71,10 @@ const FAQPage = () => {
     }
   };
 
+  const handleWriteForm = () => {
+    navigate("/faq/write");
+  };
+
   return (
     <div className="faq-page">
       {isLoading ? (
@@ -76,6 +83,18 @@ const FAQPage = () => {
         <div>
           <span className="faqLogo">FAQ</span>
           <span className="faqminiLogo">주문 / 결제</span>
+
+          {userSeq === "0" && (
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              style={{ float: "right" }}
+              onClick={handleWriteForm}
+            >
+              글쓰기
+            </button>
+          )}
+
           <hr />
           {faqList &&
             faqList.map((faq) => (
