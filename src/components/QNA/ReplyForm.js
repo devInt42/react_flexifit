@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
 import "../../styles/pages/QNA.css";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getReplyData } from "../../store/action";
 import { useDispatch, useSelector } from "react-redux";
 
 const ReplyForm = () => {
   const dispatch = useDispatch();
-  const [replyContent, setReplyContent] = useState("");
-  const ReplyList = useSelector((state) => state.replyData);
-  const [qnaId, setQnaId] = useState("");
   const location = useLocation();
+  const ReplyList = useSelector((state) => state.replyData);
+  const [replyContent, setReplyContent] = useState("");
+  const [qnaId, setQnaId] = useState("");
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);

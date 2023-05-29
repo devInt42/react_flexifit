@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
 import "../../styles/pages/QNA.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { getReplyData } from "../../store/action";
 
 const BoardForm = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   const qnaList = useSelector((state) => state.data);
   const isLoading = useSelector((state) => state.isLoading);
+  const ReplyList = useSelector((state) => state.replyData);
   const [qnaId, setQnaId] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedQna, setSelectedQna] = useState("");
   const [reply, setReply] = useState("");
-  const location = useLocation();
-  const navigate = useNavigate();
-  const userSeq = sessionStorage.getItem("userSeq");
   const [showReplyForm, setShowReplyForm] = useState(false);
-  const ReplyList = useSelector((state) => state.replyData);
+  const userSeq = sessionStorage.getItem("userSeq");
 
   useEffect(() => {
     dispatch(getReplyData());
