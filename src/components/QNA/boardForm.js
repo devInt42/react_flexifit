@@ -219,14 +219,25 @@ const BoardForm = () => {
                     value={reply}
                     onChange={handleReply}
                   ></textarea>
-                  <button
-                    type="button"
-                    style={{ marginTop: "10px" }}
-                    className="button submit-button"
-                    onClick={handleReplySubmit}
-                  >
-                    저장
-                  </button>
+                  {reply ? (
+                    <button
+                      type="button"
+                      style={{ marginTop: "10px" }}
+                      className="button submit-button"
+                      onClick={handleReplySubmit}
+                    >
+                      수정
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      style={{ marginTop: "10px" }}
+                      className="button submit-button"
+                      onClick={handleReplySubmit}
+                    >
+                      저장
+                    </button>
+                  )}
                 </div>
               )}
             </span>
