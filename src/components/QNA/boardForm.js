@@ -3,6 +3,7 @@ import "../../styles/pages/QNA.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { getReplyData } from "../../store/action";
 
 const BoardForm = () => {
   const dispatch = useDispatch();
@@ -18,12 +19,27 @@ const BoardForm = () => {
   const navigate = useNavigate();
   const userSeq = sessionStorage.getItem("userSeq");
   const [showReplyForm, setShowReplyForm] = useState(false);
+  const ReplyList = useSelector((state) => state.replyData);
+
+  useEffect(() => {
+    dispatch(getReplyData());
+  }, [dispatch]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get("qnaId");
     setQnaId(id);
   }, [location]);
+
+  //초기값 저장
+  useEffect(() => {
+    if (ReplyList && qnaId) {
+      const reply = ReplyList.find((reply) => reply.qna_id === parseInt(qnaId));
+      if (reply) {
+        setReply(reply.reply_content);
+      }
+    }
+  }, [ReplyList, qnaId]);
 
   useEffect(() => {
     if (qnaList.length > 0) {
