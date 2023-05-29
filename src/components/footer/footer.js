@@ -2,6 +2,14 @@ import React from "react";
 import "../../styles/pages/Footer.css";
 import instagram from "../../images/insta.png";
 import facebook from "../../images/facebook.png";
+import { Link } from "react-router-dom";
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
 
 const Footer = () => {
   return (
@@ -14,8 +22,12 @@ const Footer = () => {
         <div>
           <h4>HELP</h4>
           <p>문의하기</p>
-          <p>Q&A</p>
-          <p>FAQ</p>
+          <p className="footer-link" onClick={scrollToTop}>
+            <Link to="/qna">Q&A</Link>
+          </p>
+          <p className="footer-link" onClick={scrollToTop}>
+            <Link to="/faq">FAQ</Link>
+          </p>
         </div>
         <div>
           <h4>FOLLOW</h4>

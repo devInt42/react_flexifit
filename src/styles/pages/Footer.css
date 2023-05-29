@@ -40,3 +40,13 @@ p {
   width: 30px;
   height: 30px;
 }
+
+/* 안먹혀요 */
+.footer-link {
+  color: #7e858d;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #7e858d;
+}
