@@ -166,3 +166,24 @@
   background-color: #ccc;
   text-decoration: none; /* 호버 시 링크에 밑줄 제거 */
 }
+.qna-item-reply {
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.qna-item-reply > a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+.qna-item-reply > a:hover {
+  text-decoration: underline;
+  color: #000;
+}
+
+.qna-item-reply::before {
+  content: "↪";
+  display: inline-block;
+  margin-right: 5px;
+  color: #999;
+}
