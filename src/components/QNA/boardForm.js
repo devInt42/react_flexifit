@@ -13,8 +13,10 @@ const BoardForm = () => {
   const [content, setContent] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedQna, setSelectedQna] = useState("");
+  const [reply, setReply] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const userSeq = sessionStorage.getItem("userSeq");
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -95,6 +97,9 @@ const BoardForm = () => {
     }
   };
 
+  //관리자 QNA
+  const replyQna = () => {};
+
   return (
     <div className="qna-Writepage">
       <p className="WriteLogo">Q & A</p>
@@ -145,16 +150,25 @@ const BoardForm = () => {
           <Link to="/qna" className="button list-button">
             목록
           </Link>
-          <span className="button cancel-button" onClick={removeQna}>
-            삭제
-          </span>
-          <button
-            type="submit"
-            className="button submit-button"
-            onClick={handleSubmit}
-          >
-            수정
-          </button>
+          {userSeq !== "0" && (
+            <span className="button cancel-button" onClick={removeQna}>
+              삭제
+            </span>
+          )}
+          {userSeq == "0" && (
+            <span className="button submit-button" onClick={replyQna}>
+              답글 달기
+            </span>
+          )}
+          {userSeq !== "0" && (
+            <button
+              type="submit"
+              className="button submit-button"
+              onClick={handleSubmit}
+            >
+              수정
+            </button>
+          )}
         </div>
       </form>
     </div>
