@@ -7,40 +7,42 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { ImTextWidth } from "react-icons/im";
 
 const DetailPage = () => {
+  const location = useLocation();
   const [clothId, setClothId] = useState("");
-  const [clothColor, setClothColor] = useState("white");
+  const [clothColor, setClothColor] = useState("white"); //default값 white
   const [clothName, setClothName] = useState("");
   const [clothPrice, setClothPrice] = useState("");
   const [clothSize, setClothSize] = useState("");
   const [clothFrontImage, setClothFrontImage] = useState("");
   const [clothBackImage, setClothBackImage] = useState("");
-  const location = useLocation();
-  const [showPopup, setShowPopup] = useState(false);
-  const [changeImage, setChangeImage] = useState("앞면");
+  const [showPopup, setShowPopup] = useState(false); //팝업 창
+  const [changeImage, setChangeImage] = useState(""); //앞면 뒷면
   const [colors, setColors] = useState(["white", "black"]); //axios로 수정
-  const [showFrontImage, setShowFrontImage] = useState(true);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
 
-  // 선택된 색상 변경
+  const handleFrontButtonClick = () => {
+    setChangeImage(clothFrontImage);
+  };
+
+  const handleBackButtonClick = () => {
+    setChangeImage(clothBackImage);
+  };
+
   const selectColor = (color) => {
     setClothColor(color);
   };
 
+  //param값 받아오기
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get("clothId");
     setClothId(id);
   }, [location]);
 
-  // 해당 cloth_id에 해당되는 옷 정보 받아오기
-  useEffect(() => {
-    getDetailInfo();
-  }, [clothId, clothColor]);
-
-  // detail 값 가져오기  DEFAULT COLOR: "WHITE"
+  // cloth_id에 해당되는 옷 정보 받아오기
   const getDetailInfo = async () => {
     const param = {
       data: {
@@ -66,10 +68,14 @@ const DetailPage = () => {
     }
   };
 
-  // 앞면/뒷면 이미지 전환
-  const toggleImage = () => {
-    setShowFrontImage(!showFrontImage);
-  };
+  useEffect(() => {
+    getDetailInfo();
+  }, [clothId, clothColor]);
+
+  //default값 앞면
+  useEffect(() => {
+    setChangeImage(clothFrontImage);
+  }, [clothFrontImage]);
 
   return (
     <div>
@@ -135,15 +141,12 @@ const DetailPage = () => {
               </ul>
             </div>
           )}
-          <img
-            src={showFrontImage ? clothFrontImage : clothBackImage}
-            alt={showFrontImage ? "앞면 이미지" : "뒷면 이미지"}
-          />
+          <img src={changeImage} alt="T-shirt" />{" "}
           <div className="shirtBtns">
-            <button className="shirtBtn" onClick={toggleImage}>
+            <button className="shirtBtn" onClick={handleFrontButtonClick}>
               앞면
             </button>
-            <button className="shirtBtn" onClick={toggleImage}>
+            <button className="shirtBtn" onClick={handleBackButtonClick}>
               뒷면
             </button>
           </div>
