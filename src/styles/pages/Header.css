@@ -10,7 +10,7 @@
 
 .selected {
   border-bottom: 4px solid black;
-  padding-bottom: 18px;
+  padding-bottom: 10px;
   font-weight: bolder;
 }
 

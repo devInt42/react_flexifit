@@ -232,6 +232,13 @@
   margin-top: 10px;
 }
 
+.size-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 5px;
+}
+
 .size-button {
   display: flex;
   align-items: center;
@@ -254,4 +261,5 @@
 .size-button.selected {
   border-color: #6699ff;
   color: #6699ff;
+  padding-top: 10px;
 }

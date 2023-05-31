@@ -49,6 +49,7 @@ const DetailPage = () => {
   }, [location]);
 
   // cloth_id에 해당되는 옷 정보 받아오기
+  // cloth_id에 해당되는 옷 정보 받아오기
   const getDetailInfo = async () => {
     const param = {
       data: {
@@ -66,7 +67,14 @@ const DetailPage = () => {
         setClothPrice(res.data.resultData[0].cloth_discount);
         setClothFrontImage(res.data.resultData[0].cloth_FrontImage);
         setClothBackImage(res.data.resultData[0].cloth_BackImage);
-        setClothColor(res.data.resultData[0].cloth_color);
+        const availableColors = res.data.resultData[0].cloth_color;
+        if (availableColors.includes("white")) {
+          setClothColor(availableColors);
+        } else {
+          const randomColor =
+            availableColors[Math.floor(Math.random() * availableColors.length)];
+          setClothColor(randomColor);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -203,7 +211,7 @@ const DetailPage = () => {
         <div className="text-title">{clothName}</div>
         <div className="text-price">{clothPrice}원</div>
         <div className="text-color">
-          <span>색상 - {clothColor}</span>
+          <span>색상 </span>
           <div>
             {colors.map((color) => (
               <button
@@ -224,12 +232,14 @@ const DetailPage = () => {
           {size.map((size) => (
             <button
               key={size}
-              className="size-button"
+              className={`size-button ${
+                selectedSize === size ? "selected" : ""
+              }`}
               onClick={() => selectSize(size)}
             >
               {size}
             </button>
-          ))}{" "}
+          ))}
         </div>
         <button
           type="button"
