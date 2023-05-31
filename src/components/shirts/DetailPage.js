@@ -16,9 +16,17 @@ const DetailPage = () => {
   const [clothBackImage, setClothBackImage] = useState("");
   const location = useLocation();
   const [showPopup, setShowPopup] = useState(false);
+  const [changeImage, setChangeImage] = useState("앞면");
+  const [colors, setColors] = useState(["white", "black"]); //axios로 수정
+  const [showFrontImage, setShowFrontImage] = useState(true);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
+  };
+
+  // 선택된 색상 변경
+  const selectColor = (color) => {
+    setClothColor(color);
   };
 
   useEffect(() => {
@@ -30,7 +38,7 @@ const DetailPage = () => {
   // 해당 cloth_id에 해당되는 옷 정보 받아오기
   useEffect(() => {
     getDetailInfo();
-  }, [clothId]);
+  }, [clothId, clothColor]);
 
   // detail 값 가져오기  DEFAULT COLOR: "WHITE"
   const getDetailInfo = async () => {
@@ -58,74 +66,113 @@ const DetailPage = () => {
     }
   };
 
+  // 앞면/뒷면 이미지 전환
+  const toggleImage = () => {
+    setShowFrontImage(!showFrontImage);
+  };
+
   return (
-    <div className="shirt-DetailImage">
-      <div className="shirt-container">
-        <button className="additional-button" onClick={togglePopup}>
-          <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
-          커스텀 하는 방법
-        </button>
-        {showPopup && (
-          <div className="popup-container">
-            <button className="popup-close-button" onClick={togglePopup}>
-              X
-            </button>
-            <div className="popup-content">
-              <div className="custom-title"> # 커스텀 하는 방법</div>
-              <div className="custom-content">
-                <div className="custom-content2">
-                  <AiOutlineCloudUpload
-                    size={"20px"}
-                    style={{ marginRight: "5px" }}
-                  />
-                  이미지 업로드
+    <div>
+      <div className="shirt-DetailImage">
+        <div className="shirt-container">
+          <button className="additional-button" onClick={togglePopup}>
+            <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
+            커스텀 하는 방법
+          </button>
+          {showPopup && (
+            <div className="popup-container">
+              <button className="popup-close-button" onClick={togglePopup}>
+                X
+              </button>
+              <div className="popup-content">
+                <div className="custom-title"> # 커스텀 하는 방법</div>
+                <div className="custom-content">
+                  <div className="custom-content2">
+                    <AiOutlineCloudUpload
+                      size={"20px"}
+                      style={{ marginRight: "5px" }}
+                    />
+                    이미지 업로드
+                  </div>
+                  <div className="custom-content3">
+                    여행&감성 사진, 내 작품 등 특별한 추억을 패션으로
+                    간직하세요.{" "}
+                  </div>
                 </div>
-                <div className="custom-content3">
-                  여행&감성 사진, 내 작품 등 특별한 추억을 패션으로 간직하세요.{" "}
+                <div className="custom-content">
+                  <div className="custom-content2">
+                    <ImTextWidth size={"17px"} style={{ marginRight: "5px" }} />
+                    텍스트 넣기
+                  </div>
+                  <div className="custom-content3">
+                    누구나 쉽게 기념일, 크루, 좌우명을 담아 특별한 패션 아이템을
+                    만들어보세요.
+                  </div>
                 </div>
               </div>
-              <div className="custom-content">
-                <div className="custom-content2">
-                  <ImTextWidth size={"17px"} style={{ marginRight: "5px" }} />
-                  텍스트 넣기
-                </div>
-                <div className="custom-content3">
-                  누구나 쉽게 기념일, 크루, 좌우명을 담아 특별한 패션 아이템을
-                  만들어보세요.
-                </div>
-              </div>
+              <ul>
+                <li className="textdesc">
+                  PNG, AI, JPG 형식의 고화질의 이미지 사용을 권장합니다. 이미지
+                  파일의 적정 해상도는 실제 프린트할 이미지 가로 세로의 긴 면이
+                  최소 2500px 이상 + 해상도 150dpi 이상으로 지정해주세요.
+                </li>
+                <li className="textdesc">
+                  상품마다 이미지 크기가 다르므로, 해당 상품의 이미지 가이드를
+                  확인해 주세요.
+                </li>
+                <li className="textdesc">
+                  작은 원본 이미지를 임의로 크게 확대할 경우 인쇄 시 화질이 깨질
+                  수 있습니다.
+                </li>
+                <li className="textdesc">
+                  모니터, 핸드폰에 따라 실제 인쇄 색상과 다르게 보일 수
+                  있습니다.
+                </li>
+                <li className="textdesc">
+                  형광, 반사광, 야광, 홀로그램, 골드, 실버는 겹쳐서 인쇄가
+                  불가합니다.
+                </li>
+              </ul>
             </div>
-            <ul>
-              <li className="textdesc">
-                PNG, AI, JPG 형식의 고화질의 이미지 사용을 권장합니다. 이미지
-                파일의 적정 해상도는 실제 프린트할 이미지 가로 세로의 긴 면이
-                최소 2500px 이상 + 해상도 150dpi 이상으로 지정해주세요.
-              </li>
-              <li className="textdesc">
-                상품마다 이미지 크기가 다르므로, 해당 상품의 이미지 가이드를
-                확인해 주세요.
-              </li>
-              <li className="textdesc">
-                작은 원본 이미지를 임의로 크게 확대할 경우 인쇄 시 화질이 깨질
-                수 있습니다.
-              </li>
-              <li className="textdesc">
-                모니터, 핸드폰에 따라 실제 인쇄 색상과 다르게 보일 수 있습니다.
-              </li>
-              <li className="textdesc">
-                형광, 반사광, 야광, 홀로그램, 골드, 실버는 겹쳐서 인쇄가
-                불가합니다.
-              </li>
-            </ul>
+          )}
+          <img
+            src={showFrontImage ? clothFrontImage : clothBackImage}
+            alt={showFrontImage ? "앞면 이미지" : "뒷면 이미지"}
+          />
+          <div className="shirtBtns">
+            <button className="shirtBtn" onClick={toggleImage}>
+              앞면
+            </button>
+            <button className="shirtBtn" onClick={toggleImage}>
+              뒷면
+            </button>
           </div>
-        )}
-        <img src={clothFrontImage} alt="앞면 이미지" />
-        <div className="shirtBtns">
-          <button className="shirtBtn">상의</button>
-          <button className="shirtBtn">하의</button>
         </div>
+
+        {showPopup && <div className="popup-background"></div>}
       </div>
-      {showPopup && <div className="popup-background"></div>}
+      <div className="text-area">
+        <div className="text-title">{clothName}</div>
+        <div className="text-price">{clothPrice}원</div>
+        <div className="text-color">
+          <span>색상 - {clothColor}</span>
+          <div>
+            {colors.map((color) => (
+              <button
+                key={color}
+                className={
+                  clothColor === color
+                    ? "selected-color circle"
+                    : "color circle"
+                }
+                style={{ backgroundColor: color }}
+                onClick={() => selectColor(color)}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="text-size">사이즈</div>
+      </div>
     </div>
   );
 };

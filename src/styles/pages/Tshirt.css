@@ -66,6 +66,8 @@
   display: flex;
   align-items: center;
   background-color: #f8f9fa;
+  float: left;
+  margin-right: 20px;
 }
 
 .shirt-container {
@@ -187,4 +189,34 @@
   font-size: 12px;
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text-title {
+  font-weight: bolder;
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+
+.text-area {
+  height: 551px;
+}
+
+.text-price {
+  margin-bottom: 10px;
+}
+
+.text-size {
+  margin-top: 10px;
+}
+
+.text-color {
+  font-size: 13px;
+  color: gray;
+}
+
+.circle {
+  width: 10px;
+  height: 14px;
+  margin-right: 4px;
+  border-radius: 50%;
 }
