@@ -12,12 +12,13 @@ const DetailPage = () => {
   const [clothColor, setClothColor] = useState("white"); //default값 white
   const [clothName, setClothName] = useState("");
   const [clothPrice, setClothPrice] = useState("");
-  const [clothSize, setClothSize] = useState("");
   const [clothFrontImage, setClothFrontImage] = useState("");
   const [clothBackImage, setClothBackImage] = useState("");
   const [showPopup, setShowPopup] = useState(false); //팝업 창
   const [changeImage, setChangeImage] = useState(""); //앞면 뒷면
-  const [colors, setColors] = useState(["white", "black"]); //axios로 수정
+  const [colors, setColors] = useState([]); //axios로 수정
+  const [size, setSize] = useState([]);
+  const [selectedSize, setSelectedSize] = useState("");
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -33,6 +34,11 @@ const DetailPage = () => {
 
   const selectColor = (color) => {
     setClothColor(color);
+  };
+
+  //주문시 저장 값
+  const selectSize = (size) => {
+    setSelectedSize(size);
   };
 
   //param값 받아오기
@@ -58,7 +64,6 @@ const DetailPage = () => {
       if (res.data && res.data.resultData && res.data.resultData.length > 0) {
         setClothName(res.data.resultData[0].cloth_name);
         setClothPrice(res.data.resultData[0].cloth_discount);
-        setClothSize(res.data.resultData[0].cloth_size);
         setClothFrontImage(res.data.resultData[0].cloth_FrontImage);
         setClothBackImage(res.data.resultData[0].cloth_BackImage);
         setClothColor(res.data.resultData[0].cloth_color);
@@ -67,6 +72,46 @@ const DetailPage = () => {
       console.log(err);
     }
   };
+
+  //color 값 받아오기
+  const getColorByProduct = async () => {
+    const param = {
+      data: {
+        clothId: clothId,
+      },
+    };
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/clothes/color`,
+        param
+      );
+      const colorsArray = res.data.resultData.map((item) => item.cloth_color);
+      setColors(colorsArray);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // cloth_id에 해당되는 옷 사이즈 받아오기
+  const getSizeByProduct = async () => {
+    const param = {
+      data: {
+        clothId: clothId,
+      },
+    };
+    try {
+      const res = await axios.post(`http://localhost:8080/clothes/size`, param);
+      const sizeArray = res.data.resultData.map((item) => item.cloth_size);
+      setSize(sizeArray);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getColorByProduct();
+    getSizeByProduct();
+  }, [clothId]);
 
   useEffect(() => {
     getDetailInfo();
@@ -175,6 +220,24 @@ const DetailPage = () => {
           </div>
         </div>
         <div className="text-size">사이즈</div>
+        <div className="size-buttons">
+          {size.map((size) => (
+            <button
+              key={size}
+              className="size-button"
+              onClick={() => selectSize(size)}
+            >
+              {size}
+            </button>
+          ))}{" "}
+        </div>
+        <button
+          type="button"
+          class="btn btn-dark"
+          style={{ width: "550px", height: "50px", marginTop: "230px" }}
+        >
+          장바구니 담기
+        </button>
       </div>
     </div>
   );

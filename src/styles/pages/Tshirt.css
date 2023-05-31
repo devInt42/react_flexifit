@@ -194,7 +194,8 @@
 .text-title {
   font-weight: bolder;
   padding-left: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 
 .text-area {
@@ -202,21 +203,55 @@
 }
 
 .text-price {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .text-size {
   margin-top: 10px;
+  font-size: 15px;
 }
 
 .text-color {
-  font-size: 13px;
+  font-size: 15px;
   color: gray;
 }
 
 .circle {
-  width: 10px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   margin-right: 4px;
   border-radius: 50%;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.size-buttons {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.size-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 40px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ccc;
+  background-color: transparent;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.size-button:hover {
+  border-color: #6699ff;
+  color: #6699ff;
+}
+
+.size-button.selected {
+  border-color: #6699ff;
+  color: #6699ff;
 }
