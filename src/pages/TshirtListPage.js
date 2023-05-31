@@ -3,12 +3,15 @@ import axios from "axios";
 import "../styles/pages/Tshirt.css";
 import Option from "../components/options/SortingOptions";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const TshirtPage = () => {
   const data = useSelector((state) => state.data);
   const selectCategory = useSelector((state) => state.category);
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
   const [count, setCount] = useState();
+  const [qnaId, setQnaId] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCount();
@@ -23,6 +26,10 @@ const TshirtPage = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleImageClick = (clothId) => {
+    navigate(`/product/Tshirt?clothId=${clothId}`);
   };
 
   return (
@@ -40,7 +47,11 @@ const TshirtPage = () => {
           return (
             <div className="product-item" key={item.cloth_id}>
               <div className="product-image">
-                <img src={item.cloth_defaultImage} alt="T-Shirt Image" />
+                <img
+                  src={item.cloth_defaultImage}
+                  alt="T-Shirt Image"
+                  onClick={() => handleImageClick(item.cloth_id)}
+                />
               </div>
               <div className="product-details">
                 <div className="product-size">{item.cloth_size}</div>

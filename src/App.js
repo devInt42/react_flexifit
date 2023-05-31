@@ -20,6 +20,7 @@ import BoardForm from "./components/QNA/BoardForm";
 import FAQWriteForm from "./components/FAQ/WriteForm";
 import ReplySecretForm from "./components/QNA/ReplySecretForm";
 import QNAReplyForm from "./components/QNA/ReplyForm";
+import DetailPage from "./components/shirts/DetailPage";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/qna/reply/private" element={<ReplySecretForm />} />
             <Route path="/qna/board" element={<BoardForm />} />
             <Route path="/tshirt" element={<Tshirt />} />
+            <Route path="/product/Tshirt" element={<DetailPage />} />
             <Route path="/sweatshirt" element={<SweatShirt />} />
             <Route path="/outer" element={<Outer />} />
             <Route path="/pants" element={<Pants />} />
