@@ -20,6 +20,11 @@ export const setReplyData = (data) => ({
   payload: data,
 });
 
+export const setColor = (data) => ({
+  type: "SET_COLOR",
+  payload: data,
+});
+
 //qna allList
 export const getQnaData = (page, itemsPerPage) => {
   return (dispatch) => {

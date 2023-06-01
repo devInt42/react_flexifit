@@ -33,6 +33,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         replyData: action.payload,
       };
+    case "SET_COLOR":
+      return {
+        ...state,
+        color: action.payload,
+      };
     default:
       return state;
   }

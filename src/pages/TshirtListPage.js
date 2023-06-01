@@ -34,14 +34,13 @@ const TshirtPage = () => {
 
   return (
     <div className="header-container">
-      <p>
-        <h3 className="title-text">
-          티셔츠 <span className="count-text">({count})</span>
-          <span className="option">
-            <Option />
-          </span>
-        </h3>
-      </p>
+      <h3 className="title-text">
+        티셔츠 <span className="count-text">({count})</span>
+        <span className="option">
+          <Option />
+        </span>
+      </h3>
+
       <div className="product-container">
         {data.map((item) => {
           return (

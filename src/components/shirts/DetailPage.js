@@ -5,18 +5,19 @@ import axios from "axios";
 import { RiLightbulbLine } from "react-icons/ri";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { ImTextWidth } from "react-icons/im";
+import { useSelector, useDispatch } from "react-redux";
 
 const DetailPage = () => {
   const location = useLocation();
   const [clothId, setClothId] = useState("");
-  const [clothColor, setClothColor] = useState("white"); //default값 white
+  const [clothColor, setClothColor] = useState(""); //default값
   const [clothName, setClothName] = useState("");
   const [clothPrice, setClothPrice] = useState("");
   const [clothFrontImage, setClothFrontImage] = useState("");
   const [clothBackImage, setClothBackImage] = useState("");
-  const [showPopup, setShowPopup] = useState(false); //팝업 창
+  const [showPopup, setShowPopup] = useState(false); //팝업
   const [changeImage, setChangeImage] = useState(""); //앞면 뒷면
-  const [colors, setColors] = useState([]); //axios로 수정
+  const [colors, setColors] = useState([]); // 색상 list
   const [size, setSize] = useState([]);
   const [selectedSize, setSelectedSize] = useState("");
 
@@ -49,7 +50,6 @@ const DetailPage = () => {
   }, [location]);
 
   // cloth_id에 해당되는 옷 정보 받아오기
-  // cloth_id에 해당되는 옷 정보 받아오기
   const getDetailInfo = async () => {
     const param = {
       data: {
@@ -67,14 +67,6 @@ const DetailPage = () => {
         setClothPrice(res.data.resultData[0].cloth_discount);
         setClothFrontImage(res.data.resultData[0].cloth_FrontImage);
         setClothBackImage(res.data.resultData[0].cloth_BackImage);
-        const availableColors = res.data.resultData[0].cloth_color;
-        if (availableColors.includes("white")) {
-          setClothColor(availableColors);
-        } else {
-          const randomColor =
-            availableColors[Math.floor(Math.random() * availableColors.length)];
-          setClothColor(randomColor);
-        }
       }
     } catch (err) {
       console.log(err);
@@ -95,6 +87,7 @@ const DetailPage = () => {
       );
       const colorsArray = res.data.resultData.map((item) => item.cloth_color);
       setColors(colorsArray);
+      setClothColor(colorsArray[0]); //default 색상값
     } catch (err) {
       console.log(err);
     }
@@ -243,7 +236,7 @@ const DetailPage = () => {
         </div>
         <button
           type="button"
-          class="btn btn-dark"
+          className="btn btn-dark"
           style={{ width: "550px", height: "50px", marginTop: "230px" }}
         >
           장바구니 담기
