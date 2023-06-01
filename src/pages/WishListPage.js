@@ -21,7 +21,7 @@ const WishListPage = () => {
         "http://localhost:8080/clothes/getWishList",
         param
       );
-      console.log(res.data);
+      // console.log(res.data.resultData);
     } catch (err) {
       console.error(err);
     }
