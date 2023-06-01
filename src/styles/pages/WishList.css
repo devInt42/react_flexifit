@@ -1,0 +1,9 @@
+.wishList-Logo {
+  text-align: center;
+  font-size: 38px;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+}

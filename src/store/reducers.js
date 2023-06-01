@@ -3,6 +3,7 @@ const initialState = {
   data: [],
   faqData: [],
   replyData: [],
+  wishList: [],
   isLoading: false,
 };
 
@@ -33,10 +34,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         replyData: action.payload,
       };
-    case "SET_COLOR":
+    case "ADD_TO_WISHLIST":
       return {
         ...state,
-        color: action.payload,
+        wishList: [...state.wishList, action.payload],
       };
     default:
       return state;

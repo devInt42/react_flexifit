@@ -227,7 +227,9 @@ const Header = () => {
             )}
           </span>
           <span style={{ paddingRight: "25px" }}>
-            <CgHeart style={{ fontSize: "25px" }} />
+            <Link to="/product/wishList">
+              <CgHeart style={{ fontSize: "25px", color: "black" }} />
+            </Link>
           </span>
           <AiOutlineShopping style={{ fontSize: "25px" }} />
         </span>

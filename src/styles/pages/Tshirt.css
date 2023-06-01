@@ -119,6 +119,23 @@
   align-items: center;
 }
 
+.popup-container2 {
+  position: fixed;
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .popup-close-button {
   position: absolute;
   top: 0;
@@ -262,4 +279,19 @@
   border-color: #6699ff;
   color: #6699ff;
   padding-top: 10px;
+}
+
+.wishTitle {
+  color: #0000ff;
+  font-weight: bolder;
+}
+
+.wishListLink {
+  color: white;
+  text-decoration: none;
+}
+
+.wishListLink:hover {
+  color: white;
+  text-decoration: none;
 }

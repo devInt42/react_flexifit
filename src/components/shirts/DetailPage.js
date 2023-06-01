@@ -6,9 +6,12 @@ import { RiLightbulbLine } from "react-icons/ri";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { ImTextWidth } from "react-icons/im";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { addToWishList } from "../../store/action";
 
 const DetailPage = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const [clothId, setClothId] = useState("");
   const [clothColor, setClothColor] = useState(""); //default값
   const [clothName, setClothName] = useState("");
@@ -20,9 +23,15 @@ const DetailPage = () => {
   const [colors, setColors] = useState([]); // 색상 list
   const [size, setSize] = useState([]);
   const [selectedSize, setSelectedSize] = useState("");
+  const [wishListPopup, setWishListPopup] = useState(false);
+  const [showWishListPopup, setShowWishListPopup] = useState(false);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
+  };
+
+  const toggleWishListPopup = () => {
+    setShowWishListPopup(!showWishListPopup);
   };
 
   const handleFrontButtonClick = () => {
@@ -63,6 +72,7 @@ const DetailPage = () => {
         param
       );
       if (res.data && res.data.resultData && res.data.resultData.length > 0) {
+        dispatch(addToWishList(res.data.resultData[0])); // Redux store에 저장
         setClothName(res.data.resultData[0].cloth_name);
         setClothPrice(res.data.resultData[0].cloth_discount);
         setClothFrontImage(res.data.resultData[0].cloth_FrontImage);
@@ -73,7 +83,7 @@ const DetailPage = () => {
     }
   };
 
-  //color 값 받아오기
+  //color 값 받아오기F
   const getColorByProduct = async () => {
     const param = {
       data: {
@@ -237,10 +247,69 @@ const DetailPage = () => {
         <button
           type="button"
           className="btn btn-dark"
-          style={{ width: "550px", height: "50px", marginTop: "230px" }}
+          style={{
+            width: "200px",
+            height: "50px",
+            marginTop: "230px",
+            marginRight: "3PX",
+          }}
+        >
+          구매하기
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-secondary"
+          style={{
+            width: "130px",
+            height: "50px",
+            marginTop: "230px",
+            marginRight: "3PX",
+          }}
         >
           장바구니 담기
         </button>
+        <button
+          type="button"
+          className="btn btn-outline-secondary"
+          style={{ width: "130px", height: "50px", marginTop: "230px" }}
+          onClick={toggleWishListPopup}
+        >
+          찜하기
+        </button>
+        {showWishListPopup && (
+          <div className="popup-container2">
+            <button
+              className="popup-close-button"
+              onClick={toggleWishListPopup}
+            >
+              X
+            </button>
+            <div>
+              <div className="WishPopup">
+                선택하신 상품을 <span className="wishTitle"> 관심상품 </span> 에
+                담았습니다.
+              </div>
+              <div className="WishPopup">
+                지금 <span className="wishTitle"> 관심상품 </span>을
+                확인하시겠습니까?
+              </div>
+              <hr style={{ marginTop: "20px", marginBottom: "30px" }} />
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                style={{ marginRight: "10px" }}
+                onClick={toggleWishListPopup}
+              >
+                쇼핑 계속하기
+              </button>
+              <button type="button" className="btn btn-dark">
+                <Link className="wishListLink" to="/product/wishList">
+                  관심상품 확인
+                </Link>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

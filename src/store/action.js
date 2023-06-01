@@ -20,8 +20,8 @@ export const setReplyData = (data) => ({
   payload: data,
 });
 
-export const setColor = (data) => ({
-  type: "SET_COLOR",
+export const addToWishList = (data) => ({
+  type: "ADD_TO_WISHLIST",
   payload: data,
 });
 

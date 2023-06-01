@@ -21,6 +21,7 @@ import FAQWriteForm from "./components/FAQ/WriteForm";
 import ReplySecretForm from "./components/QNA/ReplySecretForm";
 import QNAReplyForm from "./components/QNA/ReplyForm";
 import DetailPage from "./components/shirts/DetailPage";
+import WishListPage from "./pages/WishListPage";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
             <Route path="/outer" element={<Outer />} />
             <Route path="/pants" element={<Pants />} />
             <Route path="/all" element={<AllList />} />
+            <Route path="/product/wishList" element={<WishListPage />} />
           </Routes>
         </div>
         <Footer />
