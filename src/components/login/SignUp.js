@@ -76,9 +76,6 @@ const SignUp = () => {
 
   return (
     <div>
-      {/* <div className="header-container">
-        <Header />
-      </div> */}
       <div className="container">
         <IoIosArrowBack
           size={25}

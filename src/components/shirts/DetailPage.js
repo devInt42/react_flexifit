@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const DetailPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [clothId, setClothId] = useState("");
   const [clothColor, setClothColor] = useState(""); //default값
   const [clothName, setClothName] = useState("");
@@ -23,6 +24,7 @@ const DetailPage = () => {
   const [selectedSize, setSelectedSize] = useState("");
   const [wishListPopup, setWishListPopup] = useState(false);
   const [showWishListPopup, setShowWishListPopup] = useState(false);
+  const userSeq = sessionStorage.getItem("userSeq");
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -129,6 +131,34 @@ const DetailPage = () => {
   useEffect(() => {
     setChangeImage(clothFrontImage);
   }, [clothFrontImage]);
+
+  //insert 장바구니
+  const insertProduct = async () => {
+    const param = {
+      data: {
+        clothId: clothId,
+        userSeq: userSeq,
+      },
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/clothes/wishlist/insert",
+        param
+      );
+      if (res.data.resultMsg === "false") {
+        alert("로그인 페이지로 이동합니다.");
+        navigate("/login");
+      } else {
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleClick = () => {
+    toggleWishListPopup();
+    insertProduct();
+  };
 
   return (
     <div>
@@ -269,7 +299,7 @@ const DetailPage = () => {
           type="button"
           className="btn btn-outline-secondary"
           style={{ width: "130px", height: "50px", marginTop: "230px" }}
-          onClick={toggleWishListPopup}
+          onClick={handleClick}
         >
           찜하기
         </button>
