@@ -34,11 +34,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         replyData: action.payload,
       };
-    case "ADD_TO_WISHLIST":
-      return {
-        ...state,
-        wishList: [...state.wishList, action.payload],
-      };
+
     default:
       return state;
   }

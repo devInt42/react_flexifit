@@ -20,11 +20,6 @@ export const setReplyData = (data) => ({
   payload: data,
 });
 
-export const addToWishList = (data) => ({
-  type: "ADD_TO_WISHLIST",
-  payload: data,
-});
-
 //qna allList
 export const getQnaData = (page, itemsPerPage) => {
   return (dispatch) => {

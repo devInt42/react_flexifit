@@ -7,11 +7,9 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { ImTextWidth } from "react-icons/im";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { addToWishList } from "../../store/action";
 
 const DetailPage = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
   const [clothId, setClothId] = useState("");
   const [clothColor, setClothColor] = useState(""); //default값
   const [clothName, setClothName] = useState("");
@@ -72,7 +70,6 @@ const DetailPage = () => {
         param
       );
       if (res.data && res.data.resultData && res.data.resultData.length > 0) {
-        dispatch(addToWishList(res.data.resultData[0])); // Redux store에 저장
         setClothName(res.data.resultData[0].cloth_name);
         setClothPrice(res.data.resultData[0].cloth_discount);
         setClothFrontImage(res.data.resultData[0].cloth_FrontImage);
@@ -83,7 +80,7 @@ const DetailPage = () => {
     }
   };
 
-  //color 값 받아오기F
+  //color 값 받아오기
   const getColorByProduct = async () => {
     const param = {
       data: {
