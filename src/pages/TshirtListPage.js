@@ -29,7 +29,7 @@ const TshirtPage = () => {
   };
 
   const handleImageClick = (clothId) => {
-    navigate(`/product/Tshirt?clothId=${clothId}`);
+    navigate(`/product?clothId=${clothId}`);
   };
 
   return (

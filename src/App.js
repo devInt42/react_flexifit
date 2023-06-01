@@ -44,7 +44,7 @@ function App() {
             <Route path="/qna/reply/private" element={<ReplySecretForm />} />
             <Route path="/qna/board" element={<BoardForm />} />
             <Route path="/tshirt" element={<Tshirt />} />
-            <Route path="/product/Tshirt" element={<DetailPage />} />
+            <Route path="/product" element={<DetailPage />} />
             <Route path="/sweatshirt" element={<SweatShirt />} />
             <Route path="/outer" element={<Outer />} />
             <Route path="/pants" element={<Pants />} />

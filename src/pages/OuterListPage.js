@@ -3,12 +3,14 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import "../styles/pages/Tshirt.css";
 import Option from "../components/options/SortingOptions";
+import { useNavigate } from "react-router-dom";
 
 const OuterListPage = () => {
   const data = useSelector((state) => state.data);
   const selectCategory = useSelector((state) => state.category);
   const [selectedCategory, setSelectedCategory] = useState(selectCategory);
   const [count, setCount] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCount();
@@ -26,6 +28,10 @@ const OuterListPage = () => {
     }
   };
 
+  const handleImageClick = (clothId) => {
+    navigate(`/product?clothId=${clothId}`);
+  };
+
   return (
     <div className="header-container">
       <p>
@@ -41,7 +47,11 @@ const OuterListPage = () => {
           return (
             <div className="product-item" key={item.cloth_id}>
               <div className="product-image">
-                <img src={item.cloth_defaultImage} alt="outer Image" />
+                <img
+                  src={item.cloth_defaultImage}
+                  alt="outer Image"
+                  onClick={() => handleImageClick(item.cloth_id)}
+                />
               </div>
               <div className="product-details">
                 <div className="product-size">{item.cloth_size}</div>
