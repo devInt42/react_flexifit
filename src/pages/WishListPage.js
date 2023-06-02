@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 
 const WishListPage = () => {
   const [wishList, setWishList] = useState([]);
-  const [selectAll, setSelectAll] = useState(false);
   const userSeq = sessionStorage.getItem("userSeq");
 
   useEffect(() => {
@@ -22,14 +21,28 @@ const WishListPage = () => {
         "http://localhost:8080/clothes/getWishList",
         param
       );
-      setWishList(res.data.resultData); // 상품 목록을 상태에 설정
+      setWishList(res.data.resultData);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleSelectAll = () => {
-    setSelectAll(!selectAll);
+  const deleteWishList = async (clothId) => {
+    const param = {
+      data: {
+        clothId: clothId,
+      },
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/clothes/deleteWishList",
+        param
+      );
+      alert("삭제 되었습니다");
+      getWishList();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -38,12 +51,7 @@ const WishListPage = () => {
       <div className="product-list">
         <div className="product-container product-header">
           <div className="checkbox-container">
-            <input
-              type="checkbox"
-              className="checkbox"
-              checked={selectAll}
-              onChange={handleSelectAll}
-            />
+            <input type="checkbox" className="checkbox" />
           </div>
           <div className="product-imageLogo">이미지</div>
 
@@ -51,7 +59,7 @@ const WishListPage = () => {
 
           <div className="product-discountLogo">판매가</div>
         </div>
-        {wishList.map((product, index) => (
+        {wishList.map((product) => (
           <div className="product-container" key={product.cloth_id}>
             <div className="checkbox-container">
               <input type="checkbox" className="checkbox" />
@@ -75,7 +83,12 @@ const WishListPage = () => {
               >
                 주문하기
               </button>
-              <button className="btn btn-outline-dark">삭제하기</button>
+              <button
+                className="btn btn-outline-dark"
+                onClick={() => deleteWishList(product.cloth_id)}
+              >
+                삭제하기
+              </button>
             </div>
           </div>
         ))}
