@@ -1,9 +1,100 @@
 .wishList-Logo {
   text-align: center;
-  font-size: 38px;
+  font-size: 30px;
   font-weight: bolder;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 30px;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.product-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: -46px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.product-image {
+  width: 120px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.product-imageLogo {
+  width: 120px;
+  text-align: center;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.product-details {
+  flex-grow: 1;
+}
+
+.product-title {
+  font-weight: bold;
+  font-size: 20px;
+  width: 1000px;
+  margin-left: 5px;
+}
+
+.product-discount {
+  font-weight: bold;
+  width: 340px;
+  float: right;
+  text-align: center;
+}
+
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 10px;
+}
+
+.buy-button,
+.delete-button {
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.delete-button {
+  background-color: #f44336;
+}
+
+.checkbox-container {
+  margin-right: 10px;
+}
+
+.checkbox {
+  transform: scale(1);
+}
+
+.orderProduct {
+  margin-top: 70px;
+  float: right;
+  margin-right: 5px;
+}
+
+.product-titleLogo {
+  width: 970px;
+  text-align: center;
+}
+
+.product-discountLogo {
+  width: 290x;
+  /* text-align: center; */
 }
