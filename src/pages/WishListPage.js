@@ -62,7 +62,7 @@ const WishListPage = () => {
           <div className="product-discountLogo">판매가</div>
         </div>
         {wishList.map((product) => (
-          <div className="product-container" key={product.cloth_id}>
+          <div className="product-container2" key={product.cloth_id}>
             <div className="checkbox-container">
               <input type="checkbox" className="checkbox" />
             </div>
@@ -72,9 +72,9 @@ const WishListPage = () => {
               alt="제품 이미지"
             />
             <div className="product-details">
-              <div className="product-title">{product.cloth_name}</div>
+              <div className="product-title2">{product.cloth_name}</div>
 
-              <div className="product-discount">
+              <div className="product-discount2">
                 할인가: {product.cloth_discount}원
               </div>
             </div>

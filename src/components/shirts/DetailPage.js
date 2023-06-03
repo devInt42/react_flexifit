@@ -143,6 +143,7 @@ const DetailPage = () => {
         "http://localhost:8080/clothes/getWishList",
         param
       );
+
       setWishList(res.data.resultData);
     } catch (err) {
       console.error(err);
@@ -159,13 +160,10 @@ const DetailPage = () => {
       data: {
         clothId: clothId,
         userSeq: userSeq,
+        wishList: wishList,
       },
     };
     try {
-      const filteredList = wishList.filter((item) => item.cloth_id !== clothId);
-      if (filteredList.length === wishList.length) {
-        return;
-      }
       const res = await axios.post(
         "http://localhost:8080/clothes/wishlist/insert",
         param
@@ -173,7 +171,9 @@ const DetailPage = () => {
       if (res.data.resultMsg === "false") {
         alert("로그인 페이지로 이동합니다.");
         navigate("/login");
-      } else {
+      }
+      if (res.data.resultMsg === "duplicate") {
+        alert("이미 담겨져 있는 상품입니다.");
       }
     } catch (err) {
       console.error(err);

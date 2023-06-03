@@ -13,10 +13,10 @@
   padding: 12px;
 }
 
-.product-container {
+.product-container2 {
   display: flex;
   align-items: center;
-  margin-bottom: -46px;
+  margin-bottom: 5px;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 5px;
@@ -39,16 +39,16 @@
   flex-grow: 1;
 }
 
-.product-title {
+.product-title2 {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 14px;
   width: 1000px;
   margin-left: 5px;
 }
 
-.product-discount {
+.product-discount2 {
   font-weight: bold;
-  width: 340px;
+  width: 470px;
   float: right;
   text-align: center;
 }
@@ -83,6 +83,10 @@
   transform: scale(1);
 }
 
+.checkbox2 {
+  margin-left: 10px;
+}
+
 .orderProduct {
   margin-top: 70px;
   float: right;
@@ -90,7 +94,7 @@
 }
 
 .product-titleLogo {
-  width: 970px;
+  width: 900px;
   text-align: center;
 }
 
