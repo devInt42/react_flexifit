@@ -53,7 +53,7 @@ const WishListPage = () => {
       <div className="product-list">
         <div className="product-container product-header">
           <div className="checkbox-container">
-            <input type="checkbox" className="checkbox" />
+            <input type="checkbox" className="checkbox2" />
           </div>
           <div className="product-imageLogo">이미지</div>
 

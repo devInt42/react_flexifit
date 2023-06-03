@@ -28,13 +28,6 @@
   border-radius: 5px;
 }
 
-.product-imageLogo {
-  width: 120px;
-  text-align: center;
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
 .product-details {
   flex-grow: 1;
 }
@@ -94,11 +87,17 @@
 }
 
 .product-titleLogo {
-  width: 900px;
+  width: 800px;
   text-align: center;
 }
 
 .product-discountLogo {
-  width: 290x;
-  /* text-align: center; */
+  width: 265px;
+  text-align: center;
+}
+
+.product-imageLogo {
+  width: 120px;
+  text-align: center;
+  margin-right: 10px;
 }
