@@ -101,3 +101,32 @@
   text-align: center;
   margin-right: 10px;
 }
+
+.empty-wishlist {
+  margin-top: 40px !important;
+  width: 60%;
+  height: 300px;
+  background-color: aliceblue;
+  margin: 0 auto;
+  display: flex;
+}
+
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.empty-icon {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-title {
+  font-size: 15px;
+  text-align: center;
+}
