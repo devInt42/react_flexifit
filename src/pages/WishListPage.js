@@ -1,10 +1,12 @@
 import "../styles/pages/WishList.css";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const WishListPage = () => {
   const [wishList, setWishList] = useState([]);
   const userSeq = sessionStorage.getItem("userSeq");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getWishList();
@@ -77,12 +79,13 @@ const WishListPage = () => {
               </div>
             </div>
             <div className="product-actions">
-              <button
+              <Link
+                to={`/product?clothId=${product.cloth_id}`}
                 className="btn btn-outline-secondary"
                 style={{ marginBottom: "5px" }}
               >
                 주문하기
-              </button>
+              </Link>
               <button
                 className="btn btn-outline-dark"
                 onClick={() => deleteWishList(product.cloth_id)}
@@ -93,20 +96,6 @@ const WishListPage = () => {
           </div>
         ))}
       </div>
-      <button
-        type="button"
-        className="btn btn-success"
-        style={{ marginRight: "5px", marginTop: "45px", marginLeft: "12px" }}
-      >
-        선택상품주문
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger"
-        style={{ marginTop: "45px" }}
-      >
-        전체상품주문
-      </button>
     </div>
   );
 };

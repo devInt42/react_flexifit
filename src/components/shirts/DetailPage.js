@@ -5,7 +5,6 @@ import axios from "axios";
 import { RiLightbulbLine } from "react-icons/ri";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { ImTextWidth } from "react-icons/im";
-import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const DetailPage = () => {
@@ -22,9 +21,9 @@ const DetailPage = () => {
   const [colors, setColors] = useState([]); // 색상 list
   const [size, setSize] = useState([]);
   const [selectedSize, setSelectedSize] = useState("");
-  const [wishListPopup, setWishListPopup] = useState(false);
   const [showWishListPopup, setShowWishListPopup] = useState(false);
   const userSeq = sessionStorage.getItem("userSeq");
+  const [wishList, setWishList] = useState("");
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -132,6 +131,28 @@ const DetailPage = () => {
     setChangeImage(clothFrontImage);
   }, [clothFrontImage]);
 
+  //wishList값
+  const getWishList = async () => {
+    const param = {
+      data: {
+        userSeq: userSeq,
+      },
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/clothes/getWishList",
+        param
+      );
+      setWishList(res.data.resultData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getWishList();
+  }, []);
+
   //insert 장바구니
   const insertProduct = async () => {
     const param = {
@@ -141,6 +162,10 @@ const DetailPage = () => {
       },
     };
     try {
+      const filteredList = wishList.filter((item) => item.cloth_id !== clothId);
+      if (filteredList.length === wishList.length) {
+        return;
+      }
       const res = await axios.post(
         "http://localhost:8080/clothes/wishlist/insert",
         param
