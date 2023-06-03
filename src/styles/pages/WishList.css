@@ -121,7 +121,7 @@
 
 .empty-icon {
   margin-bottom: 10px;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
 }

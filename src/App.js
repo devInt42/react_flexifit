@@ -26,35 +26,33 @@ import WishListPage from "./pages/WishListPage";
 function App() {
   return (
     <Router>
-      <div className="app-container">
-        <div className="header-container">
-          <Header />
-        </div>
-        <div className="content-container">
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/login/MyPage" element={<MyPage />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/faq/write" element={<FAQWriteForm />} />
-            <Route path="/qna" element={<QNA />} />
-            <Route path="/qna/write" element={<QNAWriteForm />} />
-            <Route path="/qna/reply" element={<QNAReplyForm />} />
-            <Route path="/qna/private" element={<SecretForm />} />
-            <Route path="/qna/reply/private" element={<ReplySecretForm />} />
-            <Route path="/qna/board" element={<BoardForm />} />
-            <Route path="/tshirt" element={<Tshirt />} />
-            <Route path="/product" element={<DetailPage />} />
-            <Route path="/sweatshirt" element={<SweatShirt />} />
-            <Route path="/outer" element={<Outer />} />
-            <Route path="/pants" element={<Pants />} />
-            <Route path="/all" element={<AllList />} />
-            <Route path="/product/wishList" element={<WishListPage />} />
-          </Routes>
-        </div>
-        <Footer />
+      <div className="header-container">
+        <Header />
       </div>
+      <div className="content-container">
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login/MyPage" element={<MyPage />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/faq/write" element={<FAQWriteForm />} />
+          <Route path="/qna" element={<QNA />} />
+          <Route path="/qna/write" element={<QNAWriteForm />} />
+          <Route path="/qna/reply" element={<QNAReplyForm />} />
+          <Route path="/qna/private" element={<SecretForm />} />
+          <Route path="/qna/reply/private" element={<ReplySecretForm />} />
+          <Route path="/qna/board" element={<BoardForm />} />
+          <Route path="/tshirt" element={<Tshirt />} />
+          <Route path="/product" element={<DetailPage />} />
+          <Route path="/sweatshirt" element={<SweatShirt />} />
+          <Route path="/outer" element={<Outer />} />
+          <Route path="/pants" element={<Pants />} />
+          <Route path="/all" element={<AllList />} />
+          <Route path="/product/wishList" element={<WishListPage />} />
+        </Routes>
+      </div>
+      <Footer />
     </Router>
   );
 }

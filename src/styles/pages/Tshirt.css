@@ -61,20 +61,6 @@
   float: right;
 }
 
-.shirt-DetailImage {
-  width: 60%;
-  display: flex;
-  align-items: center;
-  background-color: #f8f9fa;
-  float: left;
-  margin-right: 20px;
-}
-
-.shirt-container {
-  margin: 0 80px;
-  position: relative;
-}
-
 .shirt-container img {
   max-width: 100%;
   height: auto;
@@ -100,9 +86,6 @@
   font-size: 12px;
 }
 
-.additional-button:first-child {
-  left: -80px;
-}
 .popup-container {
   position: fixed;
   top: 57%;
@@ -191,7 +174,7 @@
 
 .shirtBtns {
   position: absolute;
-  right: -60px;
+  float: right;
   top: 7%;
   transform: translateY(-50%);
 }
@@ -216,22 +199,27 @@
 }
 
 .text-area {
-  height: 551px;
+  height: 605px;
+  width: 45%;
+  float: right;
 }
 
 .text-price {
   margin-bottom: 20px;
   font-size: 20px;
+  margin-left: 20px;
 }
 
 .text-size {
   margin-top: 10px;
   font-size: 15px;
+  margin-left: 20px;
 }
 
 .text-color {
   font-size: 15px;
   color: gray;
+  margin-left: 20px;
 }
 
 .circle {
@@ -254,6 +242,7 @@
   flex-wrap: wrap;
   margin-top: 10px;
   gap: 5px;
+  margin-left: 20px;
 }
 
 .size-button {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../../styles/pages/Tshirt.css";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -6,6 +6,7 @@ import { RiLightbulbLine } from "react-icons/ri";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { ImTextWidth } from "react-icons/im";
 import { Link, useNavigate } from "react-router-dom";
+import UploadFile from "./UploadFile";
 
 const DetailPage = () => {
   const location = useLocation();
@@ -24,6 +25,25 @@ const DetailPage = () => {
   const [showWishListPopup, setShowWishListPopup] = useState(false);
   const userSeq = sessionStorage.getItem("userSeq");
   const [wishList, setWishList] = useState("");
+  //canvas
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+
+    const drawOriginImage = () => {
+      const image = new Image();
+      image.src = changeImage;
+      image.onload = () => {
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        context.drawImage(image, 0, 0);
+      };
+    };
+    drawOriginImage();
+  }, [changeImage]);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -187,82 +207,75 @@ const DetailPage = () => {
 
   return (
     <div>
-      <div className="shirt-DetailImage">
-        <div className="shirt-container">
-          <button className="additional-button" onClick={togglePopup}>
-            <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
-            커스텀 하는 방법
+      <button className="additional-button" onClick={togglePopup}>
+        <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
+        커스텀 하는 방법
+      </button>
+      {showPopup && (
+        <div className="popup-container">
+          <button className="popup-close-button" onClick={togglePopup}>
+            X
           </button>
-          {showPopup && (
-            <div className="popup-container">
-              <button className="popup-close-button" onClick={togglePopup}>
-                X
-              </button>
-              <div className="popup-content">
-                <div className="custom-title"> # 커스텀 하는 방법</div>
-                <div className="custom-content">
-                  <div className="custom-content2">
-                    <AiOutlineCloudUpload
-                      size={"20px"}
-                      style={{ marginRight: "5px" }}
-                    />
-                    이미지 업로드
-                  </div>
-                  <div className="custom-content3">
-                    여행&감성 사진, 내 작품 등 특별한 추억을 패션으로
-                    간직하세요.{" "}
-                  </div>
-                </div>
-                <div className="custom-content">
-                  <div className="custom-content2">
-                    <ImTextWidth size={"17px"} style={{ marginRight: "5px" }} />
-                    텍스트 넣기
-                  </div>
-                  <div className="custom-content3">
-                    누구나 쉽게 기념일, 크루, 좌우명을 담아 특별한 패션 아이템을
-                    만들어보세요.
-                  </div>
-                </div>
+          <div className="popup-content">
+            <div className="custom-title"> # 커스텀 하는 방법</div>
+            <div className="custom-content">
+              <div className="custom-content2">
+                <AiOutlineCloudUpload
+                  size={"20px"}
+                  style={{ marginRight: "5px" }}
+                />
+                이미지 업로드
               </div>
-              <ul>
-                <li className="textdesc">
-                  PNG, AI, JPG 형식의 고화질의 이미지 사용을 권장합니다. 이미지
-                  파일의 적정 해상도는 실제 프린트할 이미지 가로 세로의 긴 면이
-                  최소 2500px 이상 + 해상도 150dpi 이상으로 지정해주세요.
-                </li>
-                <li className="textdesc">
-                  상품마다 이미지 크기가 다르므로, 해당 상품의 이미지 가이드를
-                  확인해 주세요.
-                </li>
-                <li className="textdesc">
-                  작은 원본 이미지를 임의로 크게 확대할 경우 인쇄 시 화질이 깨질
-                  수 있습니다.
-                </li>
-                <li className="textdesc">
-                  모니터, 핸드폰에 따라 실제 인쇄 색상과 다르게 보일 수
-                  있습니다.
-                </li>
-                <li className="textdesc">
-                  형광, 반사광, 야광, 홀로그램, 골드, 실버는 겹쳐서 인쇄가
-                  불가합니다.
-                </li>
-              </ul>
+              <div className="custom-content3">
+                여행&감성 사진, 내 작품 등 특별한 추억을 패션으로 간직하세요.{" "}
+              </div>
             </div>
-          )}
-          <img src={changeImage} alt="T-shirt" />{" "}
-          <div className="shirtBtns">
-            <button className="shirtBtn" onClick={handleFrontButtonClick}>
-              앞면
-            </button>
-            <button className="shirtBtn" onClick={handleBackButtonClick}>
-              뒷면
-            </button>
+            <div className="custom-content">
+              <div className="custom-content2">
+                <ImTextWidth size={"17px"} style={{ marginRight: "5px" }} />
+                텍스트 넣기
+              </div>
+              <div className="custom-content3">
+                누구나 쉽게 기념일, 크루, 좌우명을 담아 특별한 패션 아이템을
+                만들어보세요.
+              </div>
+            </div>
           </div>
+          <ul>
+            <li className="textdesc">
+              PNG, AI, JPG 형식의 고화질의 이미지 사용을 권장합니다. 이미지
+              파일의 적정 해상도는 실제 프린트할 이미지 가로 세로의 긴 면이 최소
+              2500px 이상 + 해상도 150dpi 이상으로 지정해주세요.
+            </li>
+            <li className="textdesc">
+              상품마다 이미지 크기가 다르므로, 해당 상품의 이미지 가이드를
+              확인해 주세요.
+            </li>
+            <li className="textdesc">
+              작은 원본 이미지를 임의로 크게 확대할 경우 인쇄 시 화질이 깨질 수
+              있습니다.
+            </li>
+            <li className="textdesc">
+              모니터, 핸드폰에 따라 실제 인쇄 색상과 다르게 보일 수 있습니다.
+            </li>
+            <li className="textdesc">
+              형광, 반사광, 야광, 홀로그램, 골드, 실버는 겹쳐서 인쇄가
+              불가합니다.
+            </li>
+          </ul>
         </div>
-
-        {showPopup && <div className="popup-background"></div>}
-      </div>
-      <div className="text-area">
+      )}
+      <canvas ref={canvasRef} alt="T-shirt"></canvas>
+      <div className="shirtBtns">
+        <button className="shirtBtn" onClick={handleFrontButtonClick}>
+          앞면
+        </button>
+        <button className="shirtBtn" onClick={handleBackButtonClick}>
+          뒷면
+        </button>{" "}
+      </div>{" "}
+      {showPopup && <div className="popup-background"></div>}
+      <span className="text-area">
         <div className="text-title">{clothName}</div>
         <div className="text-price">{clothPrice}원</div>
         <div className="text-color">
@@ -302,8 +315,9 @@ const DetailPage = () => {
           style={{
             width: "200px",
             height: "50px",
-            marginTop: "230px",
-            marginRight: "3PX",
+            marginTop: "280px",
+            marginLeft: "20px",
+            marginRight: "3px",
           }}
         >
           구매하기
@@ -314,8 +328,9 @@ const DetailPage = () => {
           style={{
             width: "130px",
             height: "50px",
-            marginTop: "230px",
-            marginRight: "3PX",
+            marginTop: "280px",
+
+            marginRight: "3px",
           }}
         >
           장바구니 담기
@@ -323,7 +338,7 @@ const DetailPage = () => {
         <button
           type="button"
           className="btn btn-outline-secondary"
-          style={{ width: "130px", height: "50px", marginTop: "230px" }}
+          style={{ width: "130px", height: "50px", marginTop: "280px" }}
           onClick={handleClick}
         >
           찜하기
@@ -362,7 +377,7 @@ const DetailPage = () => {
             </div>
           </div>
         )}
-      </div>
+      </span>
     </div>
   );
 };
