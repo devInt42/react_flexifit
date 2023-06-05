@@ -28,6 +28,13 @@ const DetailPage = () => {
   const [wishList, setWishList] = useState("");
   //canvas
   const canvasRef = useRef(null);
+  const uploadFileRef = useRef(null);
+
+  const handleResetCanvas = () => {
+    if (uploadFileRef.current) {
+      uploadFileRef.current.resetCanvas();
+    }
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -212,8 +219,12 @@ const DetailPage = () => {
         <AiOutlineReload
           size={"25px"}
           style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
+          onClick={handleResetCanvas}
         />
-        <div className="cropFont"> 처음으로</div>{" "}
+        <div className="cropFont" onClick={handleResetCanvas}>
+          {" "}
+          처음으로
+        </div>{" "}
       </div>
 
       <button className="additional-button" onClick={togglePopup}>
@@ -229,7 +240,7 @@ const DetailPage = () => {
         </button>
       </div>
       <div className="shirtFile">
-        <UploadFile />
+        <UploadFile ref={uploadFileRef} />
       </div>
       {showPopup && (
         <div className="popup-container">

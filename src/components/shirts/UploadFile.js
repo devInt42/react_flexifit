@@ -1,14 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { fabric } from "fabric";
 
-const UploadFile = () => {
+const UploadFile = forwardRef((props, ref) => {
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState(null);
   const imageContainerRef = useRef(null);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    //canvas 크기 설정
     const newCanvas = new fabric.Canvas(canvasRef.current, {
       width: 250,
       height: 360,
@@ -17,7 +22,6 @@ const UploadFile = () => {
   }, []);
 
   const handleFileInputChange = (e) => {
-    //defaultImage -> canvas로 변경
     const file = e.target.files[0];
     const reader = new FileReader();
 
@@ -40,6 +44,16 @@ const UploadFile = () => {
   const handleFileInputClick = () => {
     fileInputRef.current.click();
   };
+
+  const resetCanvas = () => {
+    if (canvas !== null) {
+      canvas.clear();
+    }
+  };
+
+  useImperativeHandle(ref, () => ({
+    resetCanvas: resetCanvas,
+  }));
 
   return (
     <div>
@@ -65,6 +79,6 @@ const UploadFile = () => {
       />
     </div>
   );
-};
+});
 
 export default UploadFile;
