@@ -4,31 +4,31 @@ import { fabric } from "fabric";
 const UploadFile = () => {
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState(null);
+  const imageContainerRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
-    // Canvas 초기화
+    //canvas 크기 설정
     const newCanvas = new fabric.Canvas(canvasRef.current, {
-      // Canvas 크기 설정
-      width: 500,
-      height: 500,
+      width: 250,
+      height: 360,
     });
     setCanvas(newCanvas);
   }, []);
 
   const handleFileInputChange = (e) => {
+    //defaultImage -> canvas로 변경
     const file = e.target.files[0];
     const reader = new FileReader();
 
     reader.onload = function (event) {
       const img = new Image();
       img.onload = function () {
-        // 이미지 객체 생성
-        const fabricImg = new fabric.Image(img, {
-          // 이미지 초기 위치 설정
-          left: 0,
-          top: 0,
+        const fabricImg = new fabric.Image(img);
+        fabricImg.scaleToWidth(canvas.width);
+        fabricImg.set({
+          left: canvas.width - fabricImg.getScaledWidth(),
         });
-        // 이미지를 Canvas에 추가
         canvas.add(fabricImg);
       };
       img.src = event.target.result;
@@ -37,10 +37,32 @@ const UploadFile = () => {
     reader.readAsDataURL(file);
   };
 
+  const handleFileInputClick = () => {
+    fileInputRef.current.click();
+  };
+
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleFileInputChange} />
-      <canvas ref={canvasRef} />
+      <div
+        ref={imageContainerRef}
+        style={{
+          width: "260",
+          height: "360px",
+          overflow: "hidden",
+        }}
+      >
+        <canvas ref={canvasRef} />
+      </div>
+      <button className="shirtBtn2" onClick={handleFileInputClick}>
+        파일 선택
+      </button>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileInputChange}
+        ref={fileInputRef}
+        style={{ display: "none" }}
+      />
     </div>
   );
 };

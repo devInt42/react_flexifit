@@ -7,6 +7,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { ImTextWidth } from "react-icons/im";
 import { Link, useNavigate } from "react-router-dom";
 import UploadFile from "./UploadFile";
+import { AiOutlineReload } from "react-icons/ai";
 
 const DetailPage = () => {
   const location = useLocation();
@@ -207,6 +208,14 @@ const DetailPage = () => {
 
   return (
     <div>
+      <div className="cropList">
+        <AiOutlineReload
+          size={"25px"}
+          style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
+        />
+        <div className="cropFont"> 처음으로</div>{" "}
+      </div>
+
       <button className="additional-button" onClick={togglePopup}>
         <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
         커스텀 하는 방법
@@ -218,6 +227,9 @@ const DetailPage = () => {
         <button className="shirtBtn" onClick={handleBackButtonClick}>
           뒷면
         </button>
+      </div>
+      <div className="shirtFile">
+        <UploadFile />
       </div>
       {showPopup && (
         <div className="popup-container">
@@ -273,9 +285,7 @@ const DetailPage = () => {
           </ul>
         </div>
       )}
-
       <canvas ref={canvasRef} alt="T-shirt"></canvas>
-
       {showPopup && <div className="popup-background"></div>}
       <span className="text-area">
         <div className="text-title">{clothName}</div>
