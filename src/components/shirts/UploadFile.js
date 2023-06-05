@@ -12,6 +12,7 @@ const UploadFile = forwardRef((props, ref) => {
   const [canvas, setCanvas] = useState(null);
   const imageContainerRef = useRef(null);
   const fileInputRef = useRef(null);
+  const imagesStackRef = useRef([]); // 이미지 스택을 관리하기 위한 배열
 
   useEffect(() => {
     const newCanvas = new fabric.Canvas(canvasRef.current, {
@@ -34,6 +35,7 @@ const UploadFile = forwardRef((props, ref) => {
           left: canvas.width - fabricImg.getScaledWidth(),
         });
         canvas.add(fabricImg);
+        imagesStackRef.current.push(fabricImg); // 이미지 스택에 추가
       };
       img.src = event.target.result;
     };
@@ -45,14 +47,24 @@ const UploadFile = forwardRef((props, ref) => {
     fileInputRef.current.click();
   };
 
+  const deleteLastImage = () => {
+    const lastImage = imagesStackRef.current.pop(); // 이미지 스택에서 마지막 이미지를 제거
+    if (canvas !== null && lastImage) {
+      canvas.remove(lastImage); // 캔버스에서 이미지 제거
+      canvas.renderAll();
+    }
+  };
+
   const resetCanvas = () => {
     if (canvas !== null) {
       canvas.clear();
+      imagesStackRef.current = []; // 이미지 스택 초기화
     }
   };
 
   useImperativeHandle(ref, () => ({
-    resetCanvas: resetCanvas,
+    deleteLastImage: deleteLastImage,
+    resetCanvas: resetCanvas, // resetCanvas 함수를 외부로 노출
   }));
 
   return (

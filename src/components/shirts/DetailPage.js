@@ -8,6 +8,7 @@ import { ImTextWidth } from "react-icons/im";
 import { Link, useNavigate } from "react-router-dom";
 import UploadFile from "./UploadFile";
 import { AiOutlineReload } from "react-icons/ai";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const DetailPage = () => {
   const location = useLocation();
@@ -33,6 +34,12 @@ const DetailPage = () => {
   const handleResetCanvas = () => {
     if (uploadFileRef.current) {
       uploadFileRef.current.resetCanvas();
+    }
+  };
+
+  const handlePreviousButtonClick = () => {
+    if (uploadFileRef.current) {
+      uploadFileRef.current.deleteLastImage();
     }
   };
 
@@ -215,18 +222,28 @@ const DetailPage = () => {
 
   return (
     <div>
-      <div className="cropList">
-        <AiOutlineReload
-          size={"25px"}
-          style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
-          onClick={handleResetCanvas}
-        />
-        <div className="cropFont" onClick={handleResetCanvas}>
-          {" "}
-          처음으로
-        </div>{" "}
+      <div className="cropList" style={{ display: "flex" }}>
+        <div>
+          <AiOutlineReload
+            size={"25px"}
+            style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
+            onClick={handleResetCanvas}
+          />
+          <div className="cropFont" onClick={handleResetCanvas}>
+            처음으로
+          </div>
+        </div>
+        <div style={{ marginLeft: "10px" }}>
+          <AiOutlineArrowLeft
+            size={"25px"}
+            style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
+            onClick={handlePreviousButtonClick}
+          />
+          <div className="cropFont" onClick={handlePreviousButtonClick}>
+            이전으로
+          </div>
+        </div>
       </div>
-
       <button className="additional-button" onClick={togglePopup}>
         <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
         커스텀 하는 방법
