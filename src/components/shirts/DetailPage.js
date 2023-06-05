@@ -36,8 +36,8 @@ const DetailPage = () => {
       const image = new Image();
       image.src = changeImage;
       image.onload = () => {
-        canvas.width = image.width;
-        canvas.height = image.height;
+        canvas.width = 787;
+        canvas.height = 601;
 
         context.drawImage(image, 0, 0);
       };
@@ -211,6 +211,14 @@ const DetailPage = () => {
         <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
         커스텀 하는 방법
       </button>
+      <div className="shirtBtns">
+        <button className="shirtBtn" onClick={handleFrontButtonClick}>
+          앞면
+        </button>
+        <button className="shirtBtn" onClick={handleBackButtonClick}>
+          뒷면
+        </button>
+      </div>
       {showPopup && (
         <div className="popup-container">
           <button className="popup-close-button" onClick={togglePopup}>
@@ -265,15 +273,9 @@ const DetailPage = () => {
           </ul>
         </div>
       )}
+
       <canvas ref={canvasRef} alt="T-shirt"></canvas>
-      <div className="shirtBtns">
-        <button className="shirtBtn" onClick={handleFrontButtonClick}>
-          앞면
-        </button>
-        <button className="shirtBtn" onClick={handleBackButtonClick}>
-          뒷면
-        </button>{" "}
-      </div>{" "}
+
       {showPopup && <div className="popup-background"></div>}
       <span className="text-area">
         <div className="text-title">{clothName}</div>
