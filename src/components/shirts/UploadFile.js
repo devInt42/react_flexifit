@@ -73,7 +73,7 @@ const UploadFile = forwardRef((props, ref) => {
     }
   };
 
-  // 합치기 및 백엔드로 보내기
+  // 합치기 / 백엔드 전송
   const saveCanvasAsImage = () => {
     if (canvas !== null && imageUrl !== "") {
       const mergedImage = new Image();
@@ -90,11 +90,14 @@ const UploadFile = forwardRef((props, ref) => {
         const canvasImageObj = new Image();
 
         canvasImageObj.onload = async function () {
-          context.drawImage(canvasImageObj, 0, 0);
+          const canvasX = (tempCanvas.width - canvas.width) / 2;
+          const canvasY = (tempCanvas.height - canvas.height) / 2;
+
+          context.drawImage(canvasImageObj, canvasX, canvasY);
 
           const mergedDataURL = tempCanvas.toDataURL();
           setMergedImageSrc(mergedDataURL);
-          console.log(mergedDataURL);
+          // console.log(mergedDataURL);
 
           // 이미지 확인 후 백엔드로 전송
           try {
