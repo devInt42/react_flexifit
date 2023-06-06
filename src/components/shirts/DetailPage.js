@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UploadFile from "./UploadFile";
 import { AiOutlineReload } from "react-icons/ai";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { CiSaveDown2 } from "react-icons/ci";
 
 const DetailPage = () => {
   const location = useLocation();
@@ -243,6 +244,13 @@ const DetailPage = () => {
             이전으로
           </div>
         </div>
+        <div style={{ marginLeft: "10px" }}>
+          <CiSaveDown2
+            size={"25px"}
+            style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
+          />
+          <div className="cropFont">임시저장</div>
+        </div>
       </div>
       <button className="additional-button" onClick={togglePopup}>
         <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
@@ -257,7 +265,7 @@ const DetailPage = () => {
         </button>
       </div>
       <div className="shirtFile">
-        <UploadFile ref={uploadFileRef} />
+        <UploadFile ref={uploadFileRef} changeImage={changeImage} />
       </div>
       {showPopup && (
         <div className="popup-container">
