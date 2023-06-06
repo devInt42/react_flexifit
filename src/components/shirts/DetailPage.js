@@ -31,6 +31,11 @@ const DetailPage = () => {
   //canvas
   const canvasRef = useRef(null);
   const uploadFileRef = useRef(null);
+  const [mergedImageSrc, setMergedImageSrc] = useState("");
+
+  const getNewImage = (e) => {
+    setMergedImageSrc(e);
+  };
 
   const handleResetCanvas = () => {
     if (uploadFileRef.current) {
@@ -256,6 +261,17 @@ const DetailPage = () => {
         <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
         커스텀 하는 방법
       </button>
+      {mergedImageSrc && (
+        <div className="newImageSrc">
+          <img
+            src={mergedImageSrc}
+            alt="Merged Image"
+            style={{ width: "200px", height: "150px" }}
+          />
+        </div>
+      )}
+      {mergedImageSrc && <div className="newImageSrc2">앞면</div>}
+
       <div className="shirtBtns">
         <button className="shirtBtn" onClick={handleFrontButtonClick}>
           앞면
@@ -265,7 +281,11 @@ const DetailPage = () => {
         </button>
       </div>
       <div className="shirtFile">
-        <UploadFile ref={uploadFileRef} changeImage={changeImage} />
+        <UploadFile
+          ref={uploadFileRef}
+          changeImage={changeImage}
+          getNewImage={getNewImage}
+        />
       </div>
       {showPopup && (
         <div className="popup-container">

@@ -16,6 +16,7 @@ const UploadFile = forwardRef((props, ref) => {
   const imagesStackRef = useRef([]); // 이미지 스택을 관리하기 위한 배열
   const [imageUrl, setImageUrl] = useState("");
   const [mergedImageSrc, setMergedImageSrc] = useState("");
+  const [mergedImageData, setMergedImageData] = useState(null); // 합성된 이미지 데이터
 
   //기존 이미지 url
   useEffect(() => {
@@ -97,12 +98,13 @@ const UploadFile = forwardRef((props, ref) => {
 
           const mergedDataURL = tempCanvas.toDataURL();
           setMergedImageSrc(mergedDataURL);
+          setMergedImageData(tempCanvas.toDataURL("image/jpeg")); // 합성된 이미지 데이터 저장
           // console.log(mergedDataURL);
-
+          props.getNewImage(mergedDataURL);
           // 이미지 확인 후 백엔드로 전송
           try {
             const response = await axios.post("<백엔드 URL>", {
-              image: mergedDataURL,
+              NewimageUrl: mergedDataURL,
             });
             console.log(response.data);
             // 여기서 필요한 작업 수행
@@ -123,10 +125,20 @@ const UploadFile = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     deleteLastImage: deleteLastImage,
     resetCanvas: resetCanvas, // resetCanvas 함수를 외부로 노출
+    getMergedImageData: () => mergedImageData, // 합성된 이미지 데이터를 외부로 노출
   }));
 
   return (
     <div>
+      <div>
+        {/* {mergedImageSrc && (
+          <img
+            src={mergedImageSrc}
+            alt="Merged Image"
+            style={{ width: "200px", height: "150px" }}
+          />
+        )} */}
+      </div>
       <div
         ref={imageContainerRef}
         style={{
@@ -141,7 +153,7 @@ const UploadFile = forwardRef((props, ref) => {
         파일 선택
       </button>
       <button className="shirtBtn2" onClick={saveCanvasAsImage}>
-        캔버스 저장
+        저장
       </button>
       <input
         type="file"
