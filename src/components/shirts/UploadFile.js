@@ -17,11 +17,24 @@ const UploadFile = forwardRef((props, ref) => {
   const [imageUrl, setImageUrl] = useState("");
   const [mergedImageSrc, setMergedImageSrc] = useState("");
   const [mergedImageData, setMergedImageData] = useState(null); // 합성된 이미지 데이터
+  const [clothFrontImage, setClothFrontImage] = useState("");
+  const [clothBackImage, setClothBackImage] = useState("");
+
+  // 기존 앞면 이미지
+  useEffect(() => {
+    setClothFrontImage(props.clothFrontImage);
+    console.log(props.clothFrontImage);
+  }, [props.clothFrontImage]);
+
+  // 기존 뒷면 이미지
+  useEffect(() => {
+    setClothBackImage(props.clothBackImage);
+  }, [props.clothBackImage]);
 
   //기존 이미지 url
-  useEffect(() => {
-    setImageUrl(props.changeImage);
-  }, [props.changeImage]);
+  // useEffect(() => {
+  //   setImageUrl(props.changeImage);
+  // }, [props.changeImage]);
 
   //canvas 범위 설정
   useEffect(() => {
@@ -75,8 +88,8 @@ const UploadFile = forwardRef((props, ref) => {
   };
 
   // 합치기 / 백엔드 전송
-  const saveCanvasAsImage = () => {
-    if (canvas !== null && imageUrl !== "") {
+  const saveCanvasAsImage = async () => {
+    if (canvas !== null && clothFrontImage !== "") {
       const mergedImage = new Image();
 
       mergedImage.onload = function () {
@@ -100,7 +113,8 @@ const UploadFile = forwardRef((props, ref) => {
           setMergedImageSrc(mergedDataURL);
           setMergedImageData(tempCanvas.toDataURL("image/jpeg")); // 합성된 이미지 데이터 저장
           // console.log(mergedDataURL);
-          props.getNewImage(mergedDataURL);
+          props.getFrontImage(mergedDataURL);
+          console.log("전송");
           // 이미지 확인 후 백엔드로 전송
           try {
             const response = await axios.post("<백엔드 URL>", {
@@ -118,7 +132,7 @@ const UploadFile = forwardRef((props, ref) => {
       };
 
       mergedImage.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
-      mergedImage.src = imageUrl;
+      mergedImage.src = clothFrontImage;
     }
   };
 
@@ -130,15 +144,7 @@ const UploadFile = forwardRef((props, ref) => {
 
   return (
     <div>
-      <div>
-        {/* {mergedImageSrc && (
-          <img
-            src={mergedImageSrc}
-            alt="Merged Image"
-            style={{ width: "200px", height: "150px" }}
-          />
-        )} */}
-      </div>
+      <div></div>
       <div
         ref={imageContainerRef}
         style={{

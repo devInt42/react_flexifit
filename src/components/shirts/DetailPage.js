@@ -33,8 +33,9 @@ const DetailPage = () => {
   const uploadFileRef = useRef(null);
   const [mergedImageSrc, setMergedImageSrc] = useState("");
 
-  const getNewImage = (e) => {
+  const getFrontImage = (e) => {
     setMergedImageSrc(e);
+    console.log(mergedImageSrc);
   };
 
   const handleResetCanvas = () => {
@@ -283,8 +284,9 @@ const DetailPage = () => {
       <div className="shirtFile">
         <UploadFile
           ref={uploadFileRef}
-          changeImage={changeImage}
-          getNewImage={getNewImage}
+          clothFrontImage={clothFrontImage}
+          clothBackImage={clothBackImage}
+          getFrontImage={getFrontImage}
         />
       </div>
       {showPopup && (
