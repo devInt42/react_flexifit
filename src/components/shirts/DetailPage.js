@@ -21,7 +21,6 @@ const DetailPage = () => {
   const [clothFrontImage, setClothFrontImage] = useState("");
   const [clothBackImage, setClothBackImage] = useState("");
   const [showPopup, setShowPopup] = useState(false); //팝업
-  const [changeImage, setChangeImage] = useState(""); //앞면 뒷면
   const [colors, setColors] = useState([]); // 색상 list
   const [size, setSize] = useState([]);
   const [selectedSize, setSelectedSize] = useState("");
@@ -29,8 +28,9 @@ const DetailPage = () => {
   const userSeq = sessionStorage.getItem("userSeq");
   const [wishList, setWishList] = useState("");
   //canvas
-  const canvasRef = useRef(null);
-  const uploadFileRef = useRef(null);
+  const frontCanvasRef = useRef(null);
+  const frontUploadFileRef = useRef(null);
+  const [frontCanvasVisible, setFrontCanvasVisible] = useState(true);
   const [mergedImageSrc, setMergedImageSrc] = useState("");
   const [mergedBackImage, setMergedBackImage] = useState("");
 
@@ -44,34 +44,36 @@ const DetailPage = () => {
     console.log(mergedBackImage);
   };
 
+  //앞면 전체 RESET
   const handleResetCanvas = () => {
-    if (uploadFileRef.current) {
-      uploadFileRef.current.resetCanvas();
+    if (frontUploadFileRef.current) {
+      frontUploadFileRef.current.resetCanvas();
     }
   };
 
+  //앞면 이전으로 RESET
   const handlePreviousButtonClick = () => {
-    if (uploadFileRef.current) {
-      uploadFileRef.current.deleteLastImage();
+    if (frontUploadFileRef.current) {
+      frontUploadFileRef.current.deleteLastImage();
     }
   };
 
+  //앞면 캔버스 변환
   useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas = frontCanvasRef.current;
     const context = canvas.getContext("2d");
 
-    const drawOriginImage = () => {
+    const drawFrontImage = () => {
       const image = new Image();
-      image.src = changeImage;
+      image.src = clothFrontImage;
       image.onload = () => {
         canvas.width = 787;
         canvas.height = 601;
-
         context.drawImage(image, 0, 0);
       };
     };
-    drawOriginImage();
-  }, [changeImage]);
+    drawFrontImage();
+  }, [clothFrontImage]);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -82,11 +84,14 @@ const DetailPage = () => {
   };
 
   const handleFrontButtonClick = () => {
-    setChangeImage(clothFrontImage);
+    setClothFrontImage(clothFrontImage);
+    setFrontCanvasVisible(true); //앞면 클릭시 앞면 보이게
   };
 
   const handleBackButtonClick = () => {
-    setChangeImage(clothBackImage);
+    setClothBackImage(clothBackImage);
+    setFrontCanvasVisible(false); //뒷면 클릭시 앞면 안보이게
+    handleResetCanvas();
   };
 
   const selectColor = (color) => {
@@ -176,8 +181,8 @@ const DetailPage = () => {
 
   //default값 앞면
   useEffect(() => {
-    setChangeImage(clothFrontImage);
-  }, [clothFrontImage]);
+    setClothFrontImage(clothFrontImage);
+  }, []);
 
   //wishList값
   const getWishList = async () => {
@@ -243,7 +248,7 @@ const DetailPage = () => {
             onClick={handleResetCanvas}
           />
           <div className="cropFont" onClick={handleResetCanvas}>
-            처음으로
+            앞면 전체 처음으로
           </div>
         </div>
         <div style={{ marginLeft: "10px" }}>
@@ -253,7 +258,7 @@ const DetailPage = () => {
             onClick={handlePreviousButtonClick}
           />
           <div className="cropFont" onClick={handlePreviousButtonClick}>
-            이전으로
+            앞면 이전으로
           </div>
         </div>
         <div style={{ marginLeft: "10px" }}>
@@ -299,7 +304,7 @@ const DetailPage = () => {
       </div>
       <div className="shirtFile">
         <UploadFile
-          ref={uploadFileRef}
+          ref={frontUploadFileRef}
           clothFrontImage={clothFrontImage}
           clothBackImage={clothBackImage}
           getFrontImage={getFrontImage}
@@ -360,7 +365,12 @@ const DetailPage = () => {
           </ul>
         </div>
       )}
-      <canvas ref={canvasRef} alt="T-shirt"></canvas>
+      {/* 앞면 클릭시 캔버스 띄우기 */}
+      <canvas
+        ref={frontCanvasRef}
+        alt="T-shirt"
+        style={{ display: frontCanvasVisible ? "block" : "none" }}
+      ></canvas>
       {showPopup && <div className="popup-background"></div>}
       <span className="text-area">
         <div className="text-title">{clothName}</div>
