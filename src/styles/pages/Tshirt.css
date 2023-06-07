@@ -269,6 +269,10 @@
   font-size: 20px;
 }
 
+.canvasWidth {
+  width: 40%;
+}
+
 .text-area {
   height: 605px;
   width: 45%;

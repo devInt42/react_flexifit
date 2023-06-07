@@ -241,32 +241,66 @@ const DetailPage = () => {
   return (
     <div>
       <div className="cropList" style={{ display: "flex" }}>
-        <div>
+        {/* 앞면 */}
+        <div style={{ display: frontCanvasVisible ? "block" : "none" }}>
           <AiOutlineReload
             size={"25px"}
-            style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
+            style={{
+              color: "#ccc",
+              marginBottom: "2px",
+              marginLeft: "5px",
+            }}
             onClick={handleResetCanvas}
           />
           <div className="cropFont" onClick={handleResetCanvas}>
-            앞면 전체 처음으로
+            처음으로
           </div>
         </div>
-        <div style={{ marginLeft: "10px" }}>
+        <div
+          style={{
+            marginLeft: "10px",
+            display: frontCanvasVisible ? "block" : "none",
+          }}
+        >
           <AiOutlineArrowLeft
             size={"25px"}
             style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
             onClick={handlePreviousButtonClick}
           />
           <div className="cropFont" onClick={handlePreviousButtonClick}>
-            앞면 이전으로
+            이전으로
           </div>
         </div>
-        <div style={{ marginLeft: "10px" }}>
-          <CiSaveDown2
+        {/* 뒷면 */}
+        {/* 함수명바꾸기 */}
+        <div style={{ display: frontCanvasVisible ? "none" : "block" }}>
+          <AiOutlineReload
+            size={"25px"}
+            style={{
+              color: "#ccc",
+              marginBottom: "2px",
+              marginLeft: "5px",
+            }}
+            onClick={handleResetCanvas}
+          />
+          <div className="cropFont" onClick={handleResetCanvas}>
+            처음으로
+          </div>
+        </div>
+        <div
+          style={{
+            marginLeft: "10px",
+            display: frontCanvasVisible ? "none" : "block",
+          }}
+        >
+          <AiOutlineArrowLeft
             size={"25px"}
             style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
+            onClick={handlePreviousButtonClick}
           />
-          <div className="cropFont">임시저장</div>
+          <div className="cropFont" onClick={handlePreviousButtonClick}>
+            이전으로
+          </div>
         </div>
       </div>
       <button className="additional-button" onClick={togglePopup}>
@@ -365,14 +399,15 @@ const DetailPage = () => {
           </ul>
         </div>
       )}
-      {/* 앞면 클릭시 캔버스 띄우기 */}
+      {/* 앞면 클릭시 앞면 캔버스 띄우기 */}
       <canvas
         ref={frontCanvasRef}
         alt="T-shirt"
         style={{ display: frontCanvasVisible ? "block" : "none" }}
       ></canvas>
+
       {showPopup && <div className="popup-background"></div>}
-      <span className="text-area">
+      <div className="text-area">
         <div className="text-title">{clothName}</div>
         <div className="text-price">{clothPrice}원</div>
         <div className="text-color">
@@ -474,7 +509,7 @@ const DetailPage = () => {
             </div>
           </div>
         )}
-      </span>
+      </div>
     </div>
   );
 };
