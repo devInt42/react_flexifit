@@ -111,6 +111,32 @@
   color: #000;
 }
 
+.newImageSrc3 {
+  position: absolute;
+  top: 80%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #000;
+}
+
+.newImageSrc4 {
+  position: absolute;
+  top: 90%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #000;
+}
+
 .shirtFile {
   position: absolute;
   top: 50%;

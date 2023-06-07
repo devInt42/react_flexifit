@@ -32,10 +32,16 @@ const DetailPage = () => {
   const canvasRef = useRef(null);
   const uploadFileRef = useRef(null);
   const [mergedImageSrc, setMergedImageSrc] = useState("");
+  const [mergedBackImage, setMergedBackImage] = useState("");
 
   const getFrontImage = (e) => {
     setMergedImageSrc(e);
     console.log(mergedImageSrc);
+  };
+
+  const getBackImage = (e) => {
+    setMergedBackImage(e);
+    console.log(mergedBackImage);
   };
 
   const handleResetCanvas = () => {
@@ -272,6 +278,16 @@ const DetailPage = () => {
         </div>
       )}
       {mergedImageSrc && <div className="newImageSrc2">앞면</div>}
+      {mergedBackImage && (
+        <div className="newImageSrc3">
+          <img
+            src={mergedBackImage}
+            alt="Merged Image"
+            style={{ width: "200px", height: "150px" }}
+          />
+        </div>
+      )}
+      {mergedBackImage && <div className="newImageSrc4">뒷면</div>}
 
       <div className="shirtBtns">
         <button className="shirtBtn" onClick={handleFrontButtonClick}>
@@ -287,6 +303,7 @@ const DetailPage = () => {
           clothFrontImage={clothFrontImage}
           clothBackImage={clothBackImage}
           getFrontImage={getFrontImage}
+          getBackImage={getBackImage}
         />
       </div>
       {showPopup && (
