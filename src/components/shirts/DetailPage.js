@@ -31,12 +31,11 @@ const DetailPage = () => {
   const frontCanvasRef = useRef(null);
   const frontUploadFileRef = useRef(null);
   const [frontCanvasVisible, setFrontCanvasVisible] = useState(true);
-  const [mergedImageSrc, setMergedImageSrc] = useState("");
+  const [mergedFrontImage, setMergedFrontImage] = useState("");
   const [mergedBackImage, setMergedBackImage] = useState("");
 
   const getFrontImage = (e) => {
-    setMergedImageSrc(e);
-    console.log(mergedImageSrc);
+    setMergedFrontImage(e);
   };
 
   const getBackImage = (e) => {
@@ -307,16 +306,16 @@ const DetailPage = () => {
         <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
         커스텀 하는 방법
       </button>
-      {mergedImageSrc && (
+      {mergedFrontImage && (
         <div className="newImageSrc">
           <img
-            src={mergedImageSrc}
+            src={mergedFrontImage}
             alt="Merged Image"
             style={{ width: "200px", height: "150px" }}
           />
         </div>
       )}
-      {mergedImageSrc && <div className="newImageSrc2">앞면</div>}
+      {mergedFrontImage && <div className="newImageSrc2">앞면</div>}
       {mergedBackImage && (
         <div className="newImageSrc3">
           <img
