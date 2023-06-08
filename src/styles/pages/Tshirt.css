@@ -147,14 +147,18 @@
 }
 
 .shirtBtn2 {
-  width: 70px;
-  height: 30px;
+  width: 80px;
+  height: 80px;
   background-color: white;
   border: none;
   font-size: 12px;
-  border-radius: 5px;
+  border-radius: 50%; /* Set border-radius to 50% to achieve a perfectly round shape */
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   float: right;
+  margin-right: 5px;
+  background-color: tan;
+  color: white;
+  font-weight: bolder;
 }
 
 .popup-container {
@@ -164,6 +168,23 @@
   transform: translate(-50%, -50%);
   width: 700px;
   height: 450px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.MyBagpopup-container {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 600px;
   background-color: white;
   border-radius: 10px;
   padding: 20px;
@@ -367,4 +388,49 @@
 
 .cropList {
   margin-left: 10px;
+}
+
+.test222 {
+  width: 55%;
+  float: left;
+}
+
+.front-image {
+  width: 65%;
+  float: left;
+  height: 70%;
+  object-fit: cover;
+
+  margin-bottom: 10px;
+}
+
+.right-section {
+  width: 33%;
+  float: right;
+  height: 88%;
+  /* background-color: pink; */
+  margin-left: 5px;
+}
+
+.mybag-title {
+  font-size: 17px;
+  font-weight: bolder;
+  margin-bottom: 5px;
+}
+
+.mybag-name {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.quantity-select {
+  margin-left: 10px;
+}
+
+.newBtn {
+  width: 30px;
+  margin-right: 10px;
+  color: gray;
+  background-color: transparent;
+  border: none;
 }

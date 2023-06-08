@@ -20,6 +20,7 @@ const DetailPage = () => {
   const [clothFrontImage, setClothFrontImage] = useState("");
   const [clothBackImage, setClothBackImage] = useState("");
   const [showPopup, setShowPopup] = useState(false); //팝업
+  const [showMyBagPopup, setShowMyBagPopup] = useState(false); //장바구니 팝업
   const [colors, setColors] = useState([]); // 색상 list
   const [size, setSize] = useState([]);
   const [selectedSize, setSelectedSize] = useState("");
@@ -36,6 +37,26 @@ const DetailPage = () => {
   const backUploadFileRef = useRef(null);
   const [backCanvasVisible, setBackCanvasVisible] = useState(false);
   const [mergedBackImage, setMergedBackImage] = useState("");
+  //장바구니 사이즈개수
+  const [sizeCounts, setSizeCounts] = useState({
+    S: 0,
+    M: 0,
+    L: 0,
+  });
+
+  const handleIncreaseCount = (size) => {
+    setSizeCounts((prevCounts) => ({
+      ...prevCounts,
+      [size]: prevCounts[size] + 1,
+    }));
+  };
+
+  const handleDecreaseCount = (size) => {
+    setSizeCounts((prevCounts) => ({
+      ...prevCounts,
+      [size]: Math.max(prevCounts[size] - 1, 0),
+    }));
+  };
 
   const getFrontImage = (e) => {
     setMergedFrontImage(e);
@@ -120,16 +141,22 @@ const DetailPage = () => {
     setShowWishListPopup(!showWishListPopup);
   };
 
+  const toggleMyBagPopup = () => {
+    setShowMyBagPopup(!showMyBagPopup);
+  };
+
   const handleFrontButtonClick = () => {
     setClothFrontImage(clothFrontImage);
     setFrontCanvasVisible(true); //앞면 클릭시 앞면 보이게
     setBackCanvasVisible(false); //앞면 클릭시 뒷면 안보이게
+    handleBackResetCanvas();
   };
 
   const handleBackButtonClick = () => {
     setClothBackImage(clothBackImage);
     setFrontCanvasVisible(false); //뒷면 클릭시 앞면 안보이게
     setBackCanvasVisible(true); //뒷면 클릭시 뒷면 보이게
+    handleFrontResetCanvas();
   };
 
   const selectColor = (color) => {
@@ -340,119 +367,175 @@ const DetailPage = () => {
           </div>
         </div>
       </div>
-      <button className="additional-button" onClick={togglePopup}>
-        <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
-        커스텀 하는 방법
-      </button>
-      {mergedFrontImage && (
-        <div className="newImageSrc">
-          <img
-            src={mergedFrontImage}
-            alt="Merged Image"
-            style={{ width: "200px", height: "150px" }}
-          />
-        </div>
-      )}
-      {mergedFrontImage && <div className="newImageSrc2">앞면</div>}
-      {mergedBackImage && (
-        <div className="newImageSrc3">
-          <img
-            src={mergedBackImage}
-            alt="Merged Image"
-            style={{ width: "200px", height: "150px" }}
-          />
-        </div>
-      )}
-      {mergedBackImage && <div className="newImageSrc4">뒷면</div>}
-
-      <div className="shirtBtns">
-        <button className="shirtBtn" onClick={handleFrontButtonClick}>
-          앞면
+      <div className="test222">
+        <button className="additional-button" onClick={togglePopup}>
+          <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
+          커스텀 하는 방법
         </button>
-        <button className="shirtBtn" onClick={handleBackButtonClick}>
-          뒷면
-        </button>
-      </div>
-      <div className="shirtFile">
-        <UploadFile
-          ref={frontUploadFileRef}
-          clothFrontImage={clothFrontImage}
-          getFrontImage={getFrontImage}
-        />
+        {mergedFrontImage && (
+          <div className="newImageSrc">
+            <img
+              src={mergedFrontImage}
+              alt="Merged Image"
+              style={{ width: "200px", height: "150px" }}
+            />
+          </div>
+        )}
+        {mergedFrontImage && <div className="newImageSrc2">앞면</div>}
+        {mergedBackImage && (
+          <div className="newImageSrc3">
+            <img
+              src={mergedBackImage}
+              alt="Merged Image"
+              style={{ width: "200px", height: "150px" }}
+            />
+          </div>
+        )}
+        {mergedBackImage && <div className="newImageSrc4">뒷면</div>}
 
-        <UploadFile
-          ref={backUploadFileRef}
-          clothBackImage={clothBackImage}
-          getBackImage={getBackImage}
-        />
-      </div>
-      {showPopup && (
-        <div className="popup-container">
-          <button className="popup-close-button" onClick={togglePopup}>
-            X
+        <div className="shirtBtns">
+          <button className="shirtBtn" onClick={handleFrontButtonClick}>
+            앞면
           </button>
-          <div className="popup-content">
-            <div className="custom-title"> # 커스텀 하는 방법</div>
-            <div className="custom-content">
-              <div className="custom-content2">
-                <AiOutlineCloudUpload
-                  size={"20px"}
-                  style={{ marginRight: "5px" }}
-                />
-                이미지 업로드
+          <button className="shirtBtn" onClick={handleBackButtonClick}>
+            뒷면
+          </button>
+        </div>
+        <div className="shirtFile">
+          <UploadFile
+            ref={frontUploadFileRef}
+            clothFrontImage={clothFrontImage}
+            getFrontImage={getFrontImage}
+            frontCanvasVisible={frontCanvasVisible}
+          />
+
+          <UploadFile
+            ref={backUploadFileRef}
+            clothBackImage={clothBackImage}
+            getBackImage={getBackImage}
+            backCanvasVisible={backCanvasVisible}
+          />
+        </div>
+        {showPopup && (
+          <div className="popup-container">
+            <button className="popup-close-button" onClick={togglePopup}>
+              X
+            </button>
+            <div className="popup-content">
+              <div className="custom-title"> # 커스텀 하는 방법</div>
+              <div className="custom-content">
+                <div className="custom-content2">
+                  <AiOutlineCloudUpload
+                    size={"20px"}
+                    style={{ marginRight: "5px" }}
+                  />
+                  이미지 업로드
+                </div>
+                <div className="custom-content3">
+                  여행&감성 사진, 내 작품 등 특별한 추억을 패션으로 간직하세요.{" "}
+                </div>
               </div>
-              <div className="custom-content3">
-                여행&감성 사진, 내 작품 등 특별한 추억을 패션으로 간직하세요.{" "}
+              <div className="custom-content">
+                <div className="custom-content2">
+                  <ImTextWidth size={"17px"} style={{ marginRight: "5px" }} />
+                  텍스트 넣기
+                </div>
+                <div className="custom-content3">
+                  누구나 쉽게 기념일, 크루, 좌우명을 담아 특별한 패션 아이템을
+                  만들어보세요.
+                </div>
               </div>
             </div>
-            <div className="custom-content">
-              <div className="custom-content2">
-                <ImTextWidth size={"17px"} style={{ marginRight: "5px" }} />
-                텍스트 넣기
+            <ul>
+              <li className="textdesc">
+                PNG, AI, JPG 형식의 고화질의 이미지 사용을 권장합니다. 이미지
+                파일의 적정 해상도는 실제 프린트할 이미지 가로 세로의 긴 면이
+                최소 2500px 이상 + 해상도 150dpi 이상으로 지정해주세요.
+              </li>
+              <li className="textdesc">
+                상품마다 이미지 크기가 다르므로, 해당 상품의 이미지 가이드를
+                확인해 주세요.
+              </li>
+              <li className="textdesc">
+                작은 원본 이미지를 임의로 크게 확대할 경우 인쇄 시 화질이 깨질
+                수 있습니다.
+              </li>
+              <li className="textdesc">
+                모니터, 핸드폰에 따라 실제 인쇄 색상과 다르게 보일 수 있습니다.
+              </li>
+              <li className="textdesc">
+                형광, 반사광, 야광, 홀로그램, 골드, 실버는 겹쳐서 인쇄가
+                불가합니다.
+              </li>
+            </ul>
+          </div>
+        )}
+
+        {/* 장바구니 팝업 */}
+        {showMyBagPopup && (
+          <div className="MyBagpopup-container">
+            <button className="popup-close-button" onClick={toggleMyBagPopup}>
+              X
+            </button>
+
+            <div className="left-section">
+              <img
+                src={mergedFrontImage}
+                alt="Front Image"
+                className="front-image"
+              ></img>
+            </div>
+            <div className="right-section">
+              <div className="mybag-title">수량을 선택해 주세요</div>
+              <div className="mybag-name">{clothName}</div>
+              <div className="quantity-select">
+                {size.map((size) => (
+                  <div key={size}>
+                    <button className="newBtn" onClick={() => selectSize(size)}>
+                      {size}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary"
+                      onClick={() => handleDecreaseCount(size)}
+                    >
+                      -
+                    </button>
+
+                    <span>{sizeCounts[size]}</span>
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary"
+                      onClick={() => handleIncreaseCount(size)}
+                    >
+                      +
+                    </button>
+                  </div>
+                ))}
+
+                <hr />
               </div>
-              <div className="custom-content3">
-                누구나 쉽게 기념일, 크루, 좌우명을 담아 특별한 패션 아이템을
-                만들어보세요.
-              </div>
+              <div className="price">(개수)상품 금액</div>
+              <button className="purchase-button">바로구매</button>
+              <button className="add-to-cart-button">장바구니</button>
             </div>
           </div>
-          <ul>
-            <li className="textdesc">
-              PNG, AI, JPG 형식의 고화질의 이미지 사용을 권장합니다. 이미지
-              파일의 적정 해상도는 실제 프린트할 이미지 가로 세로의 긴 면이 최소
-              2500px 이상 + 해상도 150dpi 이상으로 지정해주세요.
-            </li>
-            <li className="textdesc">
-              상품마다 이미지 크기가 다르므로, 해당 상품의 이미지 가이드를
-              확인해 주세요.
-            </li>
-            <li className="textdesc">
-              작은 원본 이미지를 임의로 크게 확대할 경우 인쇄 시 화질이 깨질 수
-              있습니다.
-            </li>
-            <li className="textdesc">
-              모니터, 핸드폰에 따라 실제 인쇄 색상과 다르게 보일 수 있습니다.
-            </li>
-            <li className="textdesc">
-              형광, 반사광, 야광, 홀로그램, 골드, 실버는 겹쳐서 인쇄가
-              불가합니다.
-            </li>
-          </ul>
-        </div>
-      )}
-      {/* 앞면 클릭시 앞면 캔버스 띄우기 */}
-      <canvas
-        ref={frontCanvasRef}
-        alt="T-shirt"
-        style={{ display: frontCanvasVisible ? "block" : "none" }}
-      ></canvas>
-      {/* 뒷면 클릭시 앞면 캔버스 띄우기 */}
-      <canvas
-        ref={backCanvasRef}
-        alt="T-shirt"
-        style={{ display: backCanvasVisible ? "block" : "none" }}
-      ></canvas>
-      {showPopup && <div className="popup-background"></div>}
+        )}
+
+        {/* 앞면 클릭시 앞면 캔버스 띄우기 */}
+        <canvas
+          ref={frontCanvasRef}
+          alt="T-shirt"
+          style={{ display: frontCanvasVisible ? "block" : "none" }}
+        ></canvas>
+        {/* 뒷면 클릭시 앞면 캔버스 띄우기 */}
+        <canvas
+          ref={backCanvasRef}
+          alt="T-shirt"
+          style={{ display: backCanvasVisible ? "block" : "none" }}
+        ></canvas>
+        {showPopup && <div className="popup-background"></div>}
+      </div>
       <div className="text-area">
         <div className="text-title">{clothName}</div>
         <div className="text-price">{clothPrice}원</div>
@@ -507,9 +590,9 @@ const DetailPage = () => {
             width: "130px",
             height: "50px",
             marginTop: "280px",
-
             marginRight: "3px",
           }}
+          onClick={toggleMyBagPopup}
         >
           장바구니 담기
         </button>

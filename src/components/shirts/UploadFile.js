@@ -20,10 +20,14 @@ const UploadFile = forwardRef((props, ref) => {
 
   const frontImageContainerRef = useRef(null);
   const backImageContainerRef = useRef(null);
-  const [mergedImageSrc, setMergedImageSrc] = useState("");
   const [mergedImageData, setMergedImageData] = useState(null); // 합성된 이미지 데이터
   const [clothFrontImage, setClothFrontImage] = useState("");
   const [clothBackImage, setClothBackImage] = useState("");
+  const [frontCanvasVisible, setFrontCanvasVisible] = useState(true);
+
+  useEffect(() => {
+    setFrontCanvasVisible(props.frontCanvasVisible);
+  }, [props.frontCanvasVisible]);
 
   // 기존 앞면 이미지
   useEffect(() => {
@@ -231,44 +235,47 @@ const UploadFile = forwardRef((props, ref) => {
   return (
     <div>
       <div>
-        <div
-          frontRef={frontImageContainerRef}
-          style={{ width: "260px", height: "360px", overflow: "hidden" }}
-        >
-          <canvas ref={frontCanvasRef} />
-        </div>
-        <button className="shirtBtn2" onClick={handleFrontFileInputClick}>
-          앞면 파일 선택
-        </button>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFrontFileInputChange}
-          ref={frontFileInputRef}
-          style={{ display: "none" }}
-        />
+        {frontCanvasVisible && (
+          <>
+            <div frontRef={frontImageContainerRef}>
+              <canvas ref={frontCanvasRef} />
+            </div>
+            <button className="shirtBtn2" onClick={saveCanvasAsImage}>
+              저장
+            </button>
+            <button className="shirtBtn2" onClick={handleFrontFileInputClick}>
+              파일 업로드
+            </button>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFrontFileInputChange}
+              ref={frontFileInputRef}
+              style={{ display: "none" }}
+            />
+          </>
+        )}
       </div>
-      <div>
-        <div
-          backRef={backImageContainerRef}
-          style={{ width: "260px", height: "360px", overflow: "hidden" }}
-        >
-          <canvas ref={backCanvasRef} />
-        </div>
-        <button className="shirtBtn2" onClick={handleBackFileInputClick}>
-          뒷면 파일 선택
-        </button>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleBackFileInputChange}
-          ref={backFileInputRef}
-          style={{ display: "none" }}
-        />
-      </div>
-      <button className="shirtBtn2" onClick={saveCanvasAsImage}>
-        캔버스 저장
-      </button>
+      {!frontCanvasVisible && (
+        <>
+          <div backRef={backImageContainerRef}>
+            <canvas ref={backCanvasRef} />
+          </div>
+          <button className="shirtBtn2" onClick={saveCanvasAsImage}>
+            저장
+          </button>
+          <button className="shirtBtn2" onClick={handleBackFileInputClick}>
+            파일 업로드
+          </button>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleBackFileInputChange}
+            ref={backFileInputRef}
+            style={{ display: "none" }}
+          />
+        </>
+      )}
     </div>
   );
 });
