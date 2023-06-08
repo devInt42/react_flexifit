@@ -398,7 +398,7 @@
 .front-image {
   width: 65%;
   float: left;
-  height: 70%;
+  height: 565px;
   object-fit: cover;
 
   margin-bottom: 10px;
@@ -407,7 +407,7 @@
 .right-section {
   width: 33%;
   float: right;
-  height: 88%;
+  height: 100%;
   /* background-color: pink; */
   margin-left: 5px;
 }
@@ -433,4 +433,28 @@
   color: gray;
   background-color: transparent;
   border: none;
+}
+
+.mini-select {
+  float: right;
+}
+
+.sizeCount {
+  padding: 10px;
+}
+
+.price {
+  font-weight: bolder;
+}
+
+.totalPrice {
+  float: right;
+  font-weight: bolder;
+}
+
+.buttons {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
 }

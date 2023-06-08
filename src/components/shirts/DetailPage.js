@@ -43,12 +43,21 @@ const DetailPage = () => {
     M: 0,
     L: 0,
   });
+  const [totalCount, setTotalCount] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    if (totalCount > 0) {
+      setTotalPrice(clothPrice * totalCount);
+    }
+  }, [totalCount, clothPrice]);
 
   const handleIncreaseCount = (size) => {
     setSizeCounts((prevCounts) => ({
       ...prevCounts,
       [size]: prevCounts[size] + 1,
     }));
+    setTotalCount((prevTotalCount) => prevTotalCount + 1);
   };
 
   const handleDecreaseCount = (size) => {
@@ -56,6 +65,7 @@ const DetailPage = () => {
       ...prevCounts,
       [size]: Math.max(prevCounts[size] - 1, 0),
     }));
+    setTotalCount((prevTotalCount) => prevTotalCount - 1);
   };
 
   const getFrontImage = (e) => {
@@ -143,6 +153,9 @@ const DetailPage = () => {
 
   const toggleMyBagPopup = () => {
     setShowMyBagPopup(!showMyBagPopup);
+    setTotalCount(0);
+    setTotalPrice(0);
+    setSizeCounts({ S: 0, M: 0, L: 0 });
   };
 
   const handleFrontButtonClick = () => {
@@ -491,33 +504,52 @@ const DetailPage = () => {
               <div className="quantity-select">
                 {size.map((size) => (
                   <div key={size}>
-                    <button className="newBtn" onClick={() => selectSize(size)}>
+                    <span className="newBtn" onClick={() => selectSize(size)}>
                       {size}
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary"
-                      onClick={() => handleDecreaseCount(size)}
-                    >
-                      -
-                    </button>
+                    </span>{" "}
+                    <div className="mini-select">
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={() => handleDecreaseCount(size)}
+                      >
+                        -
+                      </button>
 
-                    <span>{sizeCounts[size]}</span>
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary"
-                      onClick={() => handleIncreaseCount(size)}
-                    >
-                      +
-                    </button>
+                      <span className="sizeCount">{sizeCounts[size]}</span>
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={() => handleIncreaseCount(size)}
+                      >
+                        +
+                      </button>
+                    </div>{" "}
+                    <hr />
                   </div>
                 ))}
-
-                <hr />
               </div>
-              <div className="price">(개수)상품 금액</div>
-              <button className="purchase-button">바로구매</button>
-              <button className="add-to-cart-button">장바구니</button>
+              <span className="price">{totalCount}개 상품 금액</span>
+              <span className="totalPrice">{totalPrice}원</span>
+              <div className="buttons">
+                <button
+                  type="button"
+                  className="btn btn-dark"
+                  style={{
+                    width: "150px",
+                    marginRight: "5px",
+                  }}
+                >
+                  구매하기
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  style={{ width: "150px" }}
+                >
+                  장바구니 담기
+                </button>
+              </div>
             </div>
           </div>
         )}
