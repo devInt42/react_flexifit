@@ -9,7 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import UploadFile from "./UploadFile";
 import { AiOutlineReload } from "react-icons/ai";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { CiSaveDown2 } from "react-icons/ci";
 
 const DetailPage = () => {
   const location = useLocation();
@@ -27,33 +26,53 @@ const DetailPage = () => {
   const [showWishListPopup, setShowWishListPopup] = useState(false);
   const userSeq = sessionStorage.getItem("userSeq");
   const [wishList, setWishList] = useState("");
-  //canvas
+  //canvas 앞면
   const frontCanvasRef = useRef(null);
   const frontUploadFileRef = useRef(null);
   const [frontCanvasVisible, setFrontCanvasVisible] = useState(true);
   const [mergedFrontImage, setMergedFrontImage] = useState("");
+  //canvas 뒷면
+  const backCanvasRef = useRef(null);
+  const backUploadFileRef = useRef(null);
+  const [backCanvasVisible, setBackCanvasVisible] = useState(false);
   const [mergedBackImage, setMergedBackImage] = useState("");
 
   const getFrontImage = (e) => {
     setMergedFrontImage(e);
+    console.log("앞면");
   };
 
+  //뒷면 넣기
   const getBackImage = (e) => {
     setMergedBackImage(e);
-    console.log(mergedBackImage);
+    console.log("뒷면");
   };
 
   //앞면 전체 RESET
-  const handleResetCanvas = () => {
+  const handleFrontResetCanvas = () => {
     if (frontUploadFileRef.current) {
-      frontUploadFileRef.current.resetCanvas();
+      frontUploadFileRef.current.resetFrontCanvas();
     }
   };
 
   //앞면 이전으로 RESET
-  const handlePreviousButtonClick = () => {
+  const handleFrontPreviousButtonClick = () => {
     if (frontUploadFileRef.current) {
-      frontUploadFileRef.current.deleteLastImage();
+      frontUploadFileRef.current.deleteLastFrontImage();
+    }
+  };
+
+  //뒷면 전체 RESET
+  const handleBackResetCanvas = () => {
+    if (backUploadFileRef.current) {
+      backUploadFileRef.current.resetBackCanvas();
+    }
+  };
+
+  //뒷면 이전으로 RESET
+  const handleBackPreviousButtonClick = () => {
+    if (backUploadFileRef.current) {
+      backUploadFileRef.current.deleteLastBackImage();
     }
   };
 
@@ -74,6 +93,25 @@ const DetailPage = () => {
     drawFrontImage();
   }, [clothFrontImage]);
 
+  // //뒷면 캔버스 변환
+  useEffect(() => {
+    if (backCanvasRef.current) {
+      const canvas = backCanvasRef.current;
+      const context = canvas.getContext("2d");
+
+      const drawBackImage = () => {
+        const image = new Image();
+        image.src = clothBackImage;
+        image.onload = () => {
+          canvas.width = 787;
+          canvas.height = 601;
+          context.drawImage(image, 0, 0);
+        };
+      };
+      drawBackImage();
+    }
+  }, [clothBackImage]);
+
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
@@ -85,12 +123,13 @@ const DetailPage = () => {
   const handleFrontButtonClick = () => {
     setClothFrontImage(clothFrontImage);
     setFrontCanvasVisible(true); //앞면 클릭시 앞면 보이게
+    setBackCanvasVisible(false); //앞면 클릭시 뒷면 안보이게
   };
 
   const handleBackButtonClick = () => {
     setClothBackImage(clothBackImage);
     setFrontCanvasVisible(false); //뒷면 클릭시 앞면 안보이게
-    handleResetCanvas();
+    setBackCanvasVisible(true); //뒷면 클릭시 뒷면 보이게
   };
 
   const selectColor = (color) => {
@@ -249,9 +288,9 @@ const DetailPage = () => {
               marginBottom: "2px",
               marginLeft: "5px",
             }}
-            onClick={handleResetCanvas}
+            onClick={handleFrontResetCanvas}
           />
-          <div className="cropFont" onClick={handleResetCanvas}>
+          <div className="cropFont" onClick={handleFrontResetCanvas}>
             처음으로
           </div>
         </div>
@@ -264,14 +303,13 @@ const DetailPage = () => {
           <AiOutlineArrowLeft
             size={"25px"}
             style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
-            onClick={handlePreviousButtonClick}
+            onClick={handleFrontPreviousButtonClick}
           />
-          <div className="cropFont" onClick={handlePreviousButtonClick}>
+          <div className="cropFont" onClick={handleFrontPreviousButtonClick}>
             이전으로
           </div>
         </div>
         {/* 뒷면 */}
-        {/* 함수명바꾸기 */}
         <div style={{ display: frontCanvasVisible ? "none" : "block" }}>
           <AiOutlineReload
             size={"25px"}
@@ -280,9 +318,9 @@ const DetailPage = () => {
               marginBottom: "2px",
               marginLeft: "5px",
             }}
-            onClick={handleResetCanvas}
+            onClick={handleBackResetCanvas}
           />
-          <div className="cropFont" onClick={handleResetCanvas}>
+          <div className="cropFont" onClick={handleBackResetCanvas}>
             처음으로
           </div>
         </div>
@@ -295,9 +333,9 @@ const DetailPage = () => {
           <AiOutlineArrowLeft
             size={"25px"}
             style={{ color: "#ccc", marginBottom: "2px", marginLeft: "5px" }}
-            onClick={handlePreviousButtonClick}
+            onClick={handleBackPreviousButtonClick}
           />
-          <div className="cropFont" onClick={handlePreviousButtonClick}>
+          <div className="cropFont" onClick={handleBackPreviousButtonClick}>
             이전으로
           </div>
         </div>
@@ -339,8 +377,12 @@ const DetailPage = () => {
         <UploadFile
           ref={frontUploadFileRef}
           clothFrontImage={clothFrontImage}
-          clothBackImage={clothBackImage}
           getFrontImage={getFrontImage}
+        />
+
+        <UploadFile
+          ref={backUploadFileRef}
+          clothBackImage={clothBackImage}
           getBackImage={getBackImage}
         />
       </div>
@@ -404,7 +446,12 @@ const DetailPage = () => {
         alt="T-shirt"
         style={{ display: frontCanvasVisible ? "block" : "none" }}
       ></canvas>
-
+      {/* 뒷면 클릭시 앞면 캔버스 띄우기 */}
+      <canvas
+        ref={backCanvasRef}
+        alt="T-shirt"
+        style={{ display: backCanvasVisible ? "block" : "none" }}
+      ></canvas>
       {showPopup && <div className="popup-background"></div>}
       <div className="text-area">
         <div className="text-title">{clothName}</div>

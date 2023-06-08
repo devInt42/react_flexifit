@@ -10,12 +10,16 @@ import axios from "axios";
 
 const UploadFile = forwardRef((props, ref) => {
   const frontCanvasRef = useRef(null);
+  const backCanvasRef = useRef(null);
   const [frontCanvas, setFrontCanvas] = useState(null);
+  const [backCanvas, setBackCanvas] = useState(null);
   const frontFileInputRef = useRef(null);
+  const backFileInputRef = useRef(null);
   const frontImagesStackRef = useRef([]);
+  const backImagesStackRef = useRef([]);
 
-  const imageContainerRef = useRef(null);
-  const [imageUrl, setImageUrl] = useState("");
+  const frontImageContainerRef = useRef(null);
+  const backImageContainerRef = useRef(null);
   const [mergedImageSrc, setMergedImageSrc] = useState("");
   const [mergedImageData, setMergedImageData] = useState(null); // 합성된 이미지 데이터
   const [clothFrontImage, setClothFrontImage] = useState("");
@@ -24,7 +28,6 @@ const UploadFile = forwardRef((props, ref) => {
   // 기존 앞면 이미지
   useEffect(() => {
     setClothFrontImage(props.clothFrontImage);
-    console.log(props.clothFrontImage);
   }, [props.clothFrontImage]);
 
   // 기존 뒷면 이미지
@@ -32,7 +35,7 @@ const UploadFile = forwardRef((props, ref) => {
     setClothBackImage(props.clothBackImage);
   }, [props.clothBackImage]);
 
-  //canvas 앞면 범위 설정
+  //canvas 앞면 캔버스 초기화
   useEffect(() => {
     const newFrontCanvas = new fabric.Canvas(frontCanvasRef.current, {
       width: 250,
@@ -41,6 +44,16 @@ const UploadFile = forwardRef((props, ref) => {
     setFrontCanvas(newFrontCanvas);
   }, []);
 
+  // 뒷면 캔버스 초기화
+  useEffect(() => {
+    const newBackCanvas = new fabric.Canvas(backCanvasRef.current, {
+      width: 250,
+      height: 360,
+    });
+    setBackCanvas(newBackCanvas);
+  }, []);
+
+  //앞면 파일올리기
   const handleFrontFileInputChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -62,11 +75,37 @@ const UploadFile = forwardRef((props, ref) => {
     reader.readAsDataURL(file);
   };
 
+  //뒷면 파일올리기
+  const handleBackFileInputChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const img = new Image();
+      img.onload = function () {
+        const fabricImg = new fabric.Image(img);
+        fabricImg.scaleToWidth(backCanvas.width);
+        fabricImg.set({
+          left: backCanvas.width - fabricImg.getScaledWidth(),
+        });
+        backCanvas.add(fabricImg);
+        backImagesStackRef.current.push(fabricImg); // 이미지 스택에 추가
+      };
+      img.src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   const handleFrontFileInputClick = () => {
     frontFileInputRef.current.click();
   };
 
-  //이전 단계
+  const handleBackFileInputClick = () => {
+    backFileInputRef.current.click();
+  };
+
+  //이전 앞면 이미지 삭제
   const deleteLastFrontImage = () => {
     const lastImage = frontImagesStackRef.current.pop(); // 이미지 스택에서 마지막 이미지를 제거
     if (frontCanvas !== null && lastImage) {
@@ -75,7 +114,7 @@ const UploadFile = forwardRef((props, ref) => {
     }
   };
 
-  //전체 삭제
+  //전체 앞면 이미지 삭제
   const resetFrontCanvas = () => {
     if (frontCanvas !== null) {
       frontCanvas.clear();
@@ -83,78 +122,153 @@ const UploadFile = forwardRef((props, ref) => {
     }
   };
 
+  //이전 뒷면 이미지 삭제
+  const deleteLastBackImage = () => {
+    const lastImage = backImagesStackRef.current.pop(); // 이미지 스택에서 마지막 이미지를 제거
+    if (backCanvas !== null && lastImage) {
+      backCanvas.remove(lastImage); // 캔버스에서 이미지 제거
+      backCanvas.renderAll();
+    }
+  };
+
+  //전체 뒷면 이미지 삭제
+  const resetBackCanvas = () => {
+    if (backCanvas !== null) {
+      backCanvas.clear();
+      backImagesStackRef.current = []; // 이미지 스택 초기화
+    }
+  };
+
   // 합치기 / 백엔드 전송
-  const saveFrontCanvasAsImage = async () => {
-    if (frontCanvas !== null && clothFrontImage !== "") {
-      const mergedImage = new Image();
+  const saveCanvasAsImage = async () => {
+    if (
+      frontCanvas !== null &&
+      backCanvas !== null &&
+      clothFrontImage !== "" &&
+      clothBackImage !== ""
+    ) {
+      const mergedFrontImage = new Image();
+      const mergedBackImage = new Image();
 
-      mergedImage.onload = function () {
-        const tempCanvas = document.createElement("canvas");
-        tempCanvas.width = mergedImage.width;
-        tempCanvas.height = mergedImage.height;
+      mergedFrontImage.onload = function () {
+        const frontTempCanvas = document.createElement("canvas");
+        frontTempCanvas.width = mergedFrontImage.width;
+        frontTempCanvas.height = mergedFrontImage.height;
 
-        const context = tempCanvas.getContext("2d");
-        context.drawImage(mergedImage, 0, 0);
+        const frontContext = frontTempCanvas.getContext("2d");
+        frontContext.drawImage(mergedFrontImage, 0, 0);
 
-        const canvasImage = frontCanvas.toDataURL();
-        const canvasImageObj = new Image();
+        const frontCanvasImage = frontCanvas.toDataURL();
+        const frontCanvasImageObj = new Image();
 
-        canvasImageObj.onload = async function () {
-          const canvasX = (tempCanvas.width - frontCanvas.width) / 2;
-          const canvasY = (tempCanvas.height - frontCanvas.height) / 2;
+        frontCanvasImageObj.onload = function () {
+          const canvasX = (frontTempCanvas.width - frontCanvas.width) / 2;
+          const canvasY = (frontTempCanvas.height - frontCanvas.height) / 2;
 
-          context.drawImage(canvasImageObj, canvasX, canvasY);
+          frontContext.drawImage(frontCanvasImageObj, canvasX, canvasY);
 
-          const mergedDataURL = tempCanvas.toDataURL();
-          setMergedImageSrc(mergedDataURL);
-          setMergedImageData(tempCanvas.toDataURL("image/jpeg")); // 합성된 이미지 데이터 저장
-          // console.log(mergedDataURL);
-          props.getFrontImage(mergedDataURL);
-          console.log("앞면 전송");
+          const mergedFrontDataURL = frontTempCanvas.toDataURL();
+
+          console.log(mergedFrontDataURL + "A");
+          if (props.getFrontImage) {
+            props.getFrontImage(mergedFrontDataURL);
+          }
+
           // 이미지 확인 후 백엔드로 전송
         };
 
-        canvasImageObj.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
-        canvasImageObj.src = canvasImage;
+        frontCanvasImageObj.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
+        frontCanvasImageObj.src = frontCanvasImage;
       };
 
-      mergedImage.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
-      mergedImage.src = clothFrontImage;
+      mergedFrontImage.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
+      mergedFrontImage.src = clothFrontImage;
+
+      mergedBackImage.onload = function () {
+        const backTempCanvas = document.createElement("canvas");
+        backTempCanvas.width = mergedBackImage.width;
+        backTempCanvas.height = mergedBackImage.height;
+
+        const backContext = backTempCanvas.getContext("2d");
+        backContext.drawImage(mergedBackImage, 0, 0);
+
+        const backCanvasImage = backCanvas.toDataURL();
+        const backCanvasImageObj = new Image();
+
+        backCanvasImageObj.onload = function () {
+          const canvasX = (backTempCanvas.width - backCanvas.width) / 2;
+          const canvasY = (backTempCanvas.height - backCanvas.height) / 2;
+
+          backContext.drawImage(backCanvasImageObj, canvasX, canvasY);
+
+          const mergedBackDataURL = backTempCanvas.toDataURL();
+
+          console.log(mergedBackDataURL + "B");
+          if (props.getBackImage) {
+            props.getBackImage(mergedBackDataURL);
+          }
+
+          // 이미지 확인 후 백엔드로 전송
+        };
+
+        backCanvasImageObj.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
+        backCanvasImageObj.src = backCanvasImage;
+      };
+
+      mergedBackImage.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
+      mergedBackImage.src = clothBackImage;
     }
   };
 
   useImperativeHandle(ref, () => ({
-    deleteLastImage: deleteLastFrontImage,
-    resetCanvas: resetFrontCanvas, // resetFrontCanvas 함수를 외부로 노출
+    deleteLastFrontImage: deleteLastFrontImage,
+    deleteLastBackImage: deleteLastBackImage,
+    resetFrontCanvas: resetFrontCanvas,
+    resetBackCanvas: resetBackCanvas,
     getMergedImageData: () => mergedImageData,
   }));
 
   return (
     <div>
-      <div></div>
-      <div
-        frontRef={imageContainerRef}
-        style={{
-          width: "260px",
-          height: "360px",
-          overflow: "hidden",
-        }}
-      >
-        <canvas ref={frontCanvasRef} />
+      <div>
+        <div
+          frontRef={frontImageContainerRef}
+          style={{ width: "260px", height: "360px", overflow: "hidden" }}
+        >
+          <canvas ref={frontCanvasRef} />
+        </div>
+        <button className="shirtBtn2" onClick={handleFrontFileInputClick}>
+          앞면 파일 선택
+        </button>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFrontFileInputChange}
+          ref={frontFileInputRef}
+          style={{ display: "none" }}
+        />
       </div>
-      <button className="shirtBtn2" onClick={handleFrontFileInputClick}>
-        파일 선택
-      </button>
-      <button className="shirtBtn2" onClick={saveFrontCanvasAsImage}>
+      <div>
+        <div
+          backRef={backImageContainerRef}
+          style={{ width: "260px", height: "360px", overflow: "hidden" }}
+        >
+          <canvas ref={backCanvasRef} />
+        </div>
+        <button className="shirtBtn2" onClick={handleBackFileInputClick}>
+          뒷면 파일 선택
+        </button>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleBackFileInputChange}
+          ref={backFileInputRef}
+          style={{ display: "none" }}
+        />
+      </div>
+      <button className="shirtBtn2" onClick={saveCanvasAsImage}>
         캔버스 저장
       </button>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleFrontFileInputChange}
-        ref={frontFileInputRef}
-        style={{ display: "none" }}
-      />
     </div>
   );
 });
