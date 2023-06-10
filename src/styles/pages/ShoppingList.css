@@ -1,7 +1,7 @@
-.shopping-page {
+.shopping-container {
   /* background-color: #f7f7f7; */
   padding: 20px;
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -10,6 +10,107 @@
   font-size: 30px;
   font-weight: bolder;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shopping-mini {
+  text-align: right;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.shopping-info,
+.shopping-size,
+.shopping-price {
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.shopping-edit {
+  display: inline-block;
+  width: 23%;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.shopping-list {
+  border: 2px solid lightgray !important;
+  border-top-color: black !important;
+  padding: 10px;
+}
+
+.shopping-totallist {
+  border: 2px solid lightgray !important;
+  border-top-color: black !important;
+  padding: 10px;
+  margin-top: 50px;
+}
+
+.shopping-date {
+  margin-left: 20px;
+  margin-top: 20px;
+  color: gray;
+}
+
+.shop-frontImage,
+.shop-BackImage {
+  float: left;
+  margin-right: 10px;
+}
+
+.shop-image {
+  width: 180px;
+  height: 150px;
+  margin-top: 10px;
+  display: block;
+}
+
+.real-hr {
+  border: none;
+  border-top: 2px solid;
+  border-top-color: black;
+
+  margin: 10px 0;
+}
+
+.shop-title,
+.shop-size,
+.shop-count,
+.shop-price,
+.shop-btn {
+  width: 16%;
+  height: 150px;
+  margin-top: 10px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-total {
+  width: 24%;
+  margin-left: 15px;
+  height: 100px;
+  margin-top: 10px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-total2 {
+  width: 23%;
+
+  height: 100px;
+  margin-top: 10px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
   align-items: center;
   justify-content: center;
 }
