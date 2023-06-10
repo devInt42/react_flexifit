@@ -83,9 +83,35 @@ const DetailPage = () => {
     setMergedFrontImage(e);
   };
 
-  //장바구니 list 담기
-  const saveMyBagList = () => {
-    //axios 로 userSeq, 이름 가격 색상 사이즈 합성된이미지 2개 보내기
+  //insert 장바구니
+  const saveMyBagList = async () => {
+    const param = {
+      data: {
+        clothId: clothId,
+        userSeq: userSeq,
+        mergedFrontImage: mergedFrontImage,
+        mergedBackImage: mergedBackImage,
+        totalCount: totalCount,
+      },
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/clothes/myBag/insert",
+        param
+      );
+      if (res.data.resultMsg === "false") {
+        alert("로그인 페이지로 이동합니다.");
+        navigate("/login");
+      }
+      if (res.data.resultMsg === "noData") {
+        alert("최소 하나의 상품을 선택해주세요.");
+      } else {
+        alert("장바구니에 저장되었습니다.");
+        toggleMyBagPopup();
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   //뒷면 넣기
@@ -299,7 +325,7 @@ const DetailPage = () => {
     getWishList();
   }, []);
 
-  //insert 장바구니
+  //insert 찜하기
   const insertProduct = async () => {
     const param = {
       data: {
