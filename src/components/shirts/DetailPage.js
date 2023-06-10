@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UploadFile from "./UploadFile";
 import { AiOutlineReload } from "react-icons/ai";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import ShoppingListPage from "../../pages/ShoppingListPage";
 
 const DetailPage = () => {
   const location = useLocation();
@@ -97,6 +98,8 @@ const DetailPage = () => {
         mergedFrontImage: mergedFrontImage,
         mergedBackImage: mergedBackImage,
         totalCount: totalCount,
+        selectedSize: selectedSize,
+        clothColor: clothColor,
       },
     };
     try {
@@ -231,6 +234,7 @@ const DetailPage = () => {
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get("clothId");
     setClothId(id);
+    <ShoppingListPage clothId={clothId} />;
   }, [location]);
 
   // cloth_id에 해당되는 옷 정보 받아오기

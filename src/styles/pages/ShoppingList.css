@@ -1,0 +1,15 @@
+.shopping-page {
+  /* background-color: #f7f7f7; */
+  padding: 20px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.shopping-Logo {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
