@@ -53,6 +53,11 @@ const DetailPage = () => {
     }
   }, [totalCount, clothPrice]);
 
+  useEffect(() => {
+    setMergedFrontImage(clothFrontImage);
+    setMergedBackImage(clothBackImage);
+  }, []);
+
   const handleIncreaseCount = (size) => {
     setSizeCounts((prevCounts) => ({
       ...prevCounts,
