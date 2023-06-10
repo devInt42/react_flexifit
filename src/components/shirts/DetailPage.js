@@ -45,6 +45,7 @@ const DetailPage = () => {
   });
   const [totalCount, setTotalCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [myBagFrontVisible, setMyBagFrontVisible] = useState(true);
 
   useEffect(() => {
     if (totalCount > 0) {
@@ -68,15 +69,28 @@ const DetailPage = () => {
     setTotalCount((prevTotalCount) => prevTotalCount - 1);
   };
 
+  const handleDefaultSize = () => {
+    setSizeCounts((prevCounts) => ({
+      ...prevCounts,
+      [selectedSize]: prevCounts[selectedSize] + 1,
+    }));
+    if (selectedSize) {
+      setTotalCount(1);
+    }
+  };
+
   const getFrontImage = (e) => {
     setMergedFrontImage(e);
-    console.log("앞면");
+  };
+
+  //장바구니 list 담기
+  const saveMyBagList = () => {
+    //axios 로 userSeq, 이름 가격 색상 사이즈 합성된이미지 2개 보내기
   };
 
   //뒷면 넣기
   const getBackImage = (e) => {
     setMergedBackImage(e);
-    console.log("뒷면");
   };
 
   //앞면 전체 RESET
@@ -405,7 +419,6 @@ const DetailPage = () => {
           </div>
         )}
         {mergedBackImage && <div className="newImageSrc4">뒷면</div>}
-
         <div className="shirtBtns">
           <button className="shirtBtn" onClick={handleFrontButtonClick}>
             앞면
@@ -483,7 +496,6 @@ const DetailPage = () => {
             </ul>
           </div>
         )}
-
         {/* 장바구니 팝업 */}
         {showMyBagPopup && (
           <div className="MyBagpopup-container">
@@ -492,11 +504,19 @@ const DetailPage = () => {
             </button>
 
             <div className="left-section">
-              <img
-                src={mergedFrontImage}
-                alt="Front Image"
-                className="front-image"
-              ></img>
+              {myBagFrontVisible ? (
+                <img
+                  src={mergedFrontImage}
+                  alt="front Image"
+                  className="front-image"
+                ></img>
+              ) : (
+                <img
+                  src={mergedBackImage}
+                  alt="Back Image"
+                  className="front-image"
+                ></img>
+              )}
             </div>
             <div className="right-section">
               <div className="mybag-title">수량을 선택해 주세요</div>
@@ -546,20 +566,29 @@ const DetailPage = () => {
                   type="button"
                   className="btn btn-outline-secondary"
                   style={{ width: "150px" }}
+                  onClick={saveMyBagList}
                 >
                   장바구니 담기
                 </button>
-              </div>
+              </div>{" "}
             </div>
+            <button
+              type="button"
+              className="btn btn-dark"
+              style={{ marginLeft: "270px" }}
+              onClick={() => setMyBagFrontVisible(!myBagFrontVisible)}
+            >
+              {myBagFrontVisible ? "뒷면" : "앞면"}
+            </button>
           </div>
         )}
-
         {/* 앞면 클릭시 앞면 캔버스 띄우기 */}
         <canvas
           ref={frontCanvasRef}
           alt="T-shirt"
           style={{ display: frontCanvasVisible ? "block" : "none" }}
         ></canvas>
+
         {/* 뒷면 클릭시 앞면 캔버스 띄우기 */}
         <canvas
           ref={backCanvasRef}
@@ -624,7 +653,10 @@ const DetailPage = () => {
             marginTop: "280px",
             marginRight: "3px",
           }}
-          onClick={toggleMyBagPopup}
+          onClick={() => {
+            toggleMyBagPopup();
+            handleDefaultSize();
+          }}
         >
           장바구니 담기
         </button>

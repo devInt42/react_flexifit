@@ -398,10 +398,8 @@
 .front-image {
   width: 65%;
   float: left;
-  height: 565px;
+  height: 530px;
   object-fit: cover;
-
-  margin-bottom: 10px;
 }
 
 .right-section {
@@ -457,4 +455,8 @@
   position: absolute;
   bottom: 0;
   margin-bottom: 20px;
+}
+
+.footer-Btn {
+  font-size: 15px;
 }

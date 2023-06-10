@@ -173,7 +173,6 @@ const UploadFile = forwardRef((props, ref) => {
 
           const mergedFrontDataURL = frontTempCanvas.toDataURL();
 
-          console.log(mergedFrontDataURL + "A");
           if (props.getFrontImage) {
             props.getFrontImage(mergedFrontDataURL);
           }
@@ -207,7 +206,6 @@ const UploadFile = forwardRef((props, ref) => {
 
           const mergedBackDataURL = backTempCanvas.toDataURL();
 
-          console.log(mergedBackDataURL + "B");
           if (props.getBackImage) {
             props.getBackImage(mergedBackDataURL);
           }
