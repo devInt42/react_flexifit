@@ -39,6 +39,9 @@ const UploadFile = forwardRef((props, ref) => {
     setClothBackImage(props.clothBackImage);
   }, [props.clothBackImage]);
 
+  useEffect(() => {
+    console.log(frontCanvasVisible);
+  }, [frontCanvasVisible]);
   //canvas 앞면 캔버스 초기화
   useEffect(() => {
     const newFrontCanvas = new fabric.Canvas(frontCanvasRef.current, {
@@ -232,29 +235,26 @@ const UploadFile = forwardRef((props, ref) => {
 
   return (
     <div>
-      <div>
-        {frontCanvasVisible && (
-          <>
-            <div frontRef={frontImageContainerRef}>
-              <canvas ref={frontCanvasRef} />
-            </div>
-            <button className="shirtBtn2" onClick={saveCanvasAsImage}>
-              저장
-            </button>
-            <button className="shirtBtn2" onClick={handleFrontFileInputClick}>
-              파일 업로드
-            </button>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFrontFileInputChange}
-              ref={frontFileInputRef}
-              style={{ display: "none" }}
-            />
-          </>
-        )}
-      </div>
-      {!frontCanvasVisible && (
+      {frontCanvasVisible ? (
+        <>
+          <div frontRef={frontImageContainerRef}>
+            <canvas ref={frontCanvasRef} />
+          </div>
+          <button className="shirtBtn2" onClick={saveCanvasAsImage}>
+            저장
+          </button>
+          <button className="shirtBtn2" onClick={handleFrontFileInputClick}>
+            파일 업로드
+          </button>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFrontFileInputChange}
+            ref={frontFileInputRef}
+            style={{ display: "none" }}
+          />
+        </>
+      ) : (
         <>
           <div backRef={backImageContainerRef}>
             <canvas ref={backCanvasRef} />
@@ -277,5 +277,4 @@ const UploadFile = forwardRef((props, ref) => {
     </div>
   );
 });
-
 export default UploadFile;

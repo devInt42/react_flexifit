@@ -367,6 +367,7 @@ const DetailPage = () => {
 
   return (
     <div>
+      {/* height */}
       <div className="cropList" style={{ display: "flex" }}>
         {/* 앞면 */}
         <div style={{ display: frontCanvasVisible ? "block" : "none" }}>
@@ -429,6 +430,7 @@ const DetailPage = () => {
           </div>
         </div>
       </div>
+
       <div className="test222">
         <button className="additional-button" onClick={togglePopup}>
           <RiLightbulbLine size={"25px"} style={{ paddingRight: "10px" }} />
@@ -463,19 +465,21 @@ const DetailPage = () => {
           </button>
         </div>
         <div className="shirtFile">
-          <UploadFile
-            ref={frontUploadFileRef}
-            clothFrontImage={clothFrontImage}
-            getFrontImage={getFrontImage}
-            frontCanvasVisible={frontCanvasVisible}
-          />
-
-          <UploadFile
-            ref={backUploadFileRef}
-            clothBackImage={clothBackImage}
-            getBackImage={getBackImage}
-            backCanvasVisible={backCanvasVisible}
-          />
+          {frontCanvasVisible ? (
+            <UploadFile
+              ref={frontUploadFileRef}
+              clothFrontImage={clothFrontImage}
+              getFrontImage={getFrontImage}
+              frontCanvasVisible={frontCanvasVisible}
+            />
+          ) : (
+            <UploadFile
+              ref={backUploadFileRef}
+              clothBackImage={clothBackImage}
+              getBackImage={getBackImage}
+              backCanvasVisible={backCanvasVisible}
+            />
+          )}
         </div>
         {showPopup && (
           <div className="popup-container">
