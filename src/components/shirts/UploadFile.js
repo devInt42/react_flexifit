@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { fabric } from "fabric";
 import axios from "axios";
+import "../../styles/pages/Tshirt.css";
 
 const UploadFile = forwardRef((props, ref) => {
   const frontCanvasRef = useRef(null);
@@ -39,9 +40,8 @@ const UploadFile = forwardRef((props, ref) => {
     setClothBackImage(props.clothBackImage);
   }, [props.clothBackImage]);
 
-  useEffect(() => {
-    console.log(frontCanvasVisible);
-  }, [frontCanvasVisible]);
+  useEffect(() => {}, [frontCanvasVisible]);
+
   //canvas 앞면 캔버스 초기화
   useEffect(() => {
     const newFrontCanvas = new fabric.Canvas(frontCanvasRef.current, {
@@ -237,15 +237,16 @@ const UploadFile = forwardRef((props, ref) => {
     <div>
       {frontCanvasVisible ? (
         <>
-          <div frontRef={frontImageContainerRef}>
+          <div className="shirtFile" frontRef={frontImageContainerRef}>
             <canvas ref={frontCanvasRef} />
+            <button className="shirtBtn3" onClick={saveCanvasAsImage}>
+              저장
+            </button>
+            <button className="shirtBtn2" onClick={handleFrontFileInputClick}>
+              파일 업로드
+            </button>
           </div>
-          <button className="shirtBtn2" onClick={saveCanvasAsImage}>
-            저장
-          </button>
-          <button className="shirtBtn2" onClick={handleFrontFileInputClick}>
-            파일 업로드
-          </button>
+
           <input
             type="file"
             accept="image/*"
@@ -256,15 +257,16 @@ const UploadFile = forwardRef((props, ref) => {
         </>
       ) : (
         <>
-          <div backRef={backImageContainerRef}>
+          <div className="shirtFile" backRef={backImageContainerRef}>
             <canvas ref={backCanvasRef} />
+            <button className="shirtBtn3" onClick={saveCanvasAsImage}>
+              저장
+            </button>
+            <button className="shirtBtn2" onClick={handleBackFileInputClick}>
+              파일 업로드
+            </button>
           </div>
-          <button className="shirtBtn2" onClick={saveCanvasAsImage}>
-            저장
-          </button>
-          <button className="shirtBtn2" onClick={handleBackFileInputClick}>
-            파일 업로드
-          </button>
+
           <input
             type="file"
             accept="image/*"

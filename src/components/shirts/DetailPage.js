@@ -122,6 +122,9 @@ const DetailPage = () => {
     }
   };
 
+  //넘기기
+  const sendCountBySize = () => {};
+
   //뒷면 넣기
   const getBackImage = (e) => {
     setMergedBackImage(e);
@@ -366,8 +369,7 @@ const DetailPage = () => {
   };
 
   return (
-    <div>
-      {/* height */}
+    <div className="detail-container">
       <div className="cropList" style={{ display: "flex" }}>
         {/* 앞면 */}
         <div style={{ display: frontCanvasVisible ? "block" : "none" }}>
@@ -464,23 +466,23 @@ const DetailPage = () => {
             뒷면
           </button>
         </div>
-        <div className="shirtFile">
-          {frontCanvasVisible ? (
-            <UploadFile
-              ref={frontUploadFileRef}
-              clothFrontImage={clothFrontImage}
-              getFrontImage={getFrontImage}
-              frontCanvasVisible={frontCanvasVisible}
-            />
-          ) : (
-            <UploadFile
-              ref={backUploadFileRef}
-              clothBackImage={clothBackImage}
-              getBackImage={getBackImage}
-              backCanvasVisible={backCanvasVisible}
-            />
-          )}
-        </div>
+
+        {frontCanvasVisible ? (
+          <UploadFile
+            ref={frontUploadFileRef}
+            clothFrontImage={clothFrontImage}
+            getFrontImage={getFrontImage}
+            frontCanvasVisible={frontCanvasVisible}
+          />
+        ) : (
+          <UploadFile
+            ref={backUploadFileRef}
+            clothBackImage={clothBackImage}
+            getBackImage={getBackImage}
+            backCanvasVisible={backCanvasVisible}
+          />
+        )}
+
         {showPopup && (
           <div className="popup-container">
             <button className="popup-close-button" onClick={togglePopup}>
@@ -605,7 +607,10 @@ const DetailPage = () => {
                   type="button"
                   className="btn btn-outline-secondary"
                   style={{ width: "150px" }}
-                  onClick={saveMyBagList}
+                  onClick={() => {
+                    saveMyBagList();
+                    sendCountBySize();
+                  }}
                 >
                   장바구니 담기
                 </button>
