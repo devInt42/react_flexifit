@@ -11,10 +11,6 @@ const ShoppingListPage = (props) => {
   const userSeq = sessionStorage.getItem("userSeq");
 
   useEffect(() => {
-    setClothId(props.clothId);
-  }, [props]);
-
-  useEffect(() => {
     getShoppingList();
     getShopCount();
   }, []);
@@ -54,23 +50,24 @@ const ShoppingListPage = (props) => {
     }
   };
 
-  // const deleteWishList = async (clothId) => {
-  //   const param = {
-  //     data: {
-  //       clothId: clothId,
-  //     },
-  //   };
-  //   try {
-  //     const res = await axios.post(
-  //       "http://localhost:8080/clothes/deleteWishList",
-  //       param
-  //     );
-  //     alert("삭제 되었습니다");
-  //     getWishList();
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const removeShoppingList = async (clothId) => {
+    console.log(clothId);
+    const param = {
+      data: {
+        clothId: clothId,
+      },
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/clothes/deleteShoppingList",
+        param
+      );
+      alert("삭제되었습니다.");
+      getShoppingList();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return Array.from(shoppingList.values()).length === 0 ? (
     <div className="shopping-container">
@@ -120,7 +117,11 @@ const ShoppingListPage = (props) => {
 
             <div className="shop-price">{item.cloth_discount}원</div>
             <div className="shop-btn">
-              <button type="button" class="btn btn-outline-danger">
+              <button
+                type="button"
+                className="btn btn-outline-danger"
+                onClick={() => removeShoppingList(item.cloth_id)}
+              >
                 삭제하기
               </button>
             </div>
@@ -145,7 +146,7 @@ const ShoppingListPage = (props) => {
       </div>
       <button
         type="button"
-        class="btn btn-dark"
+        className="btn btn-dark"
         style={{
           width: "200px",
           display: "flex",
