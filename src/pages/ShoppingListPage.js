@@ -2,6 +2,7 @@ import "../styles/pages/ShoppingList.css";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BsHandbagFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const ShoppingListPage = (props) => {
   const [shoppingList, setShoppingList] = useState([]);
@@ -152,9 +153,15 @@ const ShoppingListPage = (props) => {
           display: "flex",
           justifyContent: "center",
           margin: "0 auto",
+          fontSize: "17px",
         }}
       >
-        주문하기
+        <Link
+          to="/product/shoppingList/checkout"
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          주문하기
+        </Link>
       </button>
     </div>
   );
