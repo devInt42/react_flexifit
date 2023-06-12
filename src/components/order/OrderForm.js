@@ -5,6 +5,7 @@ import DaumPostcode from "react-daum-postcode";
 
 const OrderForm = () => {
   const userSeq = sessionStorage.getItem("userSeq");
+
   const [userEmail, setUserEmail] = useState("");
   const [requestText, setRequestText] = useState("");
   const [orderPersonName, setOrderPersonName] = useState("");
