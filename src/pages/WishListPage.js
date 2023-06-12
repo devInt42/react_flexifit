@@ -55,7 +55,10 @@ const WishListPage = () => {
         <div className="empty-wishlist">
           <div className="empty-content">
             <div className="empty-icon">
-              <BsFillBagHeartFill size={"60px"} />
+              <BsFillBagHeartFill
+                size={"60px"}
+                style={{ marginBottom: "10px" }}
+              />
             </div>
             <div className="empty-title">찜한 상품이 없습니다.</div>
           </div>

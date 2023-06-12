@@ -122,9 +122,6 @@ const DetailPage = () => {
     }
   };
 
-  //넘기기
-  const sendCountBySize = () => {};
-
   //뒷면 넣기
   const getBackImage = (e) => {
     setMergedBackImage(e);
@@ -609,7 +606,6 @@ const DetailPage = () => {
                   style={{ width: "150px" }}
                   onClick={() => {
                     saveMyBagList();
-                    sendCountBySize();
                   }}
                 >
                   장바구니 담기

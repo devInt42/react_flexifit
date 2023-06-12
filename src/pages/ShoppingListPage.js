@@ -1,6 +1,7 @@
 import "../styles/pages/ShoppingList.css";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { BsHandbagFill } from "react-icons/bs";
 
 const ShoppingListPage = (props) => {
   const [shoppingList, setShoppingList] = useState([]);
@@ -71,7 +72,18 @@ const ShoppingListPage = (props) => {
   //   }
   // };
 
-  return (
+  return Array.from(shoppingList.values()).length === 0 ? (
+    <div className="shopping-container">
+      <div className="empty-shoppingList">
+        <div className="empty-shopContent">
+          <div className="empty-shopIcon">
+            <BsHandbagFill size={"60px"} style={{ marginBottom: "10px" }} />
+          </div>
+          <div className="empty-shopTitle">비어있는 장바구니를 채워주세요!</div>
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className="shopping-container">
       <div className="shopping-Logo">관심상품</div>
       <div className="shopping-mini">

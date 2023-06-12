@@ -114,3 +114,32 @@
   align-items: center;
   justify-content: center;
 }
+
+.empty-shoppingList {
+  margin-top: 40px !important;
+  width: 60%;
+  height: 300px;
+  background-color: aliceblue;
+  margin: 0 auto;
+  display: flex;
+}
+
+.empty-shopContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.empty-shopIcon {
+  margin-bottom: 10px;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-shopTitle {
+  font-size: 15px;
+  text-align: center;
+}
