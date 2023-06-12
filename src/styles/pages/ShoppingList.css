@@ -224,3 +224,21 @@
 .order-recipe-content {
   float: right;
 }
+
+.order-Btn {
+  width: 120px;
+  height: 40px;
+  border: 2px solid lightgray;
+  background-color: white;
+  color: black;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+.order-Btn:hover,
+.order-Btn:active,
+.order-Btn:focus {
+  border-color: #0157ff;
+  color: #a4c3ff;
+}

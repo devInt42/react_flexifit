@@ -1,17 +1,78 @@
 import { useState, useEffect } from "react";
 import "../../styles/pages/ShoppingList.css";
 import axios from "axios";
+import DaumPostcode from "react-daum-postcode";
 
 const OrderForm = () => {
+  const userSeq = sessionStorage.getItem("userSeq");
   const [userEmail, setUserEmail] = useState("");
-  const [deliveryType, setDeliveryType] = useState("parcel");
+  const [requestText, setRequestText] = useState("");
   const [orderPersonName, setOrderPersonName] = useState("");
+  const [orderedPhone, setOrderedPhone] = useState("");
+  const [deliveryType, setDeliveryType] = useState("parcel");
   const [isSameAsOrderer, setIsSameAsOrderer] = useState(false);
   const [recipientName, setRecipientName] = useState("");
+  const [recipientPhone1, setRecipientPhone1] = useState("");
+  const [recipientPhone2, setRecipientPhone2] = useState("");
+  //우편검색 api
+  const [postcode, setPostcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [detailAddress, setDetailAddress] = useState("");
+  const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
+  const [deliveredMemo, setDeliveredMemo] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [totalPrice, setTotalPrice] = useState();
   const [totalCount, setTotalCount] = useState();
-  const userSeq = sessionStorage.getItem("userSeq");
-  //우편검색 api
+
+  const checkMethod = () => {
+    const requiredValues = [
+      orderPersonName,
+      orderedPhone,
+      userEmail,
+      deliveryType,
+      recipientName,
+      recipientPhone1,
+      postcode,
+      address,
+      detailAddress,
+      deliveryType,
+      paymentMethod,
+    ];
+
+    const hasEmptyValue = requiredValues.some((value) => value === "");
+
+    if (hasEmptyValue) {
+      alert("필수값을 모두 입력해주세요");
+    } else {
+      //결제 api
+      alert("결제 api");
+    }
+  };
+
+  //우편 api
+  const handlePostcodeComplete = (data) => {
+    const {
+      zonecode,
+      address,
+      addressType,
+      userSelectedType,
+      bname,
+      buildingName,
+    } = data;
+
+    let fullAddress = address;
+    if (addressType === "R") {
+      if (userSelectedType === "J") {
+        fullAddress += bname;
+      } else {
+        fullAddress += buildingName !== "" ? `, ${buildingName}` : "";
+      }
+    }
+    setPostcode(zonecode);
+    setAddress(fullAddress);
+    setDetailAddress("");
+    setIsPostcodeOpen(false);
+  };
 
   useEffect(() => {
     setUserEmail(sessionStorage.getItem("userId"));
@@ -60,10 +121,6 @@ const OrderForm = () => {
     setDeliveryType(e.target.value);
   };
 
-  const handleNameChange = (e) => {
-    setOrderPersonName(e.target.value);
-  };
-
   const handleSameAsOrdererChange = () => {
     if (!isSameAsOrderer) {
       setRecipientName(orderPersonName);
@@ -73,18 +130,16 @@ const OrderForm = () => {
     setIsSameAsOrderer(!isSameAsOrderer);
   };
 
-  const handleRecipientChange = (e) => {
-    setRecipientName(e.target.value);
+  const handleMemoChange = (e) => {
+    setDeliveredMemo(e.target.value);
   };
 
-  const handlePostalCodeSearch = async () => {
-    // try {
-    //   const response = await fetch(`API_URL/${postalCode}`); // Replace API_URL with the actual API endpoint for postal code search
-    //   const data = await response.json();
-    //   setAddress(data.address); // Update the address based on the selected postal code
-    // } catch (error) {
-    //   console.error("Error fetching postal code data:", error);
-    // }
+  const handleButtonClick = () => {
+    if (paymentMethod === "card") {
+      setPaymentMethod("");
+    } else {
+      setPaymentMethod("card");
+    }
   };
 
   return (
@@ -96,15 +151,17 @@ const OrderForm = () => {
       </div>
       <div className="order-container">
         <div className="order-content">
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="exampleFormControlTextarea1" className="form-label">
               <div className="order-title">제작 요청사항</div>
             </label>
             <textarea
-              class="form-control"
+              className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="상품 제작 요청사항이 있으면 작성해주세요."
+              value={requestText}
+              onChange={(e) => setRequestText(e.target.value)}
             ></textarea>
             <div className="order-miniContent">
               디자인에 따라 가능 여부가 달라지며 추가 비용이 발생합니다.
@@ -113,42 +170,45 @@ const OrderForm = () => {
         </div>
       </div>{" "}
       <div className="order-container">
-        <div class="my-custom-class">
+        <div className="my-custom-class">
           <div className="order-title" style={{ marginBottom: "20px" }}>
             주문자 정보
           </div>
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3" style={{ padding: "5px" }}>
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               이름
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="exampleFormControlInput1"
               value={orderPersonName}
-              onChange={handleNameChange}
+              onChange={(e) => setOrderPersonName(e.target.value)}
             ></input>
           </div>
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3" style={{ padding: "5px" }}>
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               연락처
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="exampleFormControlInput1"
               placeholder="- 없이 01000000000 "
+              value={orderedPhone}
+              onChange={(e) => setOrderedPhone(e.target.value)}
             ></input>
           </div>
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3" style={{ padding: "5px" }}>
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               이메일
             </label>
             <input
               type="email"
-              class="form-control"
+              className="form-control"
               id="exampleFormControlInput1"
               value={userEmail}
+              readOnly
             ></input>
             <div className="order-miniContent">
               위 이메일로 주문 내역 메일이 전송됩니다.
@@ -276,95 +336,123 @@ const OrderForm = () => {
       </div>
       <div className="order-container">
         <div className="order-title">배송지 정보</div>
-        <div class="form-check">
+        <div className="form-check">
           <input
-            class="form-check-input"
+            className="form-check-input"
             type="checkbox"
             value=""
             id="flexCheckDefault"
             checked={isSameAsOrderer}
             onChange={handleSameAsOrdererChange}
           ></input>
-          <label class="form-check-label" for="flexCheckDefault">
+          <label className="form-check-label" htmlFor="flexCheckDefault">
             주문자와 동일
           </label>
         </div>
         <hr />
-        <div class="my-custom-class">
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <label for="exampleFormControlInput1" class="form-label">
+        <div className="my-custom-class">
+          <div className="mb-3" style={{ padding: "5px" }}>
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               수령인
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="exampleFormControlInput1"
               value={recipientName}
-              onChange={handleRecipientChange}
+              onChange={(e) => setRecipientName(e.target.value)}
             ></input>
           </div>
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3" style={{ padding: "5px" }}>
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               연락처1
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="exampleFormControlInput1"
+              value={recipientPhone1}
+              onChange={(e) => setRecipientPhone1(e.target.value)}
             ></input>
           </div>
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3" style={{ padding: "5px" }}>
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               연락처2
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="exampleFormControlInput1"
+              value={recipientPhone2}
+              onChange={(e) => setRecipientPhone2(e.target.value)}
             ></input>
           </div>
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3" style={{ padding: "5px" }}>
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               배송지
             </label>
-            <div style={{ display: "flex", alignItems: "center" }}>
+
+            <div className="mb-3" style={{ padding: "5px" }}>
               <input
                 type="text"
-                class="form-control"
-                id="exampleFormControlInput1"
+                className="form-control"
+                id="postcode"
+                value={postcode}
                 placeholder="우편번호"
-                style={{ width: "70%" }}
+                onChange={(e) => setPostcode(e.target.value)}
+                style={{ width: "50%", float: "left" }}
               ></input>
+
               <button
-                onClick={handlePostalCodeSearch}
-                style={{ marginLeft: "10px" }}
+                className="btn btn-outline-primary"
+                onClick={() => setIsPostcodeOpen(true)}
+                style={{ marginLeft: "10px", width: "140px" }}
               >
-                우편번호 검색
+                우편번호 찾기
               </button>
             </div>
+
+            <div className="mb-3" style={{ padding: "5px" }}>
+              <input
+                type="text"
+                className="form-control"
+                id="address"
+                value={address}
+                placeholder="주소"
+                onChange={(e) => setAddress(e.target.value)}
+              ></input>
+            </div>
+
+            <div className="mb-3" style={{ padding: "5px" }}>
+              <input
+                type="text"
+                className="form-control"
+                id="detailAddress"
+                value={detailAddress}
+                placeholder="상세주소"
+                onChange={(e) => setDetailAddress(e.target.value)}
+              />
+            </div>
+
+            {isPostcodeOpen && (
+              <DaumPostcode
+                onComplete={handlePostcodeComplete}
+                autoClose
+                animation
+              />
+            )}
           </div>
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <input
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput1"
-              placeholder="주소"
-            ></input>
-          </div>
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <input
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput1"
-              placeholder="상세 주소를 입력하세요"
-            ></input>{" "}
-          </div>
-          <div class="mb-3" style={{ padding: "5px" }}>
-            <label for="exampleFormControlInput1" class="form-label">
+          <div className="mb-3" style={{ padding: "5px" }}>
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               배송 메모
             </label>
-            <select class="form-select" aria-label="Default select example">
-              <option selected>배송 메모를 선택해주세요</option>
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              value={deliveredMemo}
+              onChange={handleMemoChange}
+            >
+              <option value="">배송 메모를 선택해주세요</option>
               <option value="1">배송전에 미리 연락 부탁드립니다.</option>
               <option value="2">부재시 경비실에 맡겨주세요.</option>
               <option value="3">부재시 전화하시거나 문자 남겨주세요.</option>
@@ -375,7 +463,7 @@ const OrderForm = () => {
       <div className="order-container">
         <div className="order-title">총 결제금액 </div>
 
-        <div class="mb-3" style={{ padding: "7px" }}>
+        <div className="mb-3" style={{ padding: "7px" }}>
           <div className="order-recipe-title">
             총 수량
             <span className="order-recipe-content">{totalCount}개</span>
@@ -393,6 +481,21 @@ const OrderForm = () => {
           </div>
         </div>
       </div>
+      <div className="order-container">
+        <div className="order-title">결제 방법 선택 </div>
+
+        <button className="order-Btn" onClick={handleButtonClick}>
+          신용카드
+        </button>
+      </div>
+      <button
+        type="button"
+        className="btn btn-dark"
+        style={{ width: "100%", marginTop: "13px" }}
+        onClick={checkMethod}
+      >
+        결제하기
+      </button>
     </div>
   );
 };
