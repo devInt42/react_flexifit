@@ -333,6 +333,19 @@
   margin-left: 20px;
 }
 
+.deliver-cost {
+  margin-top: 30px;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.deliver-cost2 {
+  margin-top: 5px;
+  font-size: 15px;
+  margin-left: 20px;
+  color: gray;
+}
+
 .text-color {
   font-size: 15px;
   color: gray;

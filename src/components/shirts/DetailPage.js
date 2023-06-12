@@ -671,13 +671,15 @@ const DetailPage = () => {
             </button>
           ))}
         </div>
+        <div className="deliver-cost">배송비</div>
+        <div className="deliver-cost2">3000원</div>
         <button
           type="button"
           className="btn btn-dark"
           style={{
             width: "200px",
             height: "50px",
-            marginTop: "280px",
+            marginTop: "180px",
             marginLeft: "20px",
             marginRight: "3px",
           }}
@@ -690,7 +692,7 @@ const DetailPage = () => {
           style={{
             width: "130px",
             height: "50px",
-            marginTop: "280px",
+            marginTop: "180px",
             marginRight: "3px",
           }}
           onClick={() => {
@@ -703,7 +705,7 @@ const DetailPage = () => {
         <button
           type="button"
           className="btn btn-outline-secondary"
-          style={{ width: "130px", height: "50px", marginTop: "280px" }}
+          style={{ width: "130px", height: "50px", marginTop: "180px" }}
           onClick={handleClick}
         >
           찜하기
