@@ -242,3 +242,39 @@
   border-color: #0157ff;
   color: #a4c3ff;
 }
+
+.orderComplete-title {
+  font-size: 30px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.payment-container {
+  width: 100%;
+  background-color: aliceblue;
+  height: 300px;
+}
+
+.payment-title {
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: center;
+  padding-top: 95px;
+}
+
+.payment-button {
+  background-color: skyblue; /* 주황색 배경색 */
+  color: white; /* 흰색 글자색 */
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-left: 300px;
+  margin-top: 45px;
+}
+
+/* 버튼에 호버 효과를 추가할 경우 */
+.payment-button:hover {
+  opacity: 0.8; /* 호버 시 투명도 조절 */
+  cursor: pointer;
+}

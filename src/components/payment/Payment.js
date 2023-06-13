@@ -30,6 +30,22 @@ const Payment = ({
     const merchantKey = "imp88784171"; // 가맹점 식별키(Merchant Key)로 대체해야 함
     IMP.init(merchantKey);
 
+    const requiredValues = [
+      totalPrice,
+      recipientName,
+      recipientPhone1,
+      address,
+      detailAddress,
+      postcode,
+    ];
+
+    const hasEmptyValue = requiredValues.some((value) => value === "");
+
+    if (hasEmptyValue) {
+      alert("필수값을 모두 입력해주세요");
+      return;
+    }
+
     const data = {
       pg: "html5_inicis", // 결제할 PG사
       pay_method: "card", // 결제 수단
@@ -47,6 +63,7 @@ const Payment = ({
 
   const callback = (response) => {
     const { success, error_msg } = response;
+
     if (success) {
       alert("결제 성공");
       navigate("/product/shoppingList/completeOrder");

@@ -26,31 +26,6 @@ const OrderForm = () => {
   const [totalPrice, setTotalPrice] = useState();
   const [totalCount, setTotalCount] = useState();
 
-  const checkMethod = () => {
-    const requiredValues = [
-      orderPersonName,
-      orderedPhone,
-      userEmail,
-      deliveryType,
-      recipientName,
-      recipientPhone1,
-      postcode,
-      address,
-      detailAddress,
-      deliveryType,
-      paymentMethod,
-    ];
-
-    const hasEmptyValue = requiredValues.some((value) => value === "");
-
-    if (hasEmptyValue) {
-      alert("필수값을 모두 입력해주세요");
-    } else {
-      //결제 api
-      alert("결제 api");
-    }
-  };
-
   //우편 api
   const handlePostcodeComplete = (data) => {
     const {
