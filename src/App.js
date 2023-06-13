@@ -24,6 +24,7 @@ import DetailPage from "./components/shirts/DetailPage";
 import WishListPage from "./pages/WishListPage";
 import ShoppingListPage from "./pages/ShoppingListPage";
 import OrderForm from "./components/order/OrderForm";
+import CompleteOrder from "./components/order/CompleteOrder";
 
 function App() {
   return (
@@ -56,6 +57,10 @@ function App() {
           <Route
             path="/product/shoppingList/checkout"
             element={<OrderForm />}
+          />
+          <Route
+            path="/product/shoppingList/completeOrder"
+            element={<CompleteOrder />}
           />
         </Routes>
       </div>

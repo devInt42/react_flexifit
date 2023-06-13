@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../../styles/pages/ShoppingList.css";
 import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
+import Payment from "../payment/Payment";
 
 const OrderForm = () => {
   const userSeq = sessionStorage.getItem("userSeq");
@@ -489,14 +490,14 @@ const OrderForm = () => {
           신용카드
         </button>
       </div>
-      <button
-        type="button"
-        className="btn btn-dark"
-        style={{ width: "100%", marginTop: "13px" }}
-        onClick={checkMethod}
-      >
-        결제하기
-      </button>
+      <Payment
+        totalPrice={totalPrice}
+        recipientName={recipientName}
+        recipientPhone1={recipientPhone1}
+        detailAddress={detailAddress}
+        address={address}
+        postcode={postcode}
+      />
     </div>
   );
 };
