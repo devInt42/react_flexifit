@@ -27,12 +27,14 @@ const ShoppingListPage = (props) => {
         "http://localhost:8080/clothes/getShoppingList",
         param
       );
-      setShoppingList(res.data.resultData);
-      // cloth_discount 값들을 합산하여 totalPrice 계산
-      const totalPrice = res.data.resultData.reduce(
-        (accumulator, currentItem) => accumulator + currentItem.cloth_discount,
-        0
-      );
+      const shoppingList = res.data.resultData;
+      setShoppingList(shoppingList);
+
+      let totalPrice = 0;
+      shoppingList.forEach((item) => {
+        const subtotal = item.cloth_totalCount * item.cloth_discount;
+        totalPrice += subtotal;
+      });
       setTotalPrice(totalPrice);
     } catch (err) {
       console.error(err);

@@ -7,6 +7,7 @@ import Payment from "../payment/Payment";
 const OrderForm = () => {
   const userSeq = sessionStorage.getItem("userSeq");
 
+  const [shoppingList, setShoppingList] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [requestText, setRequestText] = useState("");
   const [orderPersonName, setOrderPersonName] = useState("");
@@ -71,11 +72,14 @@ const OrderForm = () => {
         "http://localhost:8080/clothes/getShoppingList",
         param
       );
-      // cloth_discount 값들을 합산하여 totalPrice 계산
-      const totalPrice = res.data.resultData.reduce(
-        (accumulator, currentItem) => accumulator + currentItem.cloth_discount,
-        0
-      );
+      const shoppingList = res.data.resultData;
+      setShoppingList(shoppingList);
+
+      let totalPrice = 0;
+      shoppingList.forEach((item) => {
+        const subtotal = item.cloth_totalCount * item.cloth_discount;
+        totalPrice += subtotal;
+      });
       setTotalPrice(totalPrice);
     } catch (err) {
       console.error(err);
@@ -454,7 +458,7 @@ const OrderForm = () => {
           </div>
           <div className="order-recipe-title2">
             최종 결제 금액
-            <span className="order-recipe-content">{totalPrice + 3000}원</span>
+            <span className="order-recipe-content">{totalPrice + 0}원</span>
           </div>
         </div>
       </div>
@@ -466,9 +470,16 @@ const OrderForm = () => {
         </button>
       </div>
       <Payment
-        totalPrice={totalPrice}
+        userSeq={userSeq}
+        orderPersonName={orderPersonName}
+        orderedPhone={orderedPhone}
+        deliveryType={deliveryType}
         recipientName={recipientName}
         recipientPhone1={recipientPhone1}
+        recipientPhone2={recipientPhone2}
+        totalPrice={totalPrice}
+        totalCount={totalCount}
+        deliveredMemo={deliveredMemo}
         detailAddress={detailAddress}
         address={address}
         postcode={postcode}

@@ -1,11 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Payment = ({
-  totalPrice,
+  userSeq,
+  orderPersonName,
+  orderedPhone,
+  deliveryType,
   recipientName,
   recipientPhone1,
+  recipientPhone2,
+  totalPrice,
+  totalCount,
+  deliveredMemo,
   detailAddress,
   address,
   postcode,
@@ -61,11 +69,38 @@ const Payment = ({
     IMP.request_pay(data, callback);
   };
 
+  const sendOrderData = async () => {
+    const param = {
+      data: {
+        userSeq: userSeq,
+        orderPersonName: orderPersonName,
+        orderedPhone: orderedPhone,
+        deliveryType: deliveryType,
+        recipientName: recipientName,
+        recipientPhone1: recipientPhone1,
+        recipientPhone2: recipientPhone2,
+        totalPrice: totalPrice,
+        totalCount: totalCount,
+        deliveredMemo: deliveredMemo,
+        detailAddress: detailAddress,
+        address: address,
+        postcode: postcode,
+      },
+    };
+    try {
+      const res = await axios.post("http://localhost:8080/order/insert", param);
+      console.log("성공");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const callback = (response) => {
     const { success, error_msg } = response;
 
     if (success) {
       alert("결제 성공");
+      sendOrderData();
       navigate("/product/shoppingList/completeOrder");
     } else {
       alert(`결제 실패 : ${error_msg}`);
