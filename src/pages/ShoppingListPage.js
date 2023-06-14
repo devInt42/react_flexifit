@@ -3,10 +3,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BsHandbagFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Payment from "../components/payment/Payment";
 
 const ShoppingListPage = (props) => {
   const [shoppingList, setShoppingList] = useState([]);
-  const [clothId, setClothId] = useState();
+  const [clothIds, setClothIds] = useState(); //구매하기 누를시 이동
   const [totalPrice, setTotalPrice] = useState();
   const [totalCount, setTotalCount] = useState();
   const userSeq = sessionStorage.getItem("userSeq");
@@ -36,6 +37,9 @@ const ShoppingListPage = (props) => {
         totalPrice += subtotal;
       });
       setTotalPrice(totalPrice);
+
+      const clothIds = shoppingList.map((item) => item.cloth_id);
+      setClothIds(clothIds);
     } catch (err) {
       console.error(err);
     }
@@ -85,7 +89,7 @@ const ShoppingListPage = (props) => {
     </div>
   ) : (
     <div className="shopping-container">
-      <div className="shopping-Logo">관심상품</div>
+      <div className="shopping-Logo">장바구니</div>
       <div className="shopping-mini">
         <span style={{ fontWeight: "bolder" }}>장바구니</span> &gt; 주문서작성
         &gt; 주문완료

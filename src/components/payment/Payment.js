@@ -69,7 +69,7 @@ const Payment = ({
     IMP.request_pay(data, callback);
   };
 
-  const sendOrderData = async () => {
+  const sendOrderInfoData = async () => {
     const param = {
       data: {
         userSeq: userSeq,
@@ -100,7 +100,7 @@ const Payment = ({
 
     if (success) {
       alert("결제 성공");
-      sendOrderData();
+      sendOrderInfoData();
       navigate("/product/shoppingList/completeOrder");
     } else {
       alert(`결제 실패 : ${error_msg}`);
