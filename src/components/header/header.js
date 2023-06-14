@@ -76,25 +76,27 @@ const Header = () => {
         <NavigationLink to="/qna">QNA</NavigationLink>
       </div>
       <div className="header-top">
-        <h1
-          style={{
-            fontFamily: "Ubuntu Bold",
-            float: "left",
-            marginRight: "80px",
-          }}
-        >
-          <Link
-            to="/"
+        <div style={{ fontSize: "1.5rem" }}>
+          <h1
             style={{
-              paddingRight: "30px",
-              textDecoration: "none",
-              color: "black",
-              fontSize: "35px",
+              fontFamily: "Ubuntu Bold",
+              float: "left",
+              marginRight: "80px",
             }}
           >
-            F L E X I F I T
-          </Link>
-        </h1>
+            <Link
+              to="/"
+              style={{
+                paddingRight: "30px",
+                textDecoration: "none",
+                color: "black",
+                fontSize: "35px",
+              }}
+            >
+              F L E X I F I T
+            </Link>
+          </h1>
+        </div>
         <span
           className={`header-category ${
             selectCategory === "shirts" ? "selected" : ""
