@@ -162,7 +162,7 @@ const ShoppingListPage = (props) => {
           to="/product/shoppingList/checkout"
           style={{ textDecoration: "none", color: "white" }}
         >
-          주문하기
+          주문서 작성
         </Link>
       </button>
     </div>

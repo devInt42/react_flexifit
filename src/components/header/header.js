@@ -210,7 +210,14 @@ const Header = () => {
                   <br />
                   <span className="gray-line">구매내역</span>
                   <br />
-                  <span className="gray-line">나의 리뷰</span>
+                  <span className="gray-line">
+                    <Link
+                      to="/login/MyPage/review"
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      나의 리뷰
+                    </Link>
+                  </span>
                   <br />
                   <span className="gray-line">
                     <Link

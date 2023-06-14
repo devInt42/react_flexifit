@@ -2,7 +2,6 @@ import "../styles/pages/Header.css";
 import Banner from "../components/banner/banner";
 import "../styles/pages/Main.css";
 import clothes from "../images/clothes.png";
-import Review from "../components/main/Review";
 
 const MainPage = () => {
   return (
@@ -21,7 +20,7 @@ const MainPage = () => {
         <div className="imageContainer">outer</div>
         <div className="imageContainer">pants</div>
         <div className="clearFloat"></div>
-        <Review />
+        {/* 리뷰 컴포넌트 - 전체 다뜨는 axios */}
       </div>
     </div>
   );

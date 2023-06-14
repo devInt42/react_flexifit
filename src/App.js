@@ -25,6 +25,7 @@ import WishListPage from "./pages/WishListPage";
 import ShoppingListPage from "./pages/ShoppingListPage";
 import OrderForm from "./components/order/OrderForm";
 import CompleteOrder from "./components/order/CompleteOrder";
+import ReviewPage from "./pages/ReviewPage";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login/MyPage" element={<MyPage />} />
+          <Route path="/login/MyPage/review" element={<ReviewPage />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/faq/write" element={<FAQWriteForm />} />
           <Route path="/qna" element={<QNA />} />

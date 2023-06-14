@@ -87,9 +87,9 @@ const Payment = ({
         postcode: postcode,
       },
     };
+    //INSERT
     try {
       const res = await axios.post("http://localhost:8080/order/insert", param);
-      console.log("성공");
     } catch (err) {
       console.error(err);
     }
