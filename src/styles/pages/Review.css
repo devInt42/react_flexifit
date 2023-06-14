@@ -18,20 +18,37 @@
   margin-bottom: 15px;
 }
 
-.review-date,
-.review-image,
-.review-info,
-.review-count,
+.review-date {
+  display: inline-block;
+  width: 13%;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.review-image {
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.review-info {
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  font-weight: bolder;
+}
+
 .review-price {
   display: inline-block;
-  width: 16%;
+  width: 20%;
   text-align: center;
   font-weight: bolder;
 }
 
 .review-status {
   display: inline-block;
-  width: 16%;
+  width: 20%;
   text-align: center;
   font-weight: bolder;
 }
@@ -40,4 +57,86 @@
   border: 2px solid lightgray !important;
   border-top-color: black !important;
   padding: 10px;
+}
+
+.review-cloth-date {
+  width: 15%;
+  float: left;
+  margin-top: 20px;
+  font-size: 13px;
+  color: gray;
+  text-align: center;
+  padding: 50px;
+}
+
+.review-cloth-image {
+  width: 17%;
+
+  float: left;
+  margin-top: 5px;
+}
+
+.border-line {
+  border-bottom: 2px solid lightgray;
+}
+
+.review-cloth-defaultImage {
+  max-width: 65%;
+  max-height: 100%;
+  margin-left: 35px;
+  margin-top: 5px;
+}
+
+.review-cloth-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.review-cloth-color {
+  color: gray;
+  font-size: 14px;
+  padding-top: 5px;
+}
+
+.review-cloth-discount {
+  width: 15%;
+  float: left;
+  margin-top: 30px;
+  font-size: 13px;
+  /* text-align: center; */
+  padding: 40px;
+}
+
+.review-cloth-deliver {
+  width: 15%;
+  float: left;
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+  padding: 40px;
+  margin-bottom: 18px;
+  color: rgb(53, 182, 233);
+}
+
+.review-titleContainer {
+  display: flex;
+}
+
+.review-cloth-info {
+  width: 33%;
+  float: left;
+  margin-top: 1px;
+  padding: 45px;
+}
+
+.review-item {
+  clear: both;
+  margin-bottom: 20px;
+}
+
+.small-button {
+  font-size: 8px !important;
+  padding: 5px 10px;
+  margin-left: 4px;
 }
