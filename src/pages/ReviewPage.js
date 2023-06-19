@@ -70,7 +70,7 @@ const ReviewPage = () => {
                   <Link to={`/my/review?cloth_id=${review.cloth_id}`}>
                     <button
                       type="button"
-                      class="btn btn-dark small-button"
+                      className="btn btn-dark small-button"
                       style={{ marginTop: "10px", width: "75px" }}
                     >
                       구매후기

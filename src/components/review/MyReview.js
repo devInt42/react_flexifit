@@ -38,7 +38,7 @@ const MyReview = () => {
         );
 
         alert("리뷰 등록이 완료되었습니다.");
-        navigate("/login/MyPage/review");
+        navigate("/login/MyPage");
       } catch (err) {
         console.error(err);
       }
@@ -61,7 +61,6 @@ const MyReview = () => {
       );
 
       if (checkRes.data.resultData && checkRes.data.resultData.length > 0) {
-        console.log(checkRes.data.resultData);
         alert("이미 작성된 리뷰입니다.");
         navigate("/login/MyPage/review");
         setDoubleCheck(checkRes.data.resultData);
