@@ -21,7 +21,7 @@ const Footer = () => {
         </div>
         <div>
           <h4>HELP</h4>
-          <p>문의하기</p>
+
           <p className="footer-link" onClick={scrollToTop}>
             <Link to="/qna" style={{ color: "gray", textDecoration: "none" }}>
               Q&A

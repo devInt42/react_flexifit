@@ -208,8 +208,6 @@ const Header = () => {
                 <span className="menu-item">
                   <span className="menu-email">{userId}</span>
                   <br />
-                  <span className="gray-line">구매내역</span>
-                  <br />
                   <span className="gray-line">
                     <Link
                       to="/login/MyPage/review"
