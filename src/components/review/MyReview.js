@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const MyReview = () => {
   const [reviewId, setReviewId] = useState("");
@@ -8,15 +9,34 @@ const MyReview = () => {
   const [selectedSize, setSelectedSize] = useState(""); // 선택된 사이즈를 저장하는 변수
   const [userReview, setUserReview] = useState("");
   const userSeq = sessionStorage.getItem("userSeq");
+  const navigate = useNavigate();
 
-  const saveReviewInfo = () => {
+  const saveReviewInfo = async () => {
     if (selectedRating === 0 || selectedSize === "" || userReview === "") {
       alert("모든 필드를 작성해주세요.");
       return;
     }
-    // 데이터 insert axios 코드 작성
-    //성공시 값 reset
+    const param = {
+      data: {
+        userSeq: userSeq,
+        reviewId: reviewId,
+        selectedRating: selectedRating,
+        selectedSize: selectedSize,
+        userReview: userReview,
+      },
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/review/insert",
+        param
+      );
+      alert("리뷰 등록이 완료되었습니다.");
+      navigate("/login/MyPage/review");
+    } catch (err) {
+      console.error(err);
+    }
   };
+
   //param에 review_id값 받아오기
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
