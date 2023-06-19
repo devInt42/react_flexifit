@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/pages/Review.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ReviewPage = () => {
   const userSeq = sessionStorage.getItem("userSeq");
@@ -22,7 +23,6 @@ const ReviewPage = () => {
         param
       );
       setMyReview(res.data.resultData);
-      console.log(res.data.resultData);
     } catch (err) {
       console.error(err);
     }
@@ -67,13 +67,15 @@ const ReviewPage = () => {
               <div className="review-cloth-deliver">
                 배송완료
                 <div className="review-cloth-button">
-                  <button
-                    type="button"
-                    class="btn btn-dark small-button"
-                    style={{ marginTop: "10px", width: "75px" }}
-                  >
-                    구매후기
-                  </button>
+                  <Link to={`/my/review?cloth_id=${review.cloth_id}`}>
+                    <button
+                      type="button"
+                      class="btn btn-dark small-button"
+                      style={{ marginTop: "10px", width: "75px" }}
+                    >
+                      구매후기
+                    </button>
+                  </Link>
                 </div>
               </div>
               <div className="border-line" />

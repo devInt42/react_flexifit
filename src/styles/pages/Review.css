@@ -71,9 +71,13 @@
 
 .review-cloth-image {
   width: 17%;
-
   float: left;
   margin-top: 5px;
+}
+
+.review-cloth-image2 {
+  width: 20%;
+  float: left;
 }
 
 .border-line {
@@ -87,16 +91,41 @@
   margin-top: 5px;
 }
 
+.review-cloth-defaultImage2 {
+  max-width: 100%;
+  max-height: 100%;
+  padding-left: 10px;
+}
+
 .review-cloth-name {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
+.review-cloth-name2 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
 .review-cloth-color {
   color: gray;
   font-size: 14px;
   padding-top: 5px;
+}
+
+.review-cloth-color2 {
+  color: gray;
+  font-size: 10px;
+  padding-top: 5px;
+  margin-left: 2px;
+}
+
+.review-cloth-hrLine {
+  border: none;
+  border-top: 6px solid lightgray;
+  margin: 20px 0;
 }
 
 .review-cloth-discount {
@@ -130,6 +159,13 @@
   padding: 45px;
 }
 
+.review-cloth-info2 {
+  width: 50%;
+  float: left;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
 .review-item {
   clear: both;
   margin-bottom: 20px;
@@ -139,4 +175,74 @@
   font-size: 8px !important;
   padding: 5px 10px;
   margin-left: 4px;
+}
+
+.review-title {
+  background-color: #7284a3;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 20px;
+  padding: 15px;
+  color: white;
+}
+
+.review-user {
+  text-align: center;
+
+  font-weight: bolder;
+  font-size: 17px;
+}
+
+.review-rating {
+  display: flex;
+  justify-content: center;
+}
+
+.review-rating .star {
+  font-size: 40px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.review-rating .star.filled {
+  color: yellow;
+}
+
+.review-rating-text {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 12px;
+  color: gray;
+}
+
+.review-rating .circle {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 30px;
+  margin-right: 10px;
+}
+
+.review-rating .circle.selected {
+  background-color: #ccc;
+}
+
+.review-rating-circle2 {
+  text-align: center;
+  font-size: 12px;
+  color: gray;
+}
+
+.review-rating-circle3 {
+  padding-right: 20px;
+}
+
+.review-rating-circle4 {
+  padding-right: 7px;
 }
