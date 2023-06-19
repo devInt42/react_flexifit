@@ -23,10 +23,14 @@ const Footer = () => {
           <h4>HELP</h4>
           <p>문의하기</p>
           <p className="footer-link" onClick={scrollToTop}>
-            <Link to="/qna">Q&A</Link>
+            <Link to="/qna" style={{ color: "gray", textDecoration: "none" }}>
+              Q&A
+            </Link>
           </p>
           <p className="footer-link" onClick={scrollToTop}>
-            <Link to="/faq">FAQ</Link>
+            <Link to="/faq" style={{ color: "gray", textDecoration: "none" }}>
+              FAQ
+            </Link>
           </p>
         </div>
         <div>
