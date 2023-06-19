@@ -8,30 +8,65 @@ const MyReview = () => {
   const [selectedRating, setSelectedRating] = useState(0); // 선택된 점수를 저장하는 변수
   const [selectedSize, setSelectedSize] = useState(""); // 선택된 사이즈를 저장하는 변수
   const [userReview, setUserReview] = useState("");
+  const [doubleCheck, setDoubleCheck] = useState("");
   const userSeq = sessionStorage.getItem("userSeq");
+
   const navigate = useNavigate();
 
+  // 리뷰 insert
   const saveReviewInfo = async () => {
     if (selectedRating === 0 || selectedSize === "" || userReview === "") {
       alert("모든 필드를 작성해주세요.");
       return;
     }
-    const param = {
-      data: {
-        userSeq: userSeq,
-        reviewId: reviewId,
-        selectedRating: selectedRating,
-        selectedSize: selectedSize,
-        userReview: userReview,
-      },
-    };
+
+    if (doubleCheck !== null) {
+      try {
+        const param = {
+          data: {
+            userSeq: userSeq,
+            reviewId: reviewId,
+            selectedRating: selectedRating,
+            selectedSize: selectedSize,
+            userReview: userReview,
+          },
+        };
+
+        const res = await axios.post(
+          "http://localhost:8080/review/insert",
+          param
+        );
+
+        alert("리뷰 등록이 완료되었습니다.");
+        navigate("/login/MyPage/review");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
+
+  //리뷰 중복체크
+  const doubleCheckReview = async () => {
     try {
-      const res = await axios.post(
-        "http://localhost:8080/review/insert",
-        param
+      const checkParam = {
+        data: {
+          reviewId: reviewId,
+          userSeq: userSeq,
+        },
+      };
+
+      const checkRes = await axios.post(
+        "http://localhost:8080/review/checkExistingReview",
+        checkParam
       );
-      alert("리뷰 등록이 완료되었습니다.");
-      navigate("/login/MyPage/review");
+
+      if (checkRes.data.resultData && checkRes.data.resultData.length > 0) {
+        console.log(checkRes.data.resultData);
+        alert("이미 작성된 리뷰입니다.");
+        navigate("/login/MyPage/review");
+        setDoubleCheck(checkRes.data.resultData);
+        return;
+      }
     } catch (err) {
       console.error(err);
     }
@@ -46,6 +81,10 @@ const MyReview = () => {
 
   useEffect(() => {
     getReviewById();
+  }, [reviewId]);
+
+  useEffect(() => {
+    doubleCheckReview();
   }, [reviewId]);
 
   const getReviewById = async () => {
