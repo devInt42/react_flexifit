@@ -141,7 +141,7 @@ const MyReview = () => {
       </div>
       {reviewById.length > 0 && <div className="review-cloth-hrLine"></div>}
       <div className=" review-user">상품은 만족하셨나요?</div>
-      <div className="review-rating">
+      <div className="review-rating-star">
         {[...Array(5)].map((_, index) => {
           const ratingValue = index + 1;
           return (
