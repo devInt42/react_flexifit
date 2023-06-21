@@ -140,7 +140,7 @@ const MyReview = () => {
             </div>
           ))
         ) : (
-          <div> 작성 가능한 리뷰가 없습니다. </div>
+          <div> </div>
         )}
       </div>
       {reviewById.length > 0 && <div className="review-cloth-hrLine"></div>}
@@ -161,7 +161,6 @@ const MyReview = () => {
           );
         })}
       </div>
-      <div className="review-rating-text">선택하세요.</div>
       <hr />
       <div className=" review-user">사이즈는 어떤가요?</div>
       <div className="review-rating">

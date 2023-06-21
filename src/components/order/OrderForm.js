@@ -458,7 +458,7 @@ const OrderForm = () => {
           </div>
           <div className="order-recipe-title2">
             최종 결제 금액
-            <span className="order-recipe-content">{totalPrice + 0}원</span>
+            <span className="order-recipe-content">{totalPrice + 3000}원</span>
           </div>
         </div>
       </div>

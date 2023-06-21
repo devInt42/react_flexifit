@@ -5,5 +5,9 @@
   src: url("./Ubuntu-Bold.woff") format("woff");
 }
 
-.header-top2 {
+@media (min-width: 1200px) {
+  .h1,
+  h1 {
+    font-size: 1.5rem;
+  }
 }

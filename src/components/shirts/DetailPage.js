@@ -587,7 +587,9 @@ const DetailPage = () => {
                     marginRight: "5px",
                   }}
                 >
-                  구매하기
+                  <Link className="wishListLink" to="/product/shoppingList">
+                    구매하기
+                  </Link>
                 </button>
                 <button
                   type="button"
@@ -662,6 +664,7 @@ const DetailPage = () => {
         </div>
         <div className="deliver-cost">배송비</div>
         <div className="deliver-cost2">3000원</div>
+
         <button
           type="button"
           className="btn btn-dark"
@@ -670,19 +673,7 @@ const DetailPage = () => {
             height: "50px",
             marginTop: "180px",
             marginLeft: "20px",
-            marginRight: "3px",
-          }}
-        >
-          구매하기
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-secondary"
-          style={{
-            width: "130px",
-            height: "50px",
-            marginTop: "180px",
-            marginRight: "3px",
+            marginRight: "8px",
           }}
           onClick={() => {
             toggleMyBagPopup();
@@ -694,7 +685,12 @@ const DetailPage = () => {
         <button
           type="button"
           className="btn btn-outline-secondary"
-          style={{ width: "130px", height: "50px", marginTop: "180px" }}
+          style={{
+            width: "200px",
+            height: "50px",
+            marginTop: "180px",
+            marginRight: "3px",
+          }}
           onClick={handleClick}
         >
           찜하기

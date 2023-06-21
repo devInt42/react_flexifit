@@ -17,7 +17,8 @@
   flex-direction: column;
   border-radius: 7px;
   padding: 20px;
-  border: 2px solid lightpink;
+  border: 3px solid lightblue;
+
   margin-bottom: 15px;
 }
 
@@ -54,7 +55,7 @@
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
-  background-color: lightpink;
+  background-color: lightblue;
   color: white;
   float: none;
   width: 100px;
