@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { RiLightbulbLine } from "react-icons/ri";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { ImTextWidth } from "react-icons/im";
 import { Link, useNavigate } from "react-router-dom";
 import UploadFile from "./UploadFile";
 import { AiOutlineReload } from "react-icons/ai";
@@ -497,16 +496,6 @@ const DetailPage = () => {
                 </div>
                 <div className="custom-content3">
                   여행&감성 사진, 내 작품 등 특별한 추억을 패션으로 간직하세요.{" "}
-                </div>
-              </div>
-              <div className="custom-content">
-                <div className="custom-content2">
-                  <ImTextWidth size={"17px"} style={{ marginRight: "5px" }} />
-                  텍스트 넣기
-                </div>
-                <div className="custom-content3">
-                  누구나 쉽게 기념일, 크루, 좌우명을 담아 특별한 패션 아이템을
-                  만들어보세요.
                 </div>
               </div>
             </div>

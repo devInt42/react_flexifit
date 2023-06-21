@@ -12,6 +12,10 @@
   transform: translate(-50%, -50%);
 }
 
+.login-container {
+  height: 500px;
+}
+
 body {
   background-color: #ffffff;
 }

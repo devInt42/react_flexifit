@@ -50,7 +50,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <div className="container">
         <div className="square" />
         <h2 style={{ color: "#6B85EA", paddingTop: "20PX" }}>

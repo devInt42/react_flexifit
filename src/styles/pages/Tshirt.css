@@ -252,7 +252,7 @@
 }
 
 .custom-content {
-  width: 280px;
+  width: 620px;
   height: 200px;
   float: left;
   background-color: #f8f9fa;
@@ -277,7 +277,8 @@
 
 .custom-content3 {
   font-size: 13px;
-  padding: 20px;
+  padding: 10px;
+  text-align: center;
 }
 
 .textdesc {

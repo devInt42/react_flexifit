@@ -76,7 +76,7 @@ const Header = () => {
         <NavigationLink to="/qna">QNA</NavigationLink>
       </div>
       <div className="header-top">
-        <div style={{ fontSize: "1.5rem" }}>
+        <div>
           <h1
             style={{
               fontFamily: "Ubuntu Bold",

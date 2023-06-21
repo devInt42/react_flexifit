@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import "../styles/pages/Review.css";
 
-const AllReview = () => {
+const AllReviewPage = () => {
   const [reviewCount, setReviewCount] = useState("");
   const [reviewList, setReviewList] = useState();
 
@@ -37,7 +37,7 @@ const AllReview = () => {
   //전체 리뷰
   const getAllReview = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/review/getAllReview");
+      const res = await axios.get("http://localhost:8080/review/allReview");
       setReviewList(res.data);
     } catch (err) {
       console.log(err);
@@ -45,26 +45,10 @@ const AllReview = () => {
   };
 
   return (
-    <div className="allreview-container">
-      <div className="allReview-title">
-        리뷰{" "}
+    <div className="allReview-container2">
+      <div className="allReview-title" style={{ marginBottom: "30px" }}>
+        전체리뷰{" "}
         <span style={{ fontSize: "25px", color: "gray" }}>({reviewCount})</span>
-        <span
-          style={{
-            float: "right",
-            fontSize: "15px",
-            color: "gray",
-            marginTop: "10px",
-            fontWeight: "lighter",
-          }}
-        >
-          <Link
-            to="/allReview"
-            style={{ textDecoration: "none", color: "gray" }}
-          >
-            전체보기
-          </Link>
-        </span>
       </div>
 
       <div className="allreview-container">
@@ -86,4 +70,4 @@ const AllReview = () => {
     </div>
   );
 };
-export default AllReview;
+export default AllReviewPage;

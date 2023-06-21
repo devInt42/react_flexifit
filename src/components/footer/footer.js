@@ -17,7 +17,7 @@ const Footer = () => {
       <div className="links">
         <div>
           <h4>FLEXIFIT</h4>
-          <p>플렉시핏 소개</p>
+          {/* <p>플렉시핏 소개</p> */}
         </div>
         <div>
           <h4>HELP</h4>
