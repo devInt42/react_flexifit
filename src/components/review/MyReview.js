@@ -5,15 +5,14 @@ import { useNavigate } from "react-router-dom";
 const MyReview = () => {
   const [reviewId, setReviewId] = useState("");
   const [reviewById, setReviewById] = useState("");
-  const [selectedRating, setSelectedRating] = useState(0); // 선택된 점수를 저장하는 변수
-  const [selectedSize, setSelectedSize] = useState(""); // 선택된 사이즈를 저장하는 변수
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [selectedSize, setSelectedSize] = useState("");
   const [userReview, setUserReview] = useState("");
   const [doubleCheck, setDoubleCheck] = useState("");
   const userSeq = sessionStorage.getItem("userSeq");
 
   const navigate = useNavigate();
 
-  // 리뷰 insert
   const saveReviewInfo = async () => {
     if (selectedRating === 0 || selectedSize === "" || userReview === "") {
       alert("모든 필드를 작성해주세요.");
@@ -45,7 +44,7 @@ const MyReview = () => {
     }
   };
 
-  //리뷰 중복체크
+  // 중복체크
   const doubleCheckReview = async () => {
     try {
       const checkParam = {
@@ -71,7 +70,6 @@ const MyReview = () => {
     }
   };
 
-  //param에 review_id값 받아오기
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const clothId = urlParams.get("cloth_id");
@@ -104,12 +102,10 @@ const MyReview = () => {
     }
   };
 
-  //별
   const handleRating = (value) => {
     setSelectedRating(value);
   };
 
-  //사이즈
   const handleSize = (value) => {
     setSelectedSize(value);
   };

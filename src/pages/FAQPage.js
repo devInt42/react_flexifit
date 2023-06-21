@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import "../styles/pages/FAQ.css";
 import { getFAQData } from "../store/action";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const FAQPage = () => {

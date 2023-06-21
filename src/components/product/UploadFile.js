@@ -30,19 +30,16 @@ const UploadFile = forwardRef((props, ref) => {
     setFrontCanvasVisible(props.frontCanvasVisible);
   }, [props.frontCanvasVisible]);
 
-  // 기존 앞면 이미지
   useEffect(() => {
     setClothFrontImage(props.clothFrontImage);
   }, [props.clothFrontImage]);
 
-  // 기존 뒷면 이미지
   useEffect(() => {
     setClothBackImage(props.clothBackImage);
   }, [props.clothBackImage]);
 
   useEffect(() => {}, [frontCanvasVisible]);
 
-  //canvas 앞면 캔버스 초기화
   useEffect(() => {
     const newFrontCanvas = new fabric.Canvas(frontCanvasRef.current, {
       width: 250,
@@ -51,7 +48,6 @@ const UploadFile = forwardRef((props, ref) => {
     setFrontCanvas(newFrontCanvas);
   }, []);
 
-  // 뒷면 캔버스 초기화
   useEffect(() => {
     const newBackCanvas = new fabric.Canvas(backCanvasRef.current, {
       width: 250,
@@ -60,7 +56,6 @@ const UploadFile = forwardRef((props, ref) => {
     setBackCanvas(newBackCanvas);
   }, []);
 
-  //앞면 파일올리기
   const handleFrontFileInputChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -82,7 +77,6 @@ const UploadFile = forwardRef((props, ref) => {
     reader.readAsDataURL(file);
   };
 
-  //뒷면 파일올리기
   const handleBackFileInputChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -96,7 +90,7 @@ const UploadFile = forwardRef((props, ref) => {
           left: backCanvas.width - fabricImg.getScaledWidth(),
         });
         backCanvas.add(fabricImg);
-        backImagesStackRef.current.push(fabricImg); // 이미지 스택에 추가
+        backImagesStackRef.current.push(fabricImg);
       };
       img.src = event.target.result;
     };
@@ -112,41 +106,36 @@ const UploadFile = forwardRef((props, ref) => {
     backFileInputRef.current.click();
   };
 
-  //이전 앞면 이미지 삭제
   const deleteLastFrontImage = () => {
-    const lastImage = frontImagesStackRef.current.pop(); // 이미지 스택에서 마지막 이미지를 제거
+    const lastImage = frontImagesStackRef.current.pop();
     if (frontCanvas !== null && lastImage) {
-      frontCanvas.remove(lastImage); // 캔버스에서 이미지 제거
+      frontCanvas.remove(lastImage);
       frontCanvas.renderAll();
     }
   };
 
-  //전체 앞면 이미지 삭제
   const resetFrontCanvas = () => {
     if (frontCanvas !== null) {
       frontCanvas.clear();
-      frontImagesStackRef.current = []; // 이미지 스택 초기화
+      frontImagesStackRef.current = [];
     }
   };
 
-  //이전 뒷면 이미지 삭제
   const deleteLastBackImage = () => {
-    const lastImage = backImagesStackRef.current.pop(); // 이미지 스택에서 마지막 이미지를 제거
+    const lastImage = backImagesStackRef.current.pop();
     if (backCanvas !== null && lastImage) {
-      backCanvas.remove(lastImage); // 캔버스에서 이미지 제거
+      backCanvas.remove(lastImage);
       backCanvas.renderAll();
     }
   };
 
-  //전체 뒷면 이미지 삭제
   const resetBackCanvas = () => {
     if (backCanvas !== null) {
       backCanvas.clear();
-      backImagesStackRef.current = []; // 이미지 스택 초기화
+      backImagesStackRef.current = [];
     }
   };
 
-  // 합치기 / 백엔드 전송
   const saveCanvasAsImage = async () => {
     if (
       frontCanvas !== null &&
@@ -179,15 +168,13 @@ const UploadFile = forwardRef((props, ref) => {
           if (props.getFrontImage) {
             props.getFrontImage(mergedFrontDataURL);
           }
-
-          // 이미지 확인 후 백엔드로 전송
         };
 
-        frontCanvasImageObj.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
+        frontCanvasImageObj.crossOrigin = "anonymous";
         frontCanvasImageObj.src = frontCanvasImage;
       };
 
-      mergedFrontImage.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
+      mergedFrontImage.crossOrigin = "anonymous";
       mergedFrontImage.src = clothFrontImage;
 
       mergedBackImage.onload = function () {
@@ -212,15 +199,13 @@ const UploadFile = forwardRef((props, ref) => {
           if (props.getBackImage) {
             props.getBackImage(mergedBackDataURL);
           }
-
-          // 이미지 확인 후 백엔드로 전송
         };
 
-        backCanvasImageObj.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
+        backCanvasImageObj.crossOrigin = "anonymous";
         backCanvasImageObj.src = backCanvasImage;
       };
 
-      mergedBackImage.crossOrigin = "anonymous"; // 이미지에 crossOrigin 설정
+      mergedBackImage.crossOrigin = "anonymous";
       mergedBackImage.src = clothBackImage;
     }
   };

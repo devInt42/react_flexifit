@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import SignUp from "./pages/SignUpPage";
@@ -20,7 +19,7 @@ import BoardForm from "./components/QNA/BoardForm";
 import FAQWriteForm from "./components/FAQ/WriteForm";
 import ReplySecretForm from "./components/QNA/ReplySecretForm";
 import QNAReplyForm from "./components/QNA/ReplyForm";
-import DetailPage from "./components/shirts/DetailPage";
+import DetailPage from "./components/product/DetailPage";
 import WishListPage from "./pages/WishListPage";
 import ShoppingListPage from "./pages/ShoppingListPage";
 import OrderForm from "./components/order/OrderForm";

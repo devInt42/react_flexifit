@@ -21,7 +21,6 @@ const ReplyForm = () => {
     dispatch(getReplyData());
   }, [dispatch]);
 
-  //초기값 저장
   useEffect(() => {
     if (ReplyList && qnaId) {
       const reply = ReplyList.find((reply) => reply.qna_id === parseInt(qnaId));

@@ -10,7 +10,6 @@ const BoardForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const qnaList = useSelector((state) => state.data);
-  const isLoading = useSelector((state) => state.isLoading);
   const ReplyList = useSelector((state) => state.replyData);
   const [qnaId, setQnaId] = useState("");
   const [title, setTitle] = useState("");
@@ -31,7 +30,6 @@ const BoardForm = () => {
     setQnaId(id);
   }, [location]);
 
-  //초기값 저장
   useEffect(() => {
     if (ReplyList && qnaId) {
       const reply = ReplyList.find((reply) => reply.qna_id === parseInt(qnaId));
@@ -58,7 +56,6 @@ const BoardForm = () => {
     setReply(e.target.value);
   };
 
-  //insert
   const handleReplySubmit = async () => {
     const param = {
       data: {
@@ -80,7 +77,6 @@ const BoardForm = () => {
     setShowReplyForm(false);
   };
 
-  //update
   const handleReplyUpdate = async () => {
     const param = {
       data: {
@@ -118,7 +114,6 @@ const BoardForm = () => {
     setSelectedFile(e.target.files[0]);
   };
 
-  //QNA 정보 업데이트
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -151,7 +146,6 @@ const BoardForm = () => {
     }
   };
 
-  //QNA 정보 삭제
   const removeQna = async () => {
     const param = {
       data: {
@@ -167,7 +161,7 @@ const BoardForm = () => {
     }
   };
 
-  //관리자 QNA
+  //관리자
   const replyQna = () => {
     setShowReplyForm(true);
   };
@@ -212,7 +206,6 @@ const BoardForm = () => {
             onChange={handleFileChange}
           />
         </div>
-        {/* 경로 수정 */}
         {selectedFile && (
           <div>
             <img src={selectedFile} alt="Selected File" />

@@ -17,12 +17,9 @@ const MyPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  //세션 정보 받아오기
   useEffect(() => {
     setUserEmail(sessionStorage.getItem("userId"));
   }, []);
-
-  //정보 수정
 
   const handleNameChange = (e) => {
     setUserName(e.target.value);
@@ -44,17 +41,14 @@ const MyPage = () => {
     setUserPhone(e.target.value);
   };
 
-  //show 여부
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  //유저 정보 받아 오기
   useEffect(() => {
     getUserInfo();
   }, [userEmail]);
 
-  //생일 type 변환
   useEffect(() => {
     if (userBirth) {
       setSelectedDate(new Date(userBirth));
@@ -77,7 +71,6 @@ const MyPage = () => {
     }
   };
 
-  //유저 정보 업데이트
   const updateUserInfo = async () => {
     const formattedDate = selectedDate
       ? format(selectedDate, "yyyy-MM-dd")

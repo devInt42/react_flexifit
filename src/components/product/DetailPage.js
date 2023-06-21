@@ -88,7 +88,6 @@ const DetailPage = () => {
     setMergedFrontImage(e);
   };
 
-  //insert 장바구니
   const saveMyBagList = async () => {
     const param = {
       data: {
@@ -121,40 +120,34 @@ const DetailPage = () => {
     }
   };
 
-  //뒷면 넣기
   const getBackImage = (e) => {
     setMergedBackImage(e);
   };
 
-  //앞면 전체 RESET
   const handleFrontResetCanvas = () => {
     if (frontUploadFileRef.current) {
       frontUploadFileRef.current.resetFrontCanvas();
     }
   };
 
-  //앞면 이전으로 RESET
   const handleFrontPreviousButtonClick = () => {
     if (frontUploadFileRef.current) {
       frontUploadFileRef.current.deleteLastFrontImage();
     }
   };
 
-  //뒷면 전체 RESET
   const handleBackResetCanvas = () => {
     if (backUploadFileRef.current) {
       backUploadFileRef.current.resetBackCanvas();
     }
   };
 
-  //뒷면 이전으로 RESET
   const handleBackPreviousButtonClick = () => {
     if (backUploadFileRef.current) {
       backUploadFileRef.current.deleteLastBackImage();
     }
   };
 
-  //앞면 캔버스 변환
   useEffect(() => {
     const canvas = frontCanvasRef.current;
     const context = canvas.getContext("2d");
@@ -171,7 +164,6 @@ const DetailPage = () => {
     drawFrontImage();
   }, [clothFrontImage]);
 
-  // //뒷면 캔버스 변환
   useEffect(() => {
     if (backCanvasRef.current) {
       const canvas = backCanvasRef.current;
@@ -207,15 +199,15 @@ const DetailPage = () => {
 
   const handleFrontButtonClick = () => {
     setClothFrontImage(clothFrontImage);
-    setFrontCanvasVisible(true); //앞면 클릭시 앞면 보이게
-    setBackCanvasVisible(false); //앞면 클릭시 뒷면 안보이게
+    setFrontCanvasVisible(true);
+    setBackCanvasVisible(false);
     handleBackResetCanvas();
   };
 
   const handleBackButtonClick = () => {
     setClothBackImage(clothBackImage);
-    setFrontCanvasVisible(false); //뒷면 클릭시 앞면 안보이게
-    setBackCanvasVisible(true); //뒷면 클릭시 뒷면 보이게
+    setFrontCanvasVisible(false);
+    setBackCanvasVisible(true);
     handleFrontResetCanvas();
   };
 
@@ -223,12 +215,10 @@ const DetailPage = () => {
     setClothColor(color);
   };
 
-  //주문시 저장 값
   const selectSize = (size) => {
     setSelectedSize(size);
   };
 
-  //param값 받아오기
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get("clothId");
@@ -236,7 +226,6 @@ const DetailPage = () => {
     <ShoppingListPage clothId={clothId} />;
   }, [location]);
 
-  // cloth_id에 해당되는 옷 정보 받아오기
   const getDetailInfo = async () => {
     const param = {
       data: {
@@ -260,7 +249,6 @@ const DetailPage = () => {
     }
   };
 
-  //color 값 받아오기
   const getColorByProduct = async () => {
     const param = {
       data: {
@@ -274,13 +262,12 @@ const DetailPage = () => {
       );
       const colorsArray = res.data.resultData.map((item) => item.cloth_color);
       setColors(colorsArray);
-      setClothColor(colorsArray[0]); //default 색상값
+      setClothColor(colorsArray[0]);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // cloth_id에 해당되는 옷 사이즈 받아오기
   const getSizeByProduct = async () => {
     const param = {
       data: {
@@ -305,12 +292,10 @@ const DetailPage = () => {
     getDetailInfo();
   }, [clothId, clothColor]);
 
-  //default값 앞면
   useEffect(() => {
     setClothFrontImage(clothFrontImage);
   }, []);
 
-  //wishList값
   const getWishList = async () => {
     const param = {
       data: {
@@ -333,7 +318,6 @@ const DetailPage = () => {
     getWishList();
   }, []);
 
-  //insert 찜하기
   const insertProduct = async () => {
     const param = {
       data: {
@@ -367,7 +351,6 @@ const DetailPage = () => {
   return (
     <div className="detail-container">
       <div className="cropList" style={{ display: "flex" }}>
-        {/* 앞면 */}
         <div style={{ display: frontCanvasVisible ? "block" : "none" }}>
           <AiOutlineReload
             size={"25px"}
@@ -397,7 +380,6 @@ const DetailPage = () => {
             이전으로
           </div>
         </div>
-        {/* 뒷면 */}
         <div style={{ display: frontCanvasVisible ? "none" : "block" }}>
           <AiOutlineReload
             size={"25px"}
@@ -523,7 +505,7 @@ const DetailPage = () => {
             </ul>
           </div>
         )}
-        {/* 장바구니 팝업 */}
+
         {showMyBagPopup && (
           <div className="MyBagpopup-container">
             <button className="popup-close-button" onClick={toggleMyBagPopup}>
@@ -613,14 +595,13 @@ const DetailPage = () => {
             </button>
           </div>
         )}
-        {/* 앞면 클릭시 앞면 캔버스 띄우기 */}
+
         <canvas
           ref={frontCanvasRef}
           alt="T-shirt"
           style={{ display: frontCanvasVisible ? "block" : "none" }}
         ></canvas>
 
-        {/* 뒷면 클릭시 앞면 캔버스 띄우기 */}
         <canvas
           ref={backCanvasRef}
           alt="T-shirt"

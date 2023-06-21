@@ -35,7 +35,7 @@ const Payment = ({
 
   const onClickPayment = () => {
     const { IMP } = window;
-    const merchantKey = "imp88784171"; // 가맹점 식별키(Merchant Key)로 대체해야 함
+    const merchantKey = "imp88784171";
     IMP.init(merchantKey);
 
     const requiredValues = [
@@ -55,16 +55,16 @@ const Payment = ({
     }
 
     const data = {
-      pg: "html5_inicis", // 결제할 PG사
-      pay_method: "card", // 결제 수단
-      merchant_uid: "merchant_" + new Date().getTime(), // 주문번호
-      name: "플렉시핏 결제", // 주문명
-      amount: totalPrice, // 결제 금액 - totalPrice 변수로 변경
-      buyer_name: recipientName, // 구매자 이름 - recipientName 변수로 변경
-      buyer_tel: recipientPhone1, // 구매자 전화번호 - recipientPhone1 변수로 변경
-      buyer_addr: address + " " + detailAddress, // 구매자 주소 - address와 detailAddress 변수를 조합
-      buyer_postcode: postcode, // 구매자 우편번호 - postcode 변수로 변경
-      m_redirect_url: "/product/shoppingList/completeOrder", // 결제 완료 후 리디렉션할 URL
+      pg: "html5_inicis",
+      pay_method: "card",
+      merchant_uid: "merchant_" + new Date().getTime(),
+      name: "플렉시핏 결제",
+      amount: totalPrice,
+      buyer_name: recipientName,
+      buyer_tel: recipientPhone1,
+      buyer_addr: address + " " + detailAddress,
+      buyer_postcode: postcode,
+      m_redirect_url: "/product/shoppingList/completeOrder",
     };
     IMP.request_pay(data, callback);
   };

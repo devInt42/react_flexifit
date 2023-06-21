@@ -40,7 +40,7 @@ const QnaPage = () => {
 
   useEffect(() => {
     dispatch(getQnaData(page, itemsPerPage));
-    dispatch(getReplyData()); // 답변 데이터 가져오기
+    dispatch(getReplyData());
   }, [dispatch, page]);
 
   const renderReplyContent = (qnaId) => {

@@ -6,7 +6,7 @@ const AllReview = () => {
   const [reviewCount, setReviewCount] = useState("");
   const [reviewList, setReviewList] = useState();
 
-  //star개수
+  //star
   const renderStars = (rating) => {
     const stars = [];
 
@@ -34,7 +34,6 @@ const AllReview = () => {
     }
   };
 
-  //전체 리뷰
   const getAllReview = async () => {
     try {
       const res = await axios.get("http://localhost:8080/review/getAllReview");
