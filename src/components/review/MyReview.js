@@ -37,7 +37,7 @@ const MyReview = () => {
         );
 
         alert("리뷰 등록이 완료되었습니다.");
-        navigate("/login/MyPage");
+        navigate("/");
       } catch (err) {
         console.error(err);
       }
