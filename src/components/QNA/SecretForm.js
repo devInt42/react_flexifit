@@ -9,7 +9,6 @@ const SecretForm = () => {
   const [qnaPassword, setQnaPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(qnaId);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
