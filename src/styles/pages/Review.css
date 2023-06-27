@@ -259,6 +259,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
+  height: 400px;
 }
 
 .allreview-image {
@@ -271,6 +272,7 @@
   display: flex;
   flex-direction: column;
   padding-right: 13px;
+  float: left;
 }
 
 .allreview-star,
