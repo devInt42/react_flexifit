@@ -1,0 +1,80 @@
+.faq-page {
+  background-color: #f7f7f7;
+  padding: 20px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.faqLogo {
+  text-align: center;
+  font-size: 38px;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.faqminiLogo {
+  font-size: 21px;
+  font-weight: bolder;
+}
+
+.faq-title {
+  font-size: 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  color: #333333;
+}
+
+.faq-title.selected {
+  font-weight: bold;
+  color: #000000;
+}
+
+.faq-content {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.plus-button {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  text-align: center;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.faq-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.faq-textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.faqLink {
+  color: #555;
+  text-decoration: none;
+}

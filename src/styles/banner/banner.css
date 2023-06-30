@@ -1,0 +1,30 @@
+.banner-container {
+  position: relative;
+}
+
+.banner-image {
+  width: 100%;
+}
+
+.arrow-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  cursor: pointer;
+  font-size: 50px;
+  color: #6d6c5b;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
+
+.arrow:hover {
+  color: #59594a;
+  font-weight: bolder;
+}

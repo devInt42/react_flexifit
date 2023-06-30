@@ -1,5 +1,5 @@
 import { FaArrowCircleRight } from "react-icons/fa";
-import "../css/Login.css";
+import "../../styles/login/Login.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -7,40 +7,48 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userPassword, setUserPassword] = useState("");
 
-  const onChangeId = (e) => {
-    setId(e.target.value);
+  const handleIdChange = (e) => {
+    setUserId(e.target.value);
   };
 
-  const onChangePw = (e) => {
-    setPassword(e.target.value);
+  const handlePwChange = (e) => {
+    setUserPassword(e.target.value);
   };
 
   //버튼클릭시 reset
   const resetInputs = () => {
-    setId("");
-    setPassword("");
+    setUserId("");
+    setUserPassword("");
   };
 
-  const onClickBtn = () => {
-    const data = { id, password };
-    axios
-      .post("http://localhost:8080/login", data) //맞는지 모르겠어요 정수씨
-      .then((res) => {
-        console.log(res);
-        navigate("/MainPage"); //success시 메인으로 이동
-      })
-      .catch((err) => {
+  const onClickBtn = async () => {
+    const param = { data: { userId: userId, userPassword: userPassword } };
+    try {
+      const res = await axios.post("http://localhost:8080/login/check", param);
+      if (res.data.success) {
+        sessionStorage.setItem("userSeq", res.data.user_seq);
+        sessionStorage.setItem("userId", res.data.user_id);
+        navigate("/");
+      } else {
+        alert("로그인에 실패하였습니다.");
+        resetInputs();
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+      } else {
         console.error(err);
         alert("로그인에 실패하였습니다.");
         resetInputs();
-      });
+      }
+    }
   };
 
   return (
-    <div>
+    <div className="login-container">
       <div className="container">
         <div className="square" />
         <h2 style={{ color: "#6B85EA", paddingTop: "20PX" }}>
@@ -58,10 +66,10 @@ const Login = () => {
           <input
             className="form-control"
             type="text"
-            placeholder="아이디를 입력해주세요"
+            placeholder="example@naver.com"
             aria-label="default input example"
-            value={id}
-            onChange={onChangeId}
+            value={userId}
+            onChange={handleIdChange}
             style={{ marginBottom: "5px" }}
             autoFocus
           />
@@ -75,8 +83,8 @@ const Login = () => {
             placeholder="비밀번호를 입력해주세요."
             type="password"
             id="inputPassword"
-            value={password}
-            onChange={onChangePw}
+            value={userPassword}
+            onChange={handlePwChange}
           />
         </div>
         <button className="login-button" onClick={onClickBtn}>

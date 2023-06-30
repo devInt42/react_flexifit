@@ -1,0 +1,52 @@
+.footer-container {
+  background-color: #292a2b;
+  color: #afb4b8;
+  padding: 20px;
+  width: 100%;
+  margin-top: 80px;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 15px auto;
+}
+
+.links div {
+  width: 25%;
+}
+
+h4 {
+  font-size: 16px;
+  margin-bottom: 12px !important;
+  font-weight: bolder !important;
+}
+
+p {
+  margin: 5px 0;
+  font-size: 13px;
+  color: #7e858d;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.social-media img {
+  margin: 0 5px;
+  width: 30px;
+  height: 30px;
+}
+
+/* 안먹혀요 */
+.footer-link {
+  color: #7e858d;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #7e858d;
+}

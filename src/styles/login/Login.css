@@ -2,18 +2,22 @@
   background-color: #ffffff;
   border-radius: 18px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-  height: 500px;
+  height: 470px;
   margin: auto;
   padding: 20px;
   width: 500px !important;
   position: absolute;
-  top: 50%;
+  top: 57%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
+.login-container {
+  height: 500px;
+}
+
 body {
-  background-color: #f5f5f5;
+  background-color: #ffffff;
 }
 
 .square {
@@ -55,4 +59,8 @@ body {
   color: #ffffff;
   font-size: 25px;
   margin-left: 10px;
+}
+
+p {
+  font-size: 15px !important;
 }

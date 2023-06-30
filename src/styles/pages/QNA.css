@@ -1,0 +1,190 @@
+/* Q&A 페이지 스타일 */
+.qna-page {
+  background-color: #f7f7f7;
+  padding: 20px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.qna-private-page {
+  padding: 20px;
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Q&A 목록 스타일 */
+
+.qnaLogo {
+  text-align: center;
+  font-size: 38px;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.qna-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.qna-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.qna-item-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333333;
+  margin-left: 5px;
+}
+
+.qna-item-date,
+.qna-item-author {
+  color: #999999;
+  padding-right: 15px;
+  float: right;
+}
+
+.button {
+  display: inline-block;
+  background-color: #ff99cc;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* writeForm */
+.write-button {
+  background-color: #ff99cc;
+  color: #ffffff;
+  float: right;
+  text-decoration: none;
+}
+
+.write-button:hover {
+  background-color: #ff66a3;
+  text-decoration: none;
+  color: white;
+}
+
+.qna-Writepage {
+  width: 70%;
+  height: 800px;
+  margin: 0 auto;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.WriteLogo {
+  font-size: 40px !important;
+  font-weight: bolder !important;
+  text-align: center !important;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.WriteMiniLogo {
+  text-align: center !important;
+  color: #999999;
+  font-size: 15px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  color: #ffffff;
+  /* transition: background-color 0.3s ease; */
+}
+
+.cancel-button {
+  background-color: #999999;
+  margin-right: 10px;
+  float: right;
+}
+
+.submit-button {
+  background-color: #ff99cc;
+  float: right;
+}
+
+.list-button {
+  background-color: #999999;
+}
+
+.list-button:hover,
+.cancel-button:hover {
+  color: white;
+}
+
+/* qna private */
+.qna-line {
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.qna-submitBtn {
+  margin-top: 10px;
+  background-color: #ff99cc;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.qna-cancleBtn {
+  margin-top: 10px;
+  background-color: #ccc;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+  text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.qna-cancleBtn:hover {
+  color: #ffffff;
+  background-color: #ccc;
+  text-decoration: none; /* 호버 시 링크에 밑줄 제거 */
+}
+.qna-item-reply {
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.qna-item-reply > a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+.qna-item-reply > a:hover {
+  text-decoration: underline;
+  color: #000;
+}
+
+.qna-item-reply::before {
+  content: "↪";
+  display: inline-block;
+  margin-right: 5px;
+  color: #999;
+}

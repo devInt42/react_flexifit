@@ -1,0 +1,50 @@
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.selected {
+  border-bottom: 4px solid black;
+  padding-bottom: 14px;
+  font-weight: bolder;
+}
+
+.header-category {
+  margin-right: 38px;
+}
+
+.header-top {
+  padding-top: 30px;
+}
+
+.hr-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid black;
+}
+
+.menu-item {
+  color: black;
+  padding-bottom: 10px;
+}
+
+.menu-email {
+  color: darkgray;
+  margin-bottom: 10px;
+}
+
+.gray-line {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  width: 200px;
+
+  margin-bottom: 5px;
+}

@@ -1,0 +1,501 @@
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.product-item {
+  width: 25%;
+  padding: 10px;
+}
+
+.product-image img {
+  width: 280px;
+  height: 350px;
+}
+
+.product-size {
+  font-size: 10px;
+}
+
+.count-text {
+  margin-top: 50px;
+  color: gray;
+  font-size: 17px;
+  text-align: center;
+}
+
+.product-title {
+  font-size: 13px !important;
+  font-weight: bold;
+}
+
+.product-description {
+  font-size: 10px;
+}
+
+.product-price {
+  font-size: 10px;
+  color: red;
+  text-decoration: line-through;
+}
+
+.discounted-price {
+  font-size: 10px;
+  color: black;
+  font-weight: bold;
+}
+
+.header-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.title-text {
+  margin-top: 50px;
+  color: black;
+  font-weight: bolder;
+}
+
+.option {
+  float: right;
+}
+
+.shirt-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.additional-button {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 180px;
+  height: 50px;
+  background-color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #000;
+  border-radius: 0px 50px 50px 0px !important;
+  border-right: 1px solid #e6e6e6;
+  font-size: 12px;
+}
+.newImageSrc {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #000;
+}
+
+.newImageSrc2 {
+  position: absolute;
+  top: 65%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #000;
+}
+
+.newImageSrc3 {
+  position: absolute;
+  top: 80%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #000;
+}
+
+.newImageSrc4 {
+  position: absolute;
+  top: 90%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #000;
+}
+
+.shirtFile {
+  position: absolute;
+  top: 50%;
+  width: 525px;
+  height: 50px;
+  right: 45%;
+  font-size: 12px;
+}
+
+.shirtBtn2 {
+  right: -44px;
+  position: relative;
+  bottom: 340px;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border: none;
+  font-size: 12px;
+  border-radius: 50%; /* Set border-radius to 50% to achieve a perfectly round shape */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  float: right;
+  margin-right: 5px;
+  background-color: tan;
+  color: white;
+  font-weight: bolder;
+}
+
+.shirtBtn3 {
+  right: 40px;
+  position: relative;
+  bottom: 250px;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border: none;
+  font-size: 12px;
+  border-radius: 50%; /* Set border-radius to 50% to achieve a perfectly round shape */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  float: right;
+  margin-right: 5px;
+  background-color: tan;
+  color: white;
+  font-weight: bolder;
+}
+
+.popup-container {
+  position: fixed;
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 450px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.MyBagpopup-container {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 600px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-container2 {
+  position: fixed;
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.popup-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #000;
+}
+
+.custom-title {
+  color: black !important;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.custom-content {
+  width: 620px;
+  height: 200px;
+  float: left;
+  background-color: #f8f9fa;
+  margin: 20px;
+}
+
+.popup-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.custom-content2 {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bolder;
+  margin-bottom: 20px;
+}
+
+.custom-content3 {
+  font-size: 13px;
+  padding: 10px;
+  text-align: center;
+}
+
+.textdesc {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.shirtBtns {
+  position: absolute;
+  top: 35%;
+  right: 48%;
+  transform: translateY(-50%);
+}
+
+.shirtBtn {
+  width: 60px;
+  height: 30px;
+  margin-right: 5px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text-title {
+  font-weight: bolder;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.canvasWidth {
+  width: 40%;
+}
+
+.text-area {
+  height: 605px;
+  width: 45%;
+  float: right;
+}
+
+.text-price {
+  margin-bottom: 20px;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.text-size {
+  margin-top: 10px;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.deliver-cost {
+  margin-top: 30px;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.deliver-cost2 {
+  margin-top: 5px;
+  font-size: 15px;
+  margin-left: 20px;
+  color: gray;
+}
+
+.text-color {
+  font-size: 15px;
+  color: gray;
+  margin-left: 20px;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.size-buttons {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.size-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 5px;
+  margin-left: 20px;
+}
+
+.size-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 40px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ccc;
+  background-color: transparent;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.size-button:hover {
+  border-color: #6699ff;
+  color: #6699ff;
+}
+
+.size-button.selected {
+  border-color: #6699ff;
+  color: #6699ff;
+  padding-top: 10px;
+}
+
+.wishTitle {
+  color: #0000ff;
+  font-weight: bolder;
+}
+
+.wishListLink {
+  color: white;
+  text-decoration: none;
+}
+
+.wishListLink:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.cropFont {
+  font-size: 9px;
+  color: #ccc;
+}
+
+.cropList {
+  margin-left: 10px;
+}
+
+.test222 {
+  width: 55%;
+  float: left;
+}
+
+.front-image {
+  width: 65%;
+  float: left;
+  height: 530px;
+  object-fit: cover;
+}
+
+.right-section {
+  width: 33%;
+  float: right;
+  height: 100%;
+  /* background-color: pink; */
+  margin-left: 5px;
+}
+
+.mybag-title {
+  font-size: 17px;
+  font-weight: bolder;
+  margin-bottom: 5px;
+}
+
+.mybag-name {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.quantity-select {
+  margin-left: 10px;
+}
+
+.newBtn {
+  width: 30px;
+  margin-right: 10px;
+  color: gray;
+  background-color: transparent;
+  border: none;
+}
+
+.mini-select {
+  float: right;
+}
+
+.sizeCount {
+  padding: 10px;
+}
+
+.price {
+  font-weight: bolder;
+}
+
+.totalPrice {
+  float: right;
+  font-weight: bolder;
+}
+
+.buttons {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+
+.footer-Btn {
+  font-size: 15px;
+}
+
+.detail-container {
+  height: 600px;
+}
